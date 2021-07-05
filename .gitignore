@@ -1,3 +1,15 @@
+#
+local_lib.py
+
+.vimrc
+cmudict-0.7b
+di-dictionary.json
+frequency-list
+main.json
+open-dict.txt
+
+backup.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
