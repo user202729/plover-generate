@@ -245,7 +245,10 @@ for line in [
 	assert pronounce not in steno_rules_by_pronounce, pronounce
 	steno_rules_by_pronounce[pronounce]=(StenoRuleVowel(Stroke(stroke)),)
 
-for pronounce, x1 in [
+# special case by spelling.
+# This completely overrides the default (by pronunciation) stroke,
+# list them too if they should be kept in.
+for pronounce_, x1 in [
 	("ə", [
 		 "a aa           | A    ",
 		 "e ea           | E    ",
@@ -256,6 +259,15 @@ for pronounce, x1 in [
 	
 	("ɔ", [
 		"o ou            | O    ",
+		"oa              | AO AU",
+		]),
+
+	("oʊ əʊ", [
+		"oa              | AO OE",
+		]),
+
+	("ʊ u", [
+		"oo              | AO   ",
 		]),
 
 	("ɑ", [
@@ -275,13 +287,14 @@ for pronounce, x1 in [
 		"a ai            | AEU   "
 		]),
 	]:
-	for line in x1:
-		spells, strokes=line.split("|")
-		for spell in spells.split():
-			assert (spell, pronounce) not in steno_rules_by_both
-			steno_rules_by_both[spell, pronounce]=[
-					StenoRuleVowel(Stroke(stroke))
-					for stroke in strokes.split()]
+	for pronounce in pronounce_.split():
+		for line in x1:
+			spells, strokes=line.split("|")
+			for spell in spells.split():
+				assert (spell, pronounce) not in steno_rules_by_both
+				steno_rules_by_both[spell, pronounce]=[
+						StenoRuleVowel(Stroke(stroke))
+						for stroke in strokes.split()]
 
 
 for line in [
@@ -321,6 +334,7 @@ for line in [
 		"ks    | -     | -BGS          ", # -x
 		"kʃ    | -     | -BGS          ", # -x (when followed by i → sound change)
 		"ɡz    | -     | -BGS          ",
+		"tʃən  | -     | -GS           ", # (weird dialect? open IPA dict use this for some -ʃən words)
 		"ʃən   | -     | -GS           ",
 		"ʒən   | -     | -GS           ",
 		"dʒən  | -     | -GS           ",
@@ -329,6 +343,11 @@ for line in [
 		"dʒəs  | -     | -RBS          ",
 		"ntʃ   | -     | -FRPB -FRPBLG ",
 		"ɹtʃ   | -     | -FRPB         ",
+		"kəmp  | KP    | -             ",
+		"ɛks   | KP    | -             ",
+		"ɛɡz   | KP    | -             ",
+		"ɪks   | KP    | -             ",
+		"ɪɡz   | KP    | -             ",
 		]:
 	pronounce, a, b=line.split("|")
 	a_=[Stroke(x) for x in a.split()]
@@ -336,7 +355,7 @@ for line in [
 	pronounce=pronounce.strip()
 	assert pronounce not in steno_rules_by_pronounce, pronounce
 	steno_rules_by_pronounce[pronounce]=[
-			StenoRuleConsonant(Stroke(a__), Stroke(b__), False)
+			StenoRuleConsonant(a__, b__, False)
 			for a__ in a_
 			for b__ in b_
 			]
@@ -344,21 +363,34 @@ for line in [
 
 
 
+# recall that steno_rules_by_both overrides steno_rules_by_pronounce, if there's a match.
+# therefore don't use `-` arbitrarily.
+# unless it's a compound, in that case both cases are considered.
 for line in [
-		"ed   t   -   -D  ",
-		"ed   ɪd  -   -D  ",
-		"s    z   S-  -S  ",
-		"se   z   S-  -S  ",
-		"ss   z   S-  -S  ",
-		"sse  z   S-  -S  ",
-		"ing  ɪŋ  -   -G  ",
-		"h    -   H   -   ",
-		"w    -   W   -   ",
+		"ed    | t   | -          | -D   ",
+		"ed    | ɪd  | -          | -D   ",
+		"s     | z   | S-         | -S   ",
+		"se    | z   | S-         | -S   ",
+		"ss    | z   | S-         | -S   ",
+		"sse   | z   | S-         | -S   ",
+		"ing   | ɪŋ  | -          | -G   ",
+		"h     |     | H          | -    ",
+		"wh    | w   | WH         | -    ",
+		"w     |     | W          | -    ",
+		"c     | s   | S KR       | -S   ",
+		"sc    | s   | S SK SKR   | -S   ",
 		]:
-	spell, pronounce, a, b=line.split()
-	pronounce=pronounce.strip("-")
+	spell, pronounce, a, b=line.split("|")
+	spell=spell.strip()
+	pronounce=pronounce.strip()
+	a_=[Stroke(x) for x in a.split()]
+	b_=[Stroke(x) for x in b.split()]
 	assert (spell, pronounce) not in steno_rules_by_both, (spell, pronounce)
-	steno_rules_by_both[spell, pronounce]=(StenoRuleConsonant(Stroke(a.strip()), Stroke(b.strip()), False),)
+	steno_rules_by_both[spell, pronounce]=[
+			StenoRuleConsonant(a__, b__, False)
+			for a__ in a_
+			for b__ in b_
+			]
 
 def unstressed_schwa(match: Match)->bool:
 	return match.pronounce in ("ə", "jə", "ɪ") and (
@@ -385,6 +417,15 @@ def get_steno_rules(whole: Matches, left: int, right: int)->Iterator[StenoRule]:
 	if right==left+1 and unstressed_schwa(whole[left]):
 		yield skip_rule
 		# not return just yet. Consider normal cases too
+
+	if (
+			right==left+1 and right<len(whole)
+			and whole[left].spell=="i"
+			and whole[left].pronounce=="i"
+			and whole[left+1].pronounce=="ə"
+			):
+		yield from steno_rules_by_pronounce["j"]
+		return
 
 	if "ed" in spell and pronounce in ("st", "kst"):
 		assert right-left>=2
@@ -446,6 +487,8 @@ suffix_strokes: Dict[Stroke, Stroke]={Stroke(x): Stroke(y) for line in [
 		"ORD     O*RD    ",
 		"EU      KWREU   ",  # (Plover theory) only if it's spelled with y? Not really. (cookie)
 		"AOE     KWREU   ",
+		"EUS     KWREUS  ",  # IS is -is suffix while YIS is -ies (-y + -s) suffix...
+		"AOES    KWREUS  ",
 		"PHEPBT  *PLT    ",
 		"KUL     K-L     ",
 		"KULS    K-LS    ",

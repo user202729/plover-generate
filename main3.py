@@ -35,11 +35,12 @@ plover_reverse_dict: Dict[str, Sequence[str]]={
 		}
 pronunciation=pronunciation_()
 
+print("done read data")
 
-#word_filter=lambda word: True
-word_filter=lambda word: not word.endswith(("ed", "s", "ing"))
+word_filter=lambda word: True
+#word_filter=lambda word: not word.endswith(("ed", "s", "ing"))
 # (a little too restrictive)
-#word_filter=lambda word: word.lower() in {"number"}
+#word_filter=lambda word: word.lower() in {"scene"}
 
 ##
 
