@@ -4,6 +4,7 @@
 
 
 plover_briefs={
+"TPHAE", # !! (NAE,): anyway -- ['ˈɛniˌweɪ']
 "PRAOERBT", # !! (PREEʃT,): appreciate -- ['əˈpɹiʃiˌeɪt']
 "PRAOERB/KWRAEUT", # !! (PREEʃ, YAIT): appreciate -- ['əˈpɹiʃiˌeɪt']
 "PRAOERB", # !! (PREEʃ,): appreciate -- ['əˈpɹiʃiˌeɪt']

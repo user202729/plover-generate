@@ -1,7 +1,5 @@
 #!/bin/pypy3
-## ==== create a pronunciation dictionary (sort of)
-## write to tempdir/out
-## error remains...
+## see help (main2.py -h) for more details
 
 import sys
 
@@ -13,8 +11,34 @@ except KeyError:
 	pass
 
 from lib import *
+from pathlib import Path
 
-##
+
+# parse args
+
+import argparse
+parser=argparse.ArgumentParser(
+		usage="Create a matched pronunciation dictionary from a pronunciation dictionary.",
+		formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument("-a", "--append", action="store_true",
+		help="Append to the output file instead of overwriting")
+parser.add_argument("-i", "--input", type=Path,
+		default=Path("open-dict.txt"),
+		help="Path to output file")
+parser.add_argument("-o", "--output", type=Path,
+		default=tempdir/"out",
+		help="Path to output file")
+parser.add_argument("--output-rules", type=Path,
+		default=tempdir/"out2",
+		help="Path to output file to print usages of the rules")
+
+try:
+	__IPYTHON__  # type: ignore
+	args=parser.parse_args([])
+except NameError:
+	args=parser.parse_args()
+
+## read input files
 
 debug_print_all_matching=False
 
@@ -24,14 +48,10 @@ word_filter=lambda word: True
 #word_filter=lambda word: word.lower() in {"thought", "though"}
 
 frequency=frequency_()
-pronunciation=pronunciation_()
-plover_dict=plover_dict_()
-plover_dict_by_frequency=plover_dict_by_frequency_(plover_dict, frequency)
+pronunciation=pronunciation_(args.input)
 
+print("done reading")
 
-print("done")
-
-##
 
 all_word_pronunciations: List[Tuple[
 	str, # spell
@@ -52,7 +72,7 @@ all_word_pronunciations=[(word, pronunciations)
 if 1:
 ##
 	used=defaultdict(list)
-	with open(tempdir/"out", "w") as f, replace_stdout(f):
+	with open(args.output, "a" if args.append else "w") as f, replace_stdout(f):
 		for word, pronounces in all_word_pronunciations:
 			print(f"++ {word}:\n")
 			for pronounce in pronounces:
@@ -70,12 +90,12 @@ if 1:
 				print(f"{pronounce_} #{pronounce}")
 				print()
 
-	with open(tempdir/"out2", "w") as f:
+	with open(args.output_rules, "w") as f_:
 		for (s, p), words in sorted(
 				used.items(),
 				key=lambda x: -len(x[1])
 				):
 			#if not s or not p:
 			if True:
-				print(f"{s}\t{p}\t{str(words)[:100]}", file=f)
+				print(f"{s}\t{p}\t{str(words)[:100]}", file=f_)
 				##

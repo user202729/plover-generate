@@ -138,10 +138,10 @@ def print_matches(x: Matches)->None:
 	print(pronounce_)
 
 
-def matched_pronunciation_dictionary_()->List[Matches]:
+def matched_pronunciation_dictionary_(p: Path)->List[Matches]:
 	items: List[Matches]=[]
 	
-	for component_ in Path("/tmp/out").read_text().split("\n\n"):
+	for component_ in p.read_text().split("\n\n"):
 		component=component_.splitlines()
 		if not component: continue
 		if component[0].startswith("++"): del component[0]

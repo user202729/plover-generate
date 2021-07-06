@@ -166,10 +166,10 @@ def spell_out(word: str)->Optional[str]:
 	except KeyError:
 		return None
 
-def pronunciation_()->Dict[str, List[str]]:
+def pronunciation_(p: Path)->Dict[str, List[str]]:
 	pronunciation_=[
 			(word, pronunciations_filtered)
-			for a in Path("open-dict.txt").read_text().splitlines()
+			for a in p.read_text().splitlines()
 			for word, pronunciations in (a.split("\t"),)
 			for pronunciations_filtered in [[
 					pronunciation

@@ -11,6 +11,8 @@ from dataclasses import dataclass
 from typing import List, Tuple, Optional, Iterator, Sequence
 import enum
 import textwrap
+from collections import defaultdict
+
 
 from lib import*
 
@@ -24,8 +26,33 @@ from lib_steno import *
 from plover_ignore import plover_ignore
 
 
+# parse args
 
-items=matched_pronunciation_dictionary_()
+import argparse
+parser=argparse.ArgumentParser(
+		usage="Generate steno strokes.",
+		formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument("-a", "--append", action="store_true",
+		help="Append to the output file instead of overwriting")
+parser.add_argument("-i", "--input", type=Path, action="append",
+		help="Path to input file (matched pronunciation dictionary). Can be specified multiple times. "
+		f"If not specified, default to {tempdir/'out'}.")
+parser.add_argument("-o", "--output", type=Path,
+		default=tempdir/"a.json",
+		help="Path to output file")
+parser.add_argument("--output-errors", type=Path,
+		default=tempdir/"errors.txt",
+		help="Path to output file to print errors (mismatches)")
+
+try:
+	__IPYTHON__  # type: ignore
+	args=parser.parse_args([])
+except NameError:
+	args=parser.parse_args()
+
+args.input=args.input or [tempdir/"out"]
+
+items=[x for p in args.input for x in matched_pronunciation_dictionary_(p)]
 frequency=frequency_()
 plover_dict=plover_dict_()
 plover_dict_by_frequency=plover_dict_by_frequency_(plover_dict, frequency)
@@ -33,7 +60,8 @@ plover_reverse_dict: Dict[str, Sequence[str]]={
 		word: plover_entries
 		for word_frequency, word, plover_entries in plover_dict_by_frequency
 		}
-pronunciation=pronunciation_()
+pronunciation: MutableMapping[str, List[str]]=defaultdict(list)
+for x in items: pronunciation[spell_of_(x)].append(pronounce_of_(x))
 
 print("done read data")
 
@@ -50,9 +78,10 @@ if 1: # steno generation
 	generated: MutableMapping[Strokes, List[str]]=defaultdict(list)
 	generated_words: Set[str]=set()
 	count=0
-	out_dump=open(tempdir/"a.json", "w", buffering=1)
-	error_dump=open(tempdir/"errors.txt", "w", buffering=1)
-	out_brief_solitude=open(tempdir/"brief_solitude.txt", "w", buffering=1)
+	out_dump=open(args.output, "w", buffering=1)
+	error_dump=open(args.output_errors, "w", buffering=1)
+	#out_brief_solitude=open(tempdir/"brief_solitude.txt", "w", buffering=1)
+	out_brief_solitude=None
 
 	def print_error(*args, **kwargs):
 		print(*args, **kwargs)
