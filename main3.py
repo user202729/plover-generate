@@ -23,7 +23,7 @@ except KeyError:
 	pass
 
 from lib_steno import *
-from plover_ignore import plover_ignore
+from plover_ignore import *
 
 
 # parse args
@@ -37,6 +37,9 @@ parser.add_argument("-a", "--append", action="store_true",
 parser.add_argument("-i", "--input", type=Path, action="append",
 		help="Path to input file (matched pronunciation dictionary). Can be specified multiple times. "
 		f"If not specified, default to {tempdir/'out'}.")
+parser.add_argument("--item-limit", type=int,
+		default=-1,
+		help="Maximum number of items to process. Negative/default means unlimited")
 parser.add_argument("-o", "--output", type=Path,
 		default=tempdir/"a.json",
 		help="Path to output file")
@@ -53,6 +56,8 @@ except NameError:
 args.input=args.input or [tempdir/"out"]
 
 items=[x for p in args.input for x in matched_pronunciation_dictionary_(p)]
+if args.item_limit>=0:
+	items=items[:args.item_limit]
 frequency=frequency_()
 plover_dict=plover_dict_()
 plover_dict_by_frequency=plover_dict_by_frequency_(plover_dict, frequency)
@@ -65,10 +70,10 @@ for x in items: pronunciation[spell_of_(x)].append(pronounce_of_(x))
 
 print("done read data")
 
-word_filter=lambda word: True
 #word_filter=lambda word: not word.endswith(("ed", "s", "ing"))
 # (a little too restrictive)
-#word_filter=lambda word: word.lower() in {"scene"}
+#word_filter=lambda word: word.lower() in {"pretty"}
+word_filter=lambda word: True
 
 ##
 
@@ -94,6 +99,8 @@ if 1: # steno generation
 	# optional (set dictionary to be used by the translator, if `translate_stroke` is used)
 		s=spell_of_(x)
 		return (-frequency.get(s, 0), s)
+
+	plover_briefed_words: Set[str]={plover_dict.get(x, "") for x in plover_briefs}
 	for (frequency_, word), x in group_sort(items, key=key_):
 		if not word_filter(word): continue
 		outlines: Set[Strokes]=set()  # set of outlines generated for this word
@@ -169,7 +176,7 @@ if 1: # steno generation
 		if cannot_guess_any:
 			assert len(plover_entries)!=0
 		#if failed_strokes:
-		if cannot_guess_any and failed_strokes:
+		if cannot_guess_any and failed_strokes and word not in plover_briefed_words:
 			for outline in failed_strokes:
 				print(f'"{"/".join(x.raw_str() for x in outline)}", # {"!! " if cannot_guess_any else ""}{outline}: {word} -- {pronunciation.get(word)}',
 						file=error_dump

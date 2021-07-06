@@ -5,7 +5,7 @@ lib_steno_initialized=True
 
 from pathlib import Path
 from dataclasses import dataclass
-from typing import List, Tuple, Optional, Iterator, Sequence, Collection, TypeVar
+from typing import List, Tuple, Optional, Iterator, Sequence, Collection, TypeVar, MutableSequence
 import enum
 
 from lib import*
@@ -41,14 +41,16 @@ Matches=Tuple[Match, ...]
 
 @nice_enum
 class State(enum.Enum):
-	stroke_start   =enum.auto()
+	outline_start  =enum.auto()
+	prefix         =enum.auto()  # right after a prefix
 	left           =enum.auto()
 	vowel          =enum.auto()  # a vowel has just been added (most of the time same as (right))
 	right          =enum.auto()
 	right_separate =enum.auto()  # right, but in a separate stroke
+	suffix         =enum.auto()  # right after a suffix
 
 	def complete(self)->bool:
-		return self in (State.vowel, State.right, State.right_separate)
+		return self in (State.vowel, State.right, State.right_separate, State.suffix)
 
 
 @dataclass(frozen=True)
@@ -63,6 +65,40 @@ class StenoRule:
 		raise NotImplementedError
 
 @dataclass
+class StenoRulePrefix(StenoRule): # prefix in a separate stroke
+	a: Stroke
+	def apply(self, s: S, whole: Matches, left: int, right: int)->Iterator[S]:
+		if s.state in (State.outline_start, State.prefix):
+			yield S(s.strokes+(self.a,), State.prefix, s.mark)
+
+@dataclass
+class StenoRuleSuffix(StenoRule): # suffix in a separate stroke
+	a: Stroke
+	try_join: bool  # attempt to join this into the last stroke, if possible
+	def apply(self, s: S, whole: Matches, left: int, right: int)->Iterator[S]:
+		if (s.state==State.prefix or # allow an outline to consist of only prefixes and suffixes (but not only suffixes)
+				s.state.complete()):
+			yield S(
+					(stroke_append(s.strokes, self.a) or s.strokes+(self.a,))
+					if self.try_join else
+					s.strokes+(self.a,)
+					, State.suffix, s.mark)
+
+@dataclass
+class StenoRuleSuffixS(StenoRule): # suffix in a separate stroke
+	def apply(self, s: S, whole: Matches, left: int, right: int)->Iterator[S]:
+		if s.state.complete():
+			yield S(
+					s.strokes[:-1]+(s.strokes[-1]+Stroke("-SZ"),)
+					if (s.strokes[-1]&Stroke("-TSDZ"))==Stroke("-TD") else
+					(
+						stroke_append(s.strokes, Stroke("-S")) or
+						stroke_append(s.strokes, Stroke("-Z")) or
+						s.strokes+(Stroke("-S"),)
+						),
+					State.suffix, s.mark)
+
+@dataclass
 class StenoRuleConsonant(StenoRule):
 	a: Stroke
 	b: Stroke
@@ -70,12 +106,22 @@ class StenoRuleConsonant(StenoRule):
 	# if type is consonant, a is left half and b is right half (**must** not be zero)
 	#     if zero => none
 	def apply(self, s: S, whole: Matches, left: int, right: int)->Iterator[S]:
-		if s.state in (State.stroke_start, State.left):
+		if s.state==State.suffix:
+			return
+
+		elif s.state in (State.outline_start, State.prefix):
+			# separate left
+			if self.a:
+				yield S(s.strokes+(self.a,), State.left, s.mark)
+
+		elif s.state==State.left:
 			# try to put in the left part (if fail, separate left)
 			if self.a:
 				t=stroke_append(s.strokes, self.a)
 				if t is not None or len(s.strokes)==1:
 					# only allow one separate leading consonant at the start of the word
+					# without any prefix strokes
+					# (although having prefix strokes might still work because of orthographic rules)
 					# left separate is not frequent in Plover theory
 					yield S(t or s.strokes+(self.a,), State.left, s.mark)
 
@@ -105,17 +151,24 @@ class StenoRuleVowel(StenoRule):
 	a: Stroke
 	# a can be zero
 	def apply(self, s: S, whole: Matches, left: int, right: int)->Iterator[S]:
-		if s.state in (State.stroke_start, State.left):
+		t: Strokes
+		if s.state==State.suffix:
+			return
+
+		elif s.state==State.left:
 			# put it in
-			t=stroke_append(s.strokes, self.a)
-			assert t is not None
+			t_=stroke_append(s.strokes, self.a)
+			assert t_ is not None
+			t=t_
+
 		else:
-			assert s.state in (State.vowel, State.right, State.right_separate)
+			assert s.state in (State.outline_start, State.prefix, State.vowel, State.right, State.right_separate)
 			# leave it in a new stroke
 			t=s.strokes+(self.a,)
 
-		yield S(t, State.vowel, s.mark or s.state==State.vowel)
-		# (debug) mark consecutive vowels
+		yield S(t, State.vowel,
+				s.mark or s.state==State.vowel # (debug) mark consecutive vowels
+				)
 
 @dataclass
 class StenoRuleSkip(StenoRule):
@@ -187,7 +240,11 @@ def stroke_concatenate(a: Stroke, b: Stroke)->Optional[Stroke]:
 	return a|b
 
 def stroke_append(a: Strokes, b: Stroke)->Optional[Strokes]:
-	if not a: return (b,)
+	"""
+	Try to tuck stroke b into the last stroke of a.
+	Return None if a is empty, or b doesn't fit into the last stroke of a.
+	"""
+	if not a: return None
 	c=stroke_concatenate(a[-1], b)
 	if c is not None: return a[:-1]+(c,)
 	return None
@@ -212,12 +269,14 @@ def pronounce_of_(x: Sequence[Match])->str:
 
 skip_rule: StenoRule=StenoRuleSkip()
 
-steno_rules_by_both: Dict[Tuple[str, str], Sequence[StenoRule]]={}  # (spell, pronounce) -> rule
-steno_rules_by_pronounce: Dict[str, Sequence[StenoRule]]={}  # less priority than the above
+steno_rules_by_both: Dict[Tuple[str, str], List[StenoRule]]={}  # (spell, pronounce) -> rule
+steno_rules_by_pronounce: Dict[str, List[StenoRule]]={}  # less priority & hidden than the above
+steno_rules_by_pronounce_no_hide: Dict[str, List[StenoRule]]={}  # independent, never hidden
 # these code will be populated by the code below
 # they're not the complete set of rules. See also get_steno_rules and fix_outline.
+# to clarify, these are only internal implementation details of get_steno_rules function.
 
-
+# vowel by pronounce
 for line in [
 	"æ     A   ",
 	"aɪə   AOEU",
@@ -243,12 +302,14 @@ for line in [
 	]:
 	pronounce, stroke=line.split()
 	assert pronounce not in steno_rules_by_pronounce, pronounce
-	steno_rules_by_pronounce[pronounce]=(StenoRuleVowel(Stroke(stroke)),)
+	steno_rules_by_pronounce[pronounce]=[StenoRuleVowel(Stroke(stroke))]
 
-# special case by spelling.
-# This completely overrides the default (by pronunciation) stroke,
-# list them too if they should be kept in.
+# vowel by both
 for pronounce_, x1 in [
+	("ɑ", [
+		"ea              | A    ",
+		]),
+
 	("ə", [
 		 "a aa           | A    ",
 		 "e ea           | E    ",
@@ -260,6 +321,7 @@ for pronounce_, x1 in [
 	("ɔ", [
 		"o ou            | O    ",
 		"oa              | AO AU",
+		"a               | A",
 		]),
 
 	("oʊ əʊ", [
@@ -268,6 +330,7 @@ for pronounce_, x1 in [
 
 	("ʊ u", [
 		"oo              | AO   ",
+		"o               | O    ",
 		]),
 
 	("ɑ", [
@@ -275,16 +338,17 @@ for pronounce_, x1 in [
 		]),
 
 	("ɪ", [
-		"ee ea           | AOE  ",
+		"ee ea ie        | AOE  ",
 		"e               | E    ",
 		]),
 
 	("i", [
 		"y i             | EU   ",
+		#"e               | E    ",
 		]),
 
 	("ɛ", [
-		"a ai            | AEU   "
+		"a ai ei ay      | AEU   "
 		]),
 	]:
 	for pronounce in pronounce_.split():
@@ -296,7 +360,82 @@ for pronounce_, x1 in [
 						StenoRuleVowel(Stroke(stroke))
 						for stroke in strokes.split()]
 
+K=TypeVar("K")
+V=TypeVar("V")
+def append_(d: Dict[K, List[V]], key: K, value: V)->None:
+	if key not in d:
+		d[key]=[value]
+	else:
+		d[key].append(value)
 
+# prefix by pronounce
+for line in [
+"ɹi      RE      ",
+"pɹi     PRE     ",
+"fɔɹ     TPAUR   ",
+"ɔn      AUPB    ",
+"kɔn     KAUPB   ",
+"kən     KAUPB   ",
+"kɔ      KAU     ",
+"kə      KAU     ",
+"ɔɹ      AUR     ",
+"aʊt     AOUT    ",
+"ɛkstɹə  ERBGS   ",
+"ɛkstɹə  *ERBGS  ",
+"mɪs     PHEUZ   ",
+"i       E       ",
+"supəɹ   SPR     ",
+"supəɹ   SAOUP   ",
+"əndəɹ   UPBD    ",
+		]:
+	pronounce, stroke=line.split()
+	append_(steno_rules_by_pronounce_no_hide, pronounce, StenoRulePrefix(Stroke(stroke)))
+
+# suffix by both
+for line in [
+		"er   əɹ   *ER      0",
+		"or   əɹ   O*R      0",
+		"or   ɔɹ   O*R      0",
+		"al   əɫ   A*L      0",
+		"an   ən   A*PB     0",
+		"en   ən   *EPB     0",
+		"ol   ɔɫ   O*L      0",
+		"ol   əɫ   O*L      0",
+		"on   ɔn   O*PB     0",
+		"on   ən   O*PB     0",
+		"out  aʊt  SKWROUT  0",
+		"ure  əɹ   AOUR     0",
+		"'s   z    AES      0",
+		"ly   ɫi   HREU     0",
+		"ed   t    -D       1",
+		"ed   ɪd   -D       1",
+		"ed   d    -D       1",
+		"ing  ɪŋ   -G       1",
+		]:
+	spell, pronounce, stroke, try_join=line.split()
+	append_(steno_rules_by_both, (spell, pronounce),
+			StenoRuleSuffix(Stroke(stroke), bool(int(try_join)))
+			)
+
+# suffix by pronounce
+for line in [
+		# (Plover theory) only if it's spelled with y? Not really. (cookie)
+		"ɪ      KWREU  0",
+		"i      KWREU  0",
+		"mənt   *PLT   0",
+		"kəɫ    K-L    0",
+		"sɛɫf   SEFL   0",
+		"sɛɫvz  SEFLS  0",		
+		"ɪstɪk  ST-BG  0",
+		"uəɫ    WAL    0",
+		]:
+	pronounce, stroke, try_join=line.split()
+	append_(steno_rules_by_pronounce_no_hide, pronounce, StenoRuleSuffix(Stroke(stroke), bool(int(try_join))))
+
+
+
+
+# consonant by pronounce (and consonant cluster)
 for line in [
 		"b     | PW    | -B            ",
 		"d     | TK    | -D            ",
@@ -343,6 +482,8 @@ for line in [
 		"dʒəs  | -     | -RBS          ",
 		"ntʃ   | -     | -FRPB -FRPBLG ",
 		"ɹtʃ   | -     | -FRPB         ",
+		"ɫv    | -     | -FL           ",
+		"ɹʃ    | -     | *RB           ",
 		"kəmp  | KP    | -             ",
 		"ɛks   | KP    | -             ",
 		"ɛɡz   | KP    | -             ",
@@ -366,14 +507,13 @@ for line in [
 # recall that steno_rules_by_both overrides steno_rules_by_pronounce, if there's a match.
 # therefore don't use `-` arbitrarily.
 # unless it's a compound, in that case both cases are considered.
+
+# consonant by both
 for line in [
-		"ed    | t   | -          | -D   ",
-		"ed    | ɪd  | -          | -D   ",
 		"s     | z   | S-         | -S   ",
 		"se    | z   | S-         | -S   ",
 		"ss    | z   | S-         | -S   ",
 		"sse   | z   | S-         | -S   ",
-		"ing   | ɪŋ  | -          | -G   ",
 		"h     |     | H          | -    ",
 		"wh    | w   | WH         | -    ",
 		"w     |     | W          | -    ",
@@ -398,6 +538,8 @@ def unstressed_schwa(match: Match)->bool:
 			match.stress in (Stress.no, Stress.down)
 			)
 
+suffix_s_rule=StenoRuleSuffixS()
+
 def get_steno_rules(whole: Matches, left: int, right: int)->Iterator[StenoRule]:
 	assert left<right
 
@@ -414,15 +556,23 @@ def get_steno_rules(whole: Matches, left: int, right: int)->Iterator[StenoRule]:
 	pronounce=pronounce_of_(whole[left:right])
 	spell=spell_of_(whole[left:right])
 
-	if right==left+1 and unstressed_schwa(whole[left]):
+	if right==left+1 and left!=0 and unstressed_schwa(whole[left]):
 		yield skip_rule
 		# not return just yet. Consider normal cases too
+
+	if right==left+1 and whole[left].pronounce in ("s", "z") and whole[left].spell=="s":
+		yield suffix_s_rule
+
+	try:
+		yield from steno_rules_by_pronounce_no_hide[pronounce]
+	except KeyError:
+		pass
 
 	if (
 			right==left+1 and right<len(whole)
 			and whole[left].spell=="i"
 			and whole[left].pronounce=="i"
-			and whole[left+1].pronounce=="ə"
+			and whole[left+1].pronounce in ("ə", "ɑ")
 			):
 		yield from steno_rules_by_pronounce["j"]
 		return
@@ -446,7 +596,7 @@ def get_steno_rules(whole: Matches, left: int, right: int)->Iterator[StenoRule]:
 def generate_iterator(whole: Matches, right: int)->Iterator[S]:
 	# generate for whole[:right]. Need context
 	if not right:
-		yield S((), State.stroke_start, False)
+		yield S((), State.outline_start, False)
 		return
 	for i in range(right-1,-1,-1):
 		rules: List[StenoRule]=[*get_steno_rules(whole, i, right)]
@@ -470,39 +620,6 @@ def generate_complete(whole: Matches)->Tuple[S, ...]:
 
 right_half=Stroke("-FRPBLGTSDZ")
 
-prefix_strokes: Dict[Stroke, Stroke]={Stroke(x): Stroke(y) for line in [
-	"RAOE   RE     ",
-	"PRAOE  PRE    ",
-	"TPOR   TPAUR  ",
-	"OPB    AUPB   ",
-	"OR     AUR    ",
-	"OUT    AOUT   ",
-	] for x, y in [line.split()]}
-suffix_strokes: Dict[Stroke, Stroke]={Stroke(x): Stroke(y) for line in [
-		"ER      *ER     ",
-		"ERS     *ERS    ",
-		"ERD     *ERD    ",
-		"OR      O*R     ",
-		"ORS     O*RS    ",
-		"ORD     O*RD    ",
-		"EU      KWREU   ",  # (Plover theory) only if it's spelled with y? Not really. (cookie)
-		"AOE     KWREU   ",
-		"EUS     KWREUS  ",  # IS is -is suffix while YIS is -ies (-y + -s) suffix...
-		"AOES    KWREUS  ",
-		"PHEPBT  *PLT    ",
-		"KUL     K-L     ",
-		"KULS    K-LS    ",
-		"KAL     K-L     ",
-		"KALS    K-LS    ",
-		"AL      A*L     ",
-		"ALS     A*L     ",
-		"APB     A*PB    ",
-		"APBS    A*PB    ",
-		"OL      O*L     ",
-		"OLS     O*L     ",
-		"OPB     O*PB    ",
-		"OPBS    O*PB    ",
-		] for x, y in [line.split()]}
 def fix_outline(x: Strokes)->Strokes:
 	result: List[Stroke]=[]
 	for s in x:
@@ -514,17 +631,6 @@ def fix_outline(x: Strokes)->Strokes:
 			result[-1]+=Stroke("-Z")
 		else:
 			result.append(s)
-
-	i=len(result)
-	while i>1 and result[i-1] in suffix_strokes:
-		i-=1
-	result=result[:i]+[suffix_strokes[a] for a in result[i:]]
-	# (it's not possible for the whole word to consist of all prefixes or suffixes
-
-	i=0
-	while i<len(result)-1 and result[i] in prefix_strokes:
-		i+=1
-	result=[prefix_strokes[a] for a in result[:i]]+result[i:]
 
 	return tuple(result)
 

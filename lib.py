@@ -507,7 +507,11 @@ Matched("'ve", "v", condition=trailing),
 Matched("'d", "d", condition=trailing),
 Matched("'re", "ɹ", condition=trailing),
 
+Matched("ei", "ɪ", score=0.1),
 ]  # (are the conditions really necessary?...)
+
+index,=[i for i, x in enumerate(rules) if x==Matched("ei", "ɪ")]
+del rules[index]
 
 special_cases: Set[Tuple[str, str]]={
 ("of", "əv"),
