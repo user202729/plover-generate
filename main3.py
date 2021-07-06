@@ -28,6 +28,8 @@ from plover_ignore import *
 
 # parse args
 
+default_input_files=[tempdir/"out"]
+
 import argparse
 parser=argparse.ArgumentParser(
 		usage="Generate steno strokes.",
@@ -36,7 +38,7 @@ parser.add_argument("-a", "--append", action="store_true",
 		help="Append to the output file instead of overwriting")
 parser.add_argument("-i", "--input", type=Path, action="append",
 		help="Path to input file (matched pronunciation dictionary). Can be specified multiple times. "
-		f"If not specified, default to {tempdir/'out'}.")
+		f"If not specified, default to {default_input_files}.")
 parser.add_argument("--item-limit", type=int,
 		default=-1,
 		help="Maximum number of items to process. Negative/default means unlimited")
@@ -58,7 +60,7 @@ try:
 except NameError:
 	args=parser.parse_args()
 
-args.input=args.input or [tempdir/"out"]
+args.input=args.input or default_input_files
 
 items=[x for p in args.input for x in matched_pronunciation_dictionary_(p)]
 if args.item_limit>=0:

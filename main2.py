@@ -16,15 +16,16 @@ from pathlib import Path
 
 # parse args
 
+default_input_files=[Path("open-dict.txt"), Path("open-dict-additional.txt")]
+
 import argparse
 parser=argparse.ArgumentParser(
 		usage="Create a matched pronunciation dictionary from a pronunciation dictionary.",
 		formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument("-a", "--append", action="store_true",
 		help="Append to the output file instead of overwriting")
-parser.add_argument("-i", "--input", type=Path,
-		default=Path("open-dict.txt"),
-		help="Path to input file")
+parser.add_argument("-i", "--input", type=Path, action="append",
+		help=f"Path to input file. Can be specified multiple times. Default: {default_input_files}")
 parser.add_argument("-o", "--output", type=Path,
 		default=tempdir/"out",
 		help="Path to output file")
@@ -38,6 +39,8 @@ try:
 except NameError:
 	args=parser.parse_args()
 
+args.input=args.input or default_input_files
+
 ## read input files
 
 debug_print_all_matching=False
@@ -48,7 +51,11 @@ word_filter=lambda word: True
 #word_filter=lambda word: word.lower() in {"thought", "though"}
 
 frequency=frequency_()
-pronunciation=pronunciation_(args.input)
+pronunciation=pronunciation_(args.input[0])
+for p in args.input[1:]:
+	for word, pronounces in pronunciation_(p).items():
+		if word not in pronunciation: pronunciation[word]=[]
+		pronunciation[word]+=pronounces
 
 print("done reading")
 
