@@ -46,6 +46,8 @@ parser.add_argument("-o", "--output", type=Path,
 parser.add_argument("--output-errors", type=Path,
 		default=tempdir/"errors.txt",
 		help="Path to output file to print errors (mismatches)")
+parser.add_argument("--raw-steno", action="store_true",
+		help="Print raw steno instead of pseudosteno")
 
 try:
 	__IPYTHON__  # type: ignore
@@ -74,6 +76,11 @@ print("done read data")
 # (a little too restrictive)
 #word_filter=lambda word: word.lower() in {"pretty"}
 word_filter=lambda word: True
+
+def outline_to_str(outline: Strokes, raw_steno: bool=args.raw_steno)->str:
+	return "/".join(
+			x.raw_str() if raw_steno else str(x)
+			for x in outline)
 
 ##
 
@@ -149,7 +156,7 @@ if 1: # steno generation
 			generated[outline].append(word)
 			if out_dump:
 				print(
-					json.dumps("/".join(map(str, outline)), ensure_ascii=False)+
+					json.dumps(outline_to_str(outline), ensure_ascii=False)+
 					":"+
 					json.dumps(word, ensure_ascii=False)+
 					",", file=out_dump)
@@ -186,7 +193,7 @@ if 1: # steno generation
 						f"    # {line}"
 						for line in textwrap.wrap(
 							f"generated: " +
-							', '.join('/'.join(map(str, outline)) for outline in outlines)
+							', '.join(outline_to_str(outline) for outline in outlines)
 							)
 						)
 					,
