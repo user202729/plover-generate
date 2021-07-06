@@ -574,7 +574,7 @@ def get_steno_rules(whole: Matches, left: int, right: int)->Iterator[StenoRule]:
 		yield skip_rule
 		# not return just yet. Consider normal cases too
 
-	if right==left+1 and whole[left].pronounce in ("s", "z") and whole[left].spell=="s":
+	if right==left+1 and pronounce in ("s", "z") and spell=="s":
 		yield suffix_s_rule
 
 	try:
@@ -598,6 +598,10 @@ def get_steno_rules(whole: Matches, left: int, right: int)->Iterator[StenoRule]:
 	if spell=="oo":
 		yield StenoRuleVowel(Stroke("AO"))
 		return  # strict rule.
+
+	if right==left+1 and pronounce=="ɔ" and spell_of_(whole[right:]).startswith("ll"):
+		yield StenoRuleVowel(Stroke("AU"))
+		return
 
 	try:
 		yield from steno_rules_by_both[spell, pronounce]
