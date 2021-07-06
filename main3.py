@@ -48,6 +48,9 @@ parser.add_argument("--output-errors", type=Path,
 		help="Path to output file to print errors (mismatches)")
 parser.add_argument("--raw-steno", action="store_true",
 		help="Print raw steno instead of pseudosteno")
+parser.add_argument("--disambiguation-stroke", type=Stroke, default=Stroke(),
+		help=f"Stroke to disambiguate conflicts")
+
 
 try:
 	__IPYTHON__  # type: ignore
@@ -156,7 +159,10 @@ if 1: # steno generation
 			generated[outline].append(word)
 			if out_dump:
 				print(
-					json.dumps(outline_to_str(outline), ensure_ascii=False)+
+					json.dumps(outline_to_str(
+						outline + (args.disambiguation_stroke,)*(len(generated[outline])-1)
+						if args.disambiguation_stroke else outline
+						), ensure_ascii=False)+
 					":"+
 					json.dumps(word, ensure_ascii=False)+
 					",", file=out_dump)
