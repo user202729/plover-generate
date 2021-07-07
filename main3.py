@@ -182,7 +182,6 @@ if 1: # steno generation
 
 		# ======== print steno mismatches with respect to Plover's dictionary
 
-		if not word_filter(word): continue
 		if word not in plover_reverse_dict: continue
 		plover_entries: Sequence[str]=plover_reverse_dict[word]
 		failed_strokes=[ # Plover outlines that is not ignored and cannot be guessed by the program
