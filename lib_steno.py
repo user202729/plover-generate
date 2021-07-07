@@ -223,7 +223,7 @@ def matched_pronunciation_dictionary_(p: Path)->List[Matches]:
 						else:
 							assert d==c
 							break
-				if {*x.pronounce}&{*"aæɑeəɛiɪoɔuʊ"}:
+				if {*x.pronounce}&vowel_pronounce_characters:
 					result[j]=Match(x.spell, x.pronounce, stress)
 					stress=Stress.no
 				else:
@@ -628,7 +628,7 @@ def get_steno_rules(whole: Matches, left: int, right: int)->Iterator[StenoRule]:
 			right==left+1 and right<len(whole)
 			and whole[left].spell in ("i", "e")
 			and whole[left].pronounce=="i"
-			and {*whole[left+1].pronounce}&vowel_pronounce_characters
+			and {*whole[left+1].pronounce}&vowel_pronounce_characters_with_j
 			):
 		yield from steno_rules_by_pronounce["j"]
 		return
