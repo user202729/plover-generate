@@ -56,6 +56,11 @@ parser.add_argument("--include-briefs", action="store_true",
 		help="Include briefs in the output file")
 parser.add_argument("--disambiguation-stroke", type=Stroke, default=Stroke(),
 		help=f"Stroke to disambiguate conflicts")
+parser.add_argument("--last-entry", default='"WUZ/WUZ": ""',
+		help=f"Last entry. "
+		"If empty, the surrounding {...} are not generated and the output is not a valid JSON file. "
+		"This is not checked to be a valid JSON or stroke."
+		)
 
 
 try:
@@ -110,6 +115,9 @@ if 1: # steno generation
 	count=0
 	out_dump=open(args.output, "w", buffering=1)
 	error_dump=None if args.no_output_errors else open(args.output_errors, "w", buffering=1)
+
+	if out_dump and args.last_entry:
+		print("{", file=out_dump)
 
 	def append_generated(outline: Strokes, word: str)->None:
 		generated[outline].append(word)
@@ -224,3 +232,5 @@ if 1: # steno generation
 					,
 					file=error_dump)
 
+	if out_dump and args.last_entry:
+		print(args.last_entry+"\n}", file=out_dump)
