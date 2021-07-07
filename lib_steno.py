@@ -338,8 +338,8 @@ for pronounce_, x1 in [
 		]),
 
 	("ɪ", [
-		"ee ea ie        | AOE  ",
-		"e               | E    ",
+		"ee ea ie e      | AOE  ",
+		#"e               | E    ",
 		]),
 
 	("i", [
@@ -628,7 +628,7 @@ def get_steno_rules(whole: Matches, left: int, right: int)->Iterator[StenoRule]:
 			right==left+1 and right<len(whole)
 			and whole[left].spell in ("i", "e")
 			and whole[left].pronounce=="i"
-			and whole[left+1].pronounce in ("ə", "ɑ")
+			and {*whole[left+1].pronounce}&vowel_pronounce_characters
 			):
 		yield from steno_rules_by_pronounce["j"]
 		return

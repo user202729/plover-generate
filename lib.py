@@ -667,15 +667,15 @@ def print_result_matching(result: List[MatchResult], color: bool=True)->None:
 	print("==", pronounce_)
 
 
+vowel_pronounce_characters: Set[str]={*"aæɑeəɛiɪjoɔuʊ"}
 def fix_match(x: List[MatchResult])->List[Tuple[str, str]]:
 	# group the vowels together
 	# Tuple[str, str] type: (spell, pronounce)
 	# (...)
 	spell={*"aeiouy"}
-	pronounce={*"aæɑeəɛiɪjoɔuʊ"}
 
 	def is_vowel(x: Tuple[str, str])->bool:
-		return not ({*x[0]}-spell) and not ({*x[1]}-pronounce)
+		return not ({*x[0]}-spell) and not ({*x[1]}-vowel_pronounce_characters)
 
 	def can_merge(a: Tuple[str, str], b: Tuple[str, str])->bool:
 		return is_vowel(a) and is_vowel(b) and (not a[1] or not b[1])
