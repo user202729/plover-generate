@@ -688,7 +688,7 @@ def fix_outline(x: Strokes)->Strokes:
 	for s in x:
 		if s in Stroke("-RPBLGTSDZ") and result and (result[-1]&right_half)==Stroke("-S"):
 			result[-1]=result[-1]-Stroke("-S")+Stroke("-F")+s
-		elif (s&Stroke("-FRPBLGTSDZ"))==Stroke("-SD"):
+		elif (s&right_half)==Stroke("-SD"):
 			result.append(s-Stroke("-S")+Stroke("-F"))
 		elif result and s==Stroke("-S") and (result[-1]&Stroke("-DZ"))==Stroke("-D"):
 			result[-1]+=Stroke("-Z")
