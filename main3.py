@@ -100,8 +100,6 @@ if 1: # steno generation
 	count=0
 	out_dump=open(args.output, "w", buffering=1)
 	error_dump=open(args.output_errors, "w", buffering=1)
-	#out_brief_solitude=open(tempdir/"brief_solitude.txt", "w", buffering=1)
-	out_brief_solitude=None
 
 	def append_generated(outline: Strokes, word: str)->None:
 		generated[outline].append(word)
@@ -195,8 +193,6 @@ if 1: # steno generation
 		cannot_guess_any=all(
 				plover_translate(outline)!=word
 				for outline in outlines)
-		if cannot_guess_any and out_brief_solitude:
-			print(f"{word}|", end="", file=out_brief_solitude)
 		if cannot_guess_any:
 			assert len(plover_entries)!=0
 		#if failed_strokes:
