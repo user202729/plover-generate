@@ -489,6 +489,8 @@ for line in [
 		"ŋɡ    | -     | -PBG          ",
 		"ndʒ   | -     | -PBG          ",
 		"ŋk    | -     | *PBG          ",
+		"ŋkʃən | -     | -PBGS         ",
+		"ŋʃən  | -     | -PBGS         ",
 		"mp    | -     | -FRP   *PL    ",
 		"ɹv    | -     | -FRB          ",
 		"st    | -     | *S            ",
