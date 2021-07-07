@@ -608,6 +608,9 @@ def get_steno_rules(whole: Matches, left: int, right: int)->Iterator[StenoRule]:
 		yield StenoRuleVowel(Stroke("AO"))
 		return  # strict rule.
 
+	if pronounce=="ŋk" and pronounce_of_(whole[right:]).startswith(("t", "ʃ")):
+		yield from steno_rules_by_pronounce["ŋ"]  # not a strict rule
+
 	if right==left+1 and pronounce=="ɔ" and spell_of_(whole[right:]).startswith("ll"):
 		yield StenoRuleVowel(Stroke("AU"))
 		return
