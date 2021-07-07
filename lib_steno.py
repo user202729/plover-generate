@@ -396,6 +396,14 @@ for line in [
 		"con      kɑn     KAUPB   ",
 		"con      kɔŋ     KAUPB   ",
 		"con      kɑŋ     KAUPB   ",
+		"ex       ɛks     EBGS    ",
+		"ex       ɛɡz     EBGS    ",
+		"ex       ɪks     EBGS    ",
+		"ex       ɪɡz     EBGS    ",
+		"exc      ɛks     EBGS    ",
+		"exc      ɛɡz     EBGS    ",
+		"exc      ɪks     EBGS    ",
+		"exc      ɪɡz     EBGS    ",
 		]:
 	spell, pronounce, stroke=line.split()
 	append_(steno_rules_by_both, (spell, pronounce),
