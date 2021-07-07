@@ -61,6 +61,9 @@ parser.add_argument("--last-entry", default='"WUZ/WUZ": ""',
 		"If empty, the surrounding {...} are not generated and the output is not a valid JSON file. "
 		"This is not checked to be a valid JSON or stroke."
 		)
+parser.add_argument("--word-filter",
+		help=f"If not empty, list of comma-separated words to filter the output."
+		)
 
 
 try:
@@ -90,6 +93,10 @@ print("done read data")
 # (a little too restrictive)
 #word_filter=lambda word: word.lower() in {"pretty"}
 word_filter=lambda word: True
+if args.word_filter:
+	keep_words: Set[str]={*args.word_filter.split(",")}
+	word_filter=lambda word: word in keep_words
+
 
 def outline_to_str(outline: Strokes, raw_steno: bool=args.raw_steno)->str:
 	return "/".join(
