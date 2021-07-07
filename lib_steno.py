@@ -374,8 +374,6 @@ for line in [
 "pɹi     PRE     ",
 "fɔɹ     TPAUR   ",
 "ɔn      AUPB    ",
-"kɔn     KAUPB   ",
-"kən     KAUPB   ",
 "kɔ      KAU     ",
 "kə      KAU     ",
 "ɔɹ      AUR     ",
@@ -390,6 +388,19 @@ for line in [
 		]:
 	pronounce, stroke=line.split()
 	append_(steno_rules_by_pronounce_no_hide, pronounce, StenoRulePrefix(Stroke(stroke)))
+
+# prefix by both
+for line in [
+		"con      kɔn     KAUPB   ",
+		"con      kən     KAUPB   ",
+		"con      kɑn     KAUPB   ",
+		"con      kɔŋ     KAUPB   ",
+		"con      kɑŋ     KAUPB   ",
+		]:
+	spell, pronounce, stroke=line.split()
+	append_(steno_rules_by_both, (spell, pronounce),
+			StenoRulePrefix(Stroke(stroke))
+			)
 
 # suffix by both
 for line in [
