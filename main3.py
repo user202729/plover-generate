@@ -48,6 +48,8 @@ parser.add_argument("-o", "--output", type=Path,
 parser.add_argument("--output-errors", type=Path,
 		default=tempdir/"errors.txt",
 		help="Path to output file to print errors (mismatches)")
+parser.add_argument("--no-output-errors", action="store_true",
+		help="Do not print errors. See also --output-errors")
 parser.add_argument("--raw-steno", action="store_true",
 		help="Print raw steno instead of pseudosteno")
 parser.add_argument("--include-briefs", action="store_true",
@@ -99,7 +101,7 @@ if 1: # steno generation
 	generated_words: Set[str]=set()
 	count=0
 	out_dump=open(args.output, "w", buffering=1)
-	error_dump=open(args.output_errors, "w", buffering=1)
+	error_dump=None if args.no_output_errors else open(args.output_errors, "w", buffering=1)
 
 	def append_generated(outline: Strokes, word: str)->None:
 		generated[outline].append(word)
@@ -181,6 +183,7 @@ if 1: # steno generation
 		# ======== print steno mismatches with respect to Plover's dictionary
 
 		if word not in plover_reverse_dict: continue
+		if error_dump is None: continue
 		plover_entries: Sequence[str]=plover_reverse_dict[word]
 		failed_strokes=[ # Plover outlines that is not ignored and cannot be guessed by the program
 				plover_outline
