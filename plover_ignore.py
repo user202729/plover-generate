@@ -4,6 +4,11 @@
 
 
 plover_briefs={
+"PAPBLG", # (PAJ,): package -- ['pækədʒ', 'pækɪdʒ']
+"TPH*FGT", # (N*FGT,): investigate -- ['ɪnvɛstəɡeɪt']
+"SREGT", # (VEGT,): investigate -- ['ɪnvɛstəɡeɪt']
+"SREUBGT", # (VIKT,): convict -- ['kɑnvɪkt', 'kənvɪkt']
+"K-FBGT", # (K-FKT,): convict -- ['kɑnvɪkt', 'kənvɪkt']
 "EFRG", # !! (EFRG,): everything -- ['ɛvɹiθɪŋ']
 "POPB", # !! (PON,): upon -- ['əpɑn']
 "PHAPBLGD", # !! (MAJD,): imagined -- ['ɪmædʒənd']
@@ -666,6 +671,7 @@ plover_ortho_briefs={
 "HE", # (HE,): he -- ['ˈhi']
 		}
 plover_misstrokes={
+"ROUPBLDZ", # (ROUNLDZ,): rounds -- ['ɹaʊndz', 'ɹaʊnz']
 "PR-FPLD", # !! (PR-ChLD,): purchased -- ['pəɹtʃəst']
 "PR-FPDZ", # !! (PR-ChDZ,): purchased -- ['pəɹtʃəst']
 "OE/-D/-D", # !! (OE, -D, -D): owed -- ['oʊd']
