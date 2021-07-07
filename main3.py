@@ -91,6 +91,14 @@ def outline_to_str(outline: Strokes, raw_steno: bool=args.raw_steno)->str:
 			x.raw_str() if raw_steno else str(x)
 			for x in outline)
 
+def have_ignore_part(outline: str)->bool:
+	parts: List[str]=outline.split("/")
+	return any(
+			"/".join(parts[l:r]) in plover_ignore
+			for r in range(len(parts)+1)
+			for l in range(r)
+			)
+
 ##
 
 if 1: # steno generation
@@ -185,10 +193,11 @@ if 1: # steno generation
 		if word not in plover_reverse_dict: continue
 		if error_dump is None: continue
 		plover_entries: Sequence[str]=plover_reverse_dict[word]
-		failed_strokes=[ # Plover outlines that is not ignored and cannot be guessed by the program
+		failed_strokes: List[Strokes]=[ # Plover outlines that is not ignored and cannot be guessed by the program
 				plover_outline
 				for plover_outline_ in plover_entries
-				if plover_outline_ not in plover_ignore
+				#if plover_outline_ not in plover_ignore
+				if not have_ignore_part(plover_outline_)
 				for plover_outline in [to_strokes(plover_outline_)]
 				if not plover_entry_matches_generated_1(plover_outline, outlines)
 				]
