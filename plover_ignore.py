@@ -645,6 +645,7 @@ plover_briefs={
 "-F", # (-F,): of -- ['ˈəv']
 		}
 plover_ortho_briefs={
+"EU",
 "TPOUR", # (FOUR,): four -- ['ˈfɔɹ']
 "WAR", # (WAR,): war -- ['ˈwɔɹ']
 "HOUR", # (HOUR,): hour -- ['ˈaʊɝ', 'ˈaʊɹ']

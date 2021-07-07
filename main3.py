@@ -50,6 +50,8 @@ parser.add_argument("--output-errors", type=Path,
 		help="Path to output file to print errors (mismatches)")
 parser.add_argument("--raw-steno", action="store_true",
 		help="Print raw steno instead of pseudosteno")
+parser.add_argument("--include-briefs", action="store_true",
+		help="Include briefs in the output file")
 parser.add_argument("--disambiguation-stroke", type=Stroke, default=Stroke(),
 		help=f"Stroke to disambiguate conflicts")
 
@@ -93,6 +95,7 @@ if 1: # steno generation
 	##
 	errors: Set[Tuple[str, str]]=set()
 	generated: MutableMapping[Strokes, List[str]]=defaultdict(list)
+
 	generated_words: Set[str]=set()
 	count=0
 	out_dump=open(args.output, "w", buffering=1)
@@ -100,9 +103,25 @@ if 1: # steno generation
 	#out_brief_solitude=open(tempdir/"brief_solitude.txt", "w", buffering=1)
 	out_brief_solitude=None
 
+	def append_generated(outline: Strokes, word: str)->None:
+		generated[outline].append(word)
+		if out_dump:
+			print(
+				json.dumps(outline_to_str(
+					outline + (args.disambiguation_stroke,)*(len(generated[outline])-1)
+					if args.disambiguation_stroke else outline
+					), ensure_ascii=False)+
+				":"+
+				json.dumps(word, ensure_ascii=False)+
+				",", file=out_dump)
+
 	def print_error(*args, **kwargs):
 		print(*args, **kwargs)
 		if error_dump: print(*args, **kwargs, file=error_dump)
+
+	if args.include_briefs:
+		for x in plover_briefs|plover_ortho_briefs:
+			append_generated(to_strokes(x), plover_dict[x])
 
 	#out_dump=None
 	#error_count=0
@@ -158,16 +177,7 @@ if 1: # steno generation
 						raise RuntimeError()
 
 		for outline in outlines:
-			generated[outline].append(word)
-			if out_dump:
-				print(
-					json.dumps(outline_to_str(
-						outline + (args.disambiguation_stroke,)*(len(generated[outline])-1)
-						if args.disambiguation_stroke else outline
-						), ensure_ascii=False)+
-					":"+
-					json.dumps(word, ensure_ascii=False)+
-					",", file=out_dump)
+			append_generated(outline, word)
 
 
 		# ======== print steno mismatches with respect to Plover's dictionary
