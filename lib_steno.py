@@ -295,6 +295,7 @@ def pronounce_of_(x: Sequence[Match])->str:
 skip_rule: StenoRule=StenoRuleSkip()
 schwa_skip_rule: StenoRule=StenoRuleSkipSchwa()
 
+steno_rules_by_spell: Dict[str, List[StenoRule]]={}  # spell -> rule
 steno_rules_by_both: Dict[Tuple[str, str], List[StenoRule]]={}  # (spell, pronounce) -> rule
 steno_rules_by_pronounce: Dict[str, List[StenoRule]]={}  # less priority & hidden than the above
 steno_rules_by_pronounce_no_hide: Dict[str, List[StenoRule]]={}  # independent, never hidden
@@ -394,126 +395,68 @@ def append_(d: Dict[K, List[V]], key: K, value: V)->None:
 	else:
 		d[key].append(value)
 
-# prefix by pronounce
-for line in [
-"ɹi      RE      ",
-"pɹi     PRE     ",
-"fɔɹ     TPAUR   ",
-"ɔn      AUPB    ",
-"kɔ      KAU     ",
-"kə      KAU     ",
-"ɔɹ      AUR     ",
-"aʊt     AOUT    ",
-"ɛkstɹə  ERBGS   ",
-"ɛkstɹə  *ERBGS  ",
-"mɪs     PHEUZ   ",
-"i       E       ",
-"supəɹ   SPR     ",
-"supəɹ   SAOUP   ",
-"əndəɹ   UPBD    ",
-		]:
-	pronounce, stroke=line.split()
-	append_(steno_rules_by_pronounce_no_hide, pronounce, StenoRulePrefix(Stroke(stroke)))
+# prefix
+append_(steno_rules_by_spell, "re      ".strip(), StenoRulePrefix(Stroke("RE       ".strip())))
+append_(steno_rules_by_spell, "pre     ".strip(), StenoRulePrefix(Stroke("PRE      ".strip())))
+append_(steno_rules_by_spell, "for     ".strip(), StenoRulePrefix(Stroke("TPAUR    ".strip())))
+append_(steno_rules_by_spell, "on      ".strip(), StenoRulePrefix(Stroke("AUPB     ".strip())))
+append_(steno_rules_by_spell, "co      ".strip(), StenoRulePrefix(Stroke("KAU      ".strip())))
+append_(steno_rules_by_spell, "or      ".strip(), StenoRulePrefix(Stroke("AUR      ".strip())))
+append_(steno_rules_by_spell, "out     ".strip(), StenoRulePrefix(Stroke("AOUT     ".strip())))
+append_(steno_rules_by_spell, "extra   ".strip(), StenoRulePrefix(Stroke("ERBGS    ".strip())))
+append_(steno_rules_by_spell, "extra   ".strip(), StenoRulePrefix(Stroke("*ERBGS   ".strip())))
+append_(steno_rules_by_spell, "mis     ".strip(), StenoRulePrefix(Stroke("PHEUZ    ".strip())))
+append_(steno_rules_by_spell, "miss    ".strip(), StenoRulePrefix(Stroke("PHEUZ    ".strip())))
+append_(steno_rules_by_spell, "e       ".strip(), StenoRulePrefix(Stroke("AOE      ".strip())))
+append_(steno_rules_by_spell, "super   ".strip(), StenoRulePrefix(Stroke("SPR      ".strip())))
+append_(steno_rules_by_spell, "super   ".strip(), StenoRulePrefix(Stroke("SAOUP    ".strip())))
+append_(steno_rules_by_spell, "under   ".strip(), StenoRulePrefix(Stroke("UPBD     ".strip())))
+append_(steno_rules_by_spell, "con     ".strip(), StenoRulePrefix(Stroke("KAUPB    ".strip())))
+append_(steno_rules_by_spell, "ex      ".strip(), StenoRulePrefix(Stroke("EBGS     ".strip())))
+append_(steno_rules_by_spell, "exc     ".strip(), StenoRulePrefix(Stroke("EBGS     ".strip())))
 
-# prefix by both
-for line in [
-		"con      kɔn     KAUPB   ",
-		"con      kən     KAUPB   ",
-		"con      kɑn     KAUPB   ",
-		"con      kɔŋ     KAUPB   ",
-		"con      kɑŋ     KAUPB   ",
-		"ex       ɛks     EBGS    ",
-		"ex       ɛɡz     EBGS    ",
-		"ex       ɪks     EBGS    ",
-		"ex       ɪɡz     EBGS    ",
-		"exc      ɛks     EBGS    ",
-		"exc      ɛɡz     EBGS    ",
-		"exc      ɪks     EBGS    ",
-		"exc      ɪɡz     EBGS    ",
-		]:
-	spell, pronounce, stroke=line.split()
-	append_(steno_rules_by_both, (spell, pronounce),
-			StenoRulePrefix(Stroke(stroke))
-			)
+# suffix
+append_(steno_rules_by_spell, "er       ".strip(), StenoRuleSuffix(Stroke("*ER     ".strip()), False))
+append_(steno_rules_by_spell, "or       ".strip(), StenoRuleSuffix(Stroke("O*R     ".strip()), False))
+append_(steno_rules_by_spell, "al       ".strip(), StenoRuleSuffix(Stroke("A*L     ".strip()), False))
+append_(steno_rules_by_spell, "an       ".strip(), StenoRuleSuffix(Stroke("A*PB    ".strip()), False))
+append_(steno_rules_by_spell, "en       ".strip(), StenoRuleSuffix(Stroke("*EPB    ".strip()), False))
+append_(steno_rules_by_spell, "ol       ".strip(), StenoRuleSuffix(Stroke("O*L     ".strip()), False))
+append_(steno_rules_by_spell, "on       ".strip(), StenoRuleSuffix(Stroke("O*PB    ".strip()), False))
+append_(steno_rules_by_spell, "out      ".strip(), StenoRuleSuffix(Stroke("SKWROUT ".strip()), False))
+append_(steno_rules_by_spell, "ure      ".strip(), StenoRuleSuffix(Stroke("AOUR    ".strip()), False))
+append_(steno_rules_by_spell, "'s       ".strip(), StenoRuleSuffix(Stroke("AES     ".strip()), False))
+append_(steno_rules_by_spell, "ly       ".strip(), StenoRuleSuffix(Stroke("HREU    ".strip()), False))
+append_(steno_rules_by_spell, "li       ".strip(), StenoRuleSuffix(Stroke("HREU    ".strip()), False))
+append_(steno_rules_by_spell, "ness     ".strip(), StenoRuleSuffix(Stroke("-PBS    ".strip()), False))
+append_(steno_rules_by_spell, "less     ".strip(), StenoRuleSuffix(Stroke("-LS     ".strip()), False))
+append_(steno_rules_by_spell, "ful      ".strip(), StenoRuleSuffix(Stroke("-FL     ".strip()), False))
+append_(steno_rules_by_spell, "fully    ".strip(), StenoRuleSuffix(Stroke("TPHREU  ".strip()), False))
+append_(steno_rules_by_spell, "some     ".strip(), StenoRuleSuffix(Stroke("SO*PL   ".strip()), False))
+append_(steno_rules_by_spell, "some     ".strip(), StenoRuleSuffix(Stroke("SO*EPL  ".strip()), False))
+append_(steno_rules_by_spell, "man      ".strip(), StenoRuleSuffix(Stroke("PHA*PB  ".strip()), False))
+append_(steno_rules_by_spell, "ary      ".strip(), StenoRuleSuffix(Stroke("AER     ".strip()), False))
+append_(steno_rules_by_spell, "ary      ".strip(), StenoRuleSuffix(Stroke("REU     ".strip()), False))
+append_(steno_rules_by_spell, "ory      ".strip(), StenoRuleSuffix(Stroke("REU     ".strip()), False))
+append_(steno_rules_by_spell, "self     ".strip(), StenoRuleSuffix(Stroke("SEFL    ".strip()), False))
+append_(steno_rules_by_spell, "selves   ".strip(), StenoRuleSuffix(Stroke("SEFLS   ".strip()), False))
+append_(steno_rules_by_spell, "istic    ".strip(), StenoRuleSuffix(Stroke("ST-BG   ".strip()), False))
+append_(steno_rules_by_spell, "astic    ".strip(), StenoRuleSuffix(Stroke("ST-BG   ".strip()), False))
+append_(steno_rules_by_spell, "ment     ".strip(), StenoRuleSuffix(Stroke("*PLT    ".strip()), False))
+append_(steno_rules_by_spell, "ed       ".strip(), StenoRuleSuffix(Stroke("-D      ".strip()), True))
+append_(steno_rules_by_spell, "ing      ".strip(), StenoRuleSuffix(Stroke("-G      ".strip()), True))
 
-# suffix by both
-for line in [
-		"er     əɹ    *ER      0",
-		"or     əɹ    O*R      0",
-		"or     ɔɹ    O*R      0",
-		"al     əɫ    A*L      0",
-		"an     ən    A*PB     0",
-		"en     ən    *EPB     0",
-		"ol     ɔɫ    O*L      0",
-		"ol     əɫ    O*L      0",
-		"on     ɔn    O*PB     0",
-		"on     ən    O*PB     0",
-		"out    aʊt   SKWROUT  0",
-		"ure    əɹ    AOUR     0",
-		"'s     z     AES      0",
-		"y      ə     KWREU    0",
-		"i      ə     KWREU    0",
-		# these rules are sufficiently natural that the program can figure them out
-		# however if they're not explicitly listed as suffix, they cannot be used after (listed) suffixes
-		"ly     ɫi    HREU     0",
-		"ness   nəs   -PBS     0",
-		"ness   nɛs   -PBS     0",
-		"ness   nɪs   -PBS     0",
-		"less   ɫəs   -LS      0",
-		"less   ɫɛs   -LS      0",
-		"less   ɫɪs   -LS      0",
-		"ful    fəɫ   -FL      0",
-		"ful    fʊɫ   -FL      0",
-		"fully  fɫi   TPHREU   0",
-		"fully  fəɫi  TPHREU   0",
-		"some   səm   SO*PL    0",
-		"some   səm   SO*EPL   0",
-		"some   soʊm  SO*PL    0",
-		"some   soʊm  SO*EPL   0",
-		"some   səʊm  SO*PL    0",
-		"some   səʊm  SO*EPL   0",
-		"man    mən   PHA*PB   0",
-		"man    mæn   PHA*PB   0",
-		"man    mɑn   PHA*PB   0",
-		"ary    əɹi   AER      0",
-		"ary    ɑɹi   AER      0",
-		"ary    ɛɹi   AER      0",
-		"ary    ɹi    AER      0",
-		"ary    əɹɪ   AER      0",
-		"ary    ɑɹɪ   AER      0",
-		"ary    ɛɹɪ   AER      0",
-		"ary    ɹɪ    AER      0",
-		"ed     t     -D       1",
-		"ed     ɪd    -D       1",
-		"ed     d     -D       1",
-		"ing    ɪŋ    -G       1",
-		]:
-	spell, pronounce, stroke, try_join=line.split()
-	append_(steno_rules_by_both, (spell, pronounce),
-			StenoRuleSuffix(Stroke(stroke), bool(int(try_join)))
-			)
+# some rules are sufficiently natural that the program can figure them out
+# however if they're not explicitly listed as suffix, they cannot be used after (listed) suffixes
 
 # suffix by pronounce
 for line in [
 		# (Plover theory) only if it's spelled with y? Not really. (cookie)
 		"ɪ      KWREU  0",
 		"i      KWREU  0",
-		"mənt   *PLT   0",
 		"kəɫ    K-L    0",
-		"sɛɫf   SEFL   0",
-		"sɛɫvz  SEFLS  0",		
-		"ɪstɪk  ST-BG  0",
 		"uəɫ    WAL    0",
-		"əɹi    REU    0",
-		"ɑɹi    REU    0",
-		"ɔɹi    REU    0",
-		"ɛɹi    REU    0",
-		"ɹi     REU    0",
-		"əɹɪ    REU    0",
-		"ɑɹɪ    REU    0",
-		"ɔɹɪ    REU    0",
-		"ɛɹɪ    REU    0",
-		"ɹɪ     REU    0",
+		"wəɫ    WAL    0",
 		]:
 	pronounce, stroke, try_join=line.split()
 	append_(steno_rules_by_pronounce_no_hide, pronounce, StenoRuleSuffix(Stroke(stroke), bool(int(try_join))))
@@ -652,6 +595,11 @@ def get_steno_rules(whole: Matches, left: int, right: int)->Iterator[StenoRule]:
 
 	if right==left+1 and pronounce in ("s", "z") and spell=="s":
 		yield suffix_s_rule
+
+	try:
+		yield from steno_rules_by_spell[spell]
+	except KeyError:
+		pass
 
 	try:
 		yield from steno_rules_by_pronounce_no_hide[pronounce]
