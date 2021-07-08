@@ -191,10 +191,6 @@ if 1: # steno generation
 						print_error("error (no steno_strokes generated):", word_lower, pronounce)
 						print_matches(m)
 
-						if 1:  # exit on (particular count of) (word-pronounce pair) errors
-							if len(errors)>=100:
-								raise RuntimeError()
-
 			outlines|={*current_strokes}
 
 		if 1:  # print words that does not generate any strokes
@@ -207,11 +203,6 @@ if 1: # steno generation
 				strokes_: str
 				for strokes_ in plover_reverse_dict.get(word_lower, []):
 					print("\t", to_strokes(strokes_))
-
-				
-				if 1:  # exit on (particular count of) (unique word) errors
-					if len(errors)>=100:
-						raise RuntimeError()
 
 		for outline in outlines:
 			for word in casereverse.get(word_lower, [word_lower]):
