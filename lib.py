@@ -196,8 +196,8 @@ def pronunciation_(p: Path)->Dict[str, List[str]]:
 	return pronunciation
 def plover_dict_()->Dict[str, str]:
 	plover_dict=json.loads(
-			#Path("main.json")
-			Path("di-dictionary.json")
+			Path("main.json")
+			#Path("di-dictionary.json")
 			.read_text())
 	return plover_dict
 
