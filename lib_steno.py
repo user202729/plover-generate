@@ -303,89 +303,72 @@ steno_rules_by_pronounce_no_hide: Dict[str, List[StenoRule]]={}  # independent, 
 # they're not the complete set of rules. See also get_steno_rules and fix_outline.
 # to clarify, these are only internal implementation details of get_steno_rules function.
 
-# vowel by pronounce
-for line in [
-	"æ     A   ",
-	"aɪə   AOEU",
-	"aɪ    AOEU",
-	"aʊ    OU  ",
-	"eɪ    AEU ",
-	"wə    U   ",    # (temporary)
-	"əw    U   ",    # (temporary)
-	"jə    U   ",
-	"ju    AOU ",
-	"jʊ    AOU ",
-	"oʊ    OE  ",
-	"ɔɪ    OEU ",
-	"u     AOU ",
-	"ʊ     U   ",
-
-	"ə     U   ", # this may be /ʌ/ too
-	"ɔ     AU  ",
-	"ɑ     O   ",
-	"ɪ     EU  ",
-	"i     AOE ", # may be /iː/ but open ipa dict does not use /ː/
-	"ɛ     E   ",
-	]:
-	pronounce, stroke=line.split()
+# vowel
+x1: List[str]
+for pronounce, stroke, x1 in [  # type: ignore
+		("æ     ", "A     ", []),
+		("aɪə   ", "AOEU  ", []),
+		("aɪ    ", "AOEU  ", []),
+		("aʊ    ", "OU    ", []),
+		("eɪ    ", "AEU   ", []),
+		("wə    ", "U     ", []),    # (temporary)
+		("əw    ", "U     ", []),    # (temporary)
+		("jə    ", "U     ", []),
+		("ju    ", "AOU   ", []),
+		("jʊ    ", "AOU   ", []),
+		("oʊ    ", "OE    ", [
+			"oa              | AO OE",
+			]),
+		("əʊ    ", "OE    ", [
+			"oa              | AO OE",
+			]),
+		("ɔɪ    ", "OEU   ", []),
+		("u     ", "AOU   ", [
+			"oo              | AO   ",
+			"o               | O    ",
+			]),
+		("ʊ     ", "U     ", [
+			"oo              | AO   ",
+			"o               | O    ",
+			]),
+		("ə     ", "U     ", [
+			"a aa           | A    ",
+			"e ea           | E    ",
+			"i y ia ui ieu  | EU   ",
+			"o              | O    ",
+			"u              | U    ",
+			]), # this may be /ʌ/ too
+		("ɔ     ", "AU    ", [
+			"o ou            | O    ",
+			"oa              | AO AU",
+			"a               | A",
+			]),
+		("ɑ     ", "O     ", [
+			"ea              | A    ",
+			"a               | A    ",
+			]),
+		("ɪ     ", "EU    ", [
+			"ee ea ie e      | AOE  ",
+			]),
+		("i     ", "AOE   ", [
+			"y i             | EU   ",
+			]), # may be /iː/ but open ipa dict does not use /ː/
+		("ɛ     ", "E     ", [
+			"a ai ei ay      | AEU   "
+			]),
+]:
+	pronounce=pronounce.strip()
+	stroke=stroke.strip()
 	assert pronounce not in steno_rules_by_pronounce, pronounce
 	steno_rules_by_pronounce[pronounce]=[StenoRuleVowel(Stroke(stroke))]
 
-# vowel by both
-for pronounce_, x1 in [
-	("ɑ", [
-		"ea              | A    ",
-		]),
-
-	("ə", [
-		 "a aa           | A    ",
-		 "e ea           | E    ",
-		 "i y ia ui ieu  | EU   ",
-		 "o              | O    ",
-		 "u              | U    ",
-		 ]),
-	
-	("ɔ", [
-		"o ou            | O    ",
-		"oa              | AO AU",
-		"a               | A",
-		]),
-
-	("oʊ əʊ", [
-		"oa              | AO OE",
-		]),
-
-	("ʊ u", [
-		"oo              | AO   ",
-		"o               | O    ",
-		]),
-
-	("ɑ", [
-		"a               | A    ",
-		]),
-
-	("ɪ", [
-		"ee ea ie e      | AOE  ",
-		#"e               | E    ",
-		]),
-
-	("i", [
-		"y i             | EU   ",
-		#"e               | E    ",
-		]),
-
-	("ɛ", [
-		"a ai ei ay      | AEU   "
-		]),
-	]:
-	for pronounce in pronounce_.split():
-		for line in x1:
-			spells, strokes=line.split("|")
-			for spell in spells.split():
-				assert (spell, pronounce) not in steno_rules_by_both
-				steno_rules_by_both[spell, pronounce]=[
-						StenoRuleVowel(Stroke(stroke))
-						for stroke in strokes.split()]
+	for line in x1:
+		spells, strokes=line.split("|")
+		for spell in spells.split():
+			assert (spell, pronounce) not in steno_rules_by_both
+			steno_rules_by_both[spell, pronounce]=[
+					StenoRuleVowel(Stroke(stroke))
+					for stroke in strokes.split()]
 
 K=TypeVar("K")
 V=TypeVar("V")
@@ -398,6 +381,7 @@ def append_(d: Dict[K, List[V]], key: K, value: V)->None:
 # prefix
 append_(steno_rules_by_spell, "re      ".strip(), StenoRulePrefix(Stroke("RE       ".strip())))
 append_(steno_rules_by_spell, "pre     ".strip(), StenoRulePrefix(Stroke("PRE      ".strip())))
+append_(steno_rules_by_spell, "de      ".strip(), StenoRulePrefix(Stroke("TKE      ".strip())))
 append_(steno_rules_by_spell, "for     ".strip(), StenoRulePrefix(Stroke("TPAUR    ".strip())))
 append_(steno_rules_by_spell, "on      ".strip(), StenoRulePrefix(Stroke("AUPB     ".strip())))
 append_(steno_rules_by_spell, "co      ".strip(), StenoRulePrefix(Stroke("KAU      ".strip())))
@@ -416,6 +400,9 @@ append_(steno_rules_by_spell, "ex      ".strip(), StenoRulePrefix(Stroke("EBGS  
 append_(steno_rules_by_spell, "exc     ".strip(), StenoRulePrefix(Stroke("EBGS     ".strip())))
 
 # suffix
+append_(steno_rules_by_spell, "able     ".strip(), StenoRuleSuffix(Stroke("-BL     ".strip()), False))
+append_(steno_rules_by_spell, "ible     ".strip(), StenoRuleSuffix(Stroke("-BL     ".strip()), False))
+append_(steno_rules_by_spell, "ible     ".strip(), StenoRuleSuffix(Stroke("EUBL    ".strip()), False))
 append_(steno_rules_by_spell, "er       ".strip(), StenoRuleSuffix(Stroke("*ER     ".strip()), False))
 append_(steno_rules_by_spell, "or       ".strip(), StenoRuleSuffix(Stroke("O*R     ".strip()), False))
 append_(steno_rules_by_spell, "al       ".strip(), StenoRuleSuffix(Stroke("A*L     ".strip()), False))
@@ -438,6 +425,7 @@ append_(steno_rules_by_spell, "man      ".strip(), StenoRuleSuffix(Stroke("PHA*P
 append_(steno_rules_by_spell, "ary      ".strip(), StenoRuleSuffix(Stroke("AER     ".strip()), False))
 append_(steno_rules_by_spell, "ary      ".strip(), StenoRuleSuffix(Stroke("REU     ".strip()), False))
 append_(steno_rules_by_spell, "ory      ".strip(), StenoRuleSuffix(Stroke("REU     ".strip()), False))
+append_(steno_rules_by_spell, "ury      ".strip(), StenoRuleSuffix(Stroke("REU     ".strip()), False))
 append_(steno_rules_by_spell, "self     ".strip(), StenoRuleSuffix(Stroke("SEFL    ".strip()), False))
 append_(steno_rules_by_spell, "selves   ".strip(), StenoRuleSuffix(Stroke("SEFLS   ".strip()), False))
 append_(steno_rules_by_spell, "istic    ".strip(), StenoRuleSuffix(Stroke("ST-BG   ".strip()), False))
