@@ -29,6 +29,7 @@ from plover_ignore import *
 # parse args
 
 default_input_files=[tempdir/"out"]
+generate_equivalent="--raw-steno --include-briefs --no-output-errors --disambiguation-stroke=R-RPB"
 
 import argparse
 parser=argparse.ArgumentParser(
@@ -64,6 +65,10 @@ parser.add_argument("--last-entry", default='"WUZ/WUZ": ""',
 parser.add_argument("--word-filter",
 		help=f"If not empty, list of comma-separated words to filter the output."
 		)
+parser.add_argument("--generate", action="store_true",
+		help=f"Preset for generating a dictionary. "
+		f"Equivalent to appending '{generate_equivalent}' to the command-line."
+		)
 
 
 try:
@@ -71,6 +76,9 @@ try:
 	args=parser.parse_args([])
 except NameError:
 	args=parser.parse_args()
+
+if args.generate:
+	args=parser.parse_args(sys.argv[1:]+generate_equivalent.split())
 
 args.input=args.input or default_input_files
 
