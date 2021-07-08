@@ -57,7 +57,10 @@ class State(enum.Enum):
 class S:
 	strokes: Strokes
 	state: State
+	seen_schwa_in_cluster: bool  # current (left or right) cluster
 	mark: bool  # for debugging.
+
+S_default=S((), State.outline_start, False, False)
 
 @dataclass
 class StenoRule:
@@ -69,7 +72,7 @@ class StenoRulePrefix(StenoRule): # prefix in a separate stroke
 	a: Stroke
 	def apply(self, s: S, whole: Matches, left: int, right: int)->Iterator[S]:
 		if s.state in (State.outline_start, State.prefix):
-			yield S(s.strokes+(self.a,), State.prefix, s.mark)
+			yield S(s.strokes+(self.a,), State.prefix, False, s.mark)
 
 @dataclass
 class StenoRuleSuffix(StenoRule): # suffix in a separate stroke
@@ -82,7 +85,7 @@ class StenoRuleSuffix(StenoRule): # suffix in a separate stroke
 					(stroke_append(s.strokes, self.a) or s.strokes+(self.a,))
 					if self.try_join else
 					s.strokes+(self.a,)
-					, State.suffix, s.mark)
+					, State.suffix, False, s.mark)
 
 @dataclass
 class StenoRuleSuffixS(StenoRule): # suffix in a separate stroke
@@ -96,7 +99,7 @@ class StenoRuleSuffixS(StenoRule): # suffix in a separate stroke
 						stroke_append(s.strokes, Stroke("-Z")) or
 						s.strokes+(Stroke("-S"),)
 						),
-					State.suffix, s.mark)
+					State.suffix, False, s.mark)
 
 @dataclass
 class StenoRuleConsonant(StenoRule):
@@ -112,30 +115,40 @@ class StenoRuleConsonant(StenoRule):
 		elif s.state in (State.outline_start, State.prefix):
 			# separate left
 			if self.a:
-				yield S(s.strokes+(self.a,), State.left, s.mark)
+				yield S(s.strokes+(self.a,), State.left, False, s.mark)
 
 		elif s.state==State.left:
 			# try to put in the left part (if fail, separate left)
 			if self.a:
 				t=stroke_append(s.strokes, self.a)
-				if t is not None or len(s.strokes)==1:
+				if t is not None:
+					yield S(t, State.left, s.seen_schwa_in_cluster, s.mark)
+				elif len(s.strokes)==1 and not s.seen_schwa_in_cluster:
 					# only allow one separate leading consonant at the start of the word
 					# without any prefix strokes
+					# and with no schwa seen
 					# (although having prefix strokes might still work because of orthographic rules)
 					# left separate is not frequent in Plover theory
-					yield S(t or s.strokes+(self.a,), State.left, s.mark)
+					# a set of possible onset may be better
+					yield S(s.strokes+(self.a,), State.left, s.seen_schwa_in_cluster, s.mark)
 
 		else:
 			# try to put in the right (if fail, separate right)
 			assert s.state in (State.vowel, State.right, State.right_separate)
 			if self.b:
 				t=stroke_append(s.strokes, self.b)
-				if t is not None or s.state!=State.right_separate:
+				if t is not None:
+					yield S(t,
+							State.right_separate if s.state==State.right_separate else State.right,
+							s.seen_schwa_in_cluster, s.mark)
+				elif s.state!=State.right_separate and not s.seen_schwa_in_cluster:
 					# disallow double right_separate
 					# example: [extr] cannot be a "natural" syllable (EX/-T/-R)
 					# (besides, it's stroke-inefficient)
+					# also disallow when there's a schwa in the cluster
 					# right_separate is not frequent in Plover theory
-					yield S(t or s.strokes+(self.b,), State.right_separate if t is None else State.right, s.mark)
+					yield S(s.strokes+(self.b,),
+							State.right_separate, s.seen_schwa_in_cluster, s.mark)
 
 				# try to put in right+left (if (right) fail, ignore)
 				assert not self.dupe
@@ -143,7 +156,7 @@ class StenoRuleConsonant(StenoRule):
 
 			# try to make a new syllable (this syllable has a vowel already)
 			if self.a:
-				yield S(s.strokes+(self.a,), State.left, s.mark)
+				yield S(s.strokes+(self.a,), State.left, False, s.mark)
 
 
 @dataclass
@@ -167,8 +180,16 @@ class StenoRuleVowel(StenoRule):
 			t=s.strokes+(self.a,)
 
 		yield S(t, State.vowel,
+				False,
 				s.mark or s.state==State.vowel # (debug) mark consecutive vowels
 				)
+
+@dataclass
+class StenoRuleSkipSchwa(StenoRule):
+	def apply(self, s: S, whole: Matches, left: int, right: int)->Iterator[S]:
+		if not s.seen_schwa_in_cluster:
+			s=S(strokes=s.strokes, state=s.state, seen_schwa_in_cluster=True, mark=s.mark)
+		yield s
 
 @dataclass
 class StenoRuleSkip(StenoRule):
@@ -272,6 +293,7 @@ def pronounce_of_(x: Sequence[Match])->str:
 
 
 skip_rule: StenoRule=StenoRuleSkip()
+schwa_skip_rule: StenoRule=StenoRuleSkipSchwa()
 
 steno_rules_by_both: Dict[Tuple[str, str], List[StenoRule]]={}  # (spell, pronounce) -> rule
 steno_rules_by_pronounce: Dict[str, List[StenoRule]]={}  # less priority & hidden than the above
@@ -625,7 +647,7 @@ def get_steno_rules(whole: Matches, left: int, right: int)->Iterator[StenoRule]:
 	spell=spell_of_(whole[left:right])
 
 	if right==left+1 and left!=0 and unstressed_schwa(whole[left]):
-		yield skip_rule
+		yield schwa_skip_rule
 		# not return just yet. Consider normal cases too
 
 	if right==left+1 and pronounce in ("s", "z") and spell=="s":
@@ -671,7 +693,7 @@ def get_steno_rules(whole: Matches, left: int, right: int)->Iterator[StenoRule]:
 def generate_iterator(whole: Matches, right: int)->Iterator[S]:
 	# generate for whole[:right]. Need context
 	if not right:
-		yield S((), State.outline_start, False)
+		yield S_default
 		return
 	for i in range(right-1,-1,-1):
 		rules: List[StenoRule]=[*get_steno_rules(whole, i, right)]
