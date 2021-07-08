@@ -192,6 +192,10 @@ def print_matches(x: Matches)->None:
 
 
 def matched_pronunciation_dictionary_(p: Path)->List[Matches]:
+	"""
+	Read and return a matched pronunciation dictionary (as outputted by main2).
+	The spelling is in lowercase.
+	"""
 	items: List[Matches]=[]
 	
 	for component_ in p.read_text().split("\n\n"):

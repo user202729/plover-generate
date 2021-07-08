@@ -82,17 +82,26 @@ if args.generate:
 
 args.input=args.input or default_input_files
 
-items=[x for p in args.input for x in matched_pronunciation_dictionary_(p)]
+items=[x for p in args.input for x in matched_pronunciation_dictionary_(p)]  # spelling are in lowercase
 if args.item_limit>=0:
 	items=items[:args.item_limit]
+
 frequency=frequency_()
+frequency_items=[
+		(word_lower, [*items_])
+		for word_lower, items_ in group_sort(frequency.items(), key=lambda x: x[0].lower())]
+frequency_lowercase: Dict[str, float]={
+		word_lower: sum(x[1] for x in items_) for word_lower, items_ in frequency_items}
+casereverse: Dict[str, List[str]]={ #only consist of words in the frequency file
+		word_lower: [x[0] for x in items_] for word_lower, items_ in frequency_items}
+
 plover_dict=plover_dict_()
 plover_dict_by_frequency=plover_dict_by_frequency_(plover_dict, frequency)
 plover_reverse_dict: Dict[str, Sequence[str]]={
 		word: plover_entries
 		for word_frequency, word, plover_entries in plover_dict_by_frequency
 		}
-pronunciation: MutableMapping[str, List[str]]=defaultdict(list)
+pronunciation: MutableMapping[str, List[str]]=defaultdict(list)  # spelling are in lowercase
 for x in items: pronunciation[spell_of_(x)].append(pronounce_of_(x))
 
 print("done read data")
@@ -102,7 +111,7 @@ print("done read data")
 #word_filter=lambda word: word.lower() in {"pretty"}
 word_filter=lambda word: True
 if args.word_filter:
-	keep_words: Set[str]={*args.word_filter.split(",")}
+	keep_words: Set[str]={*args.word_filter.lower().split(",")}
 	word_filter=lambda word: word in keep_words
 
 
@@ -126,7 +135,6 @@ if 1: # steno generation
 	errors: Set[Tuple[str, str]]=set()
 	generated: MutableMapping[Strokes, List[str]]=defaultdict(list)
 
-	generated_words: Set[str]=set()
 	count=0
 	out_dump=open(args.output, "w", buffering=1)
 	error_dump=None if args.no_output_errors else open(args.output_errors, "w", buffering=1)
@@ -160,14 +168,12 @@ if 1: # steno generation
 	def key_(x: Matches):
 	# optional (set dictionary to be used by the translator, if `translate_stroke` is used)
 		s=spell_of_(x)
-		return (-frequency.get(s, 0), s)
+		return (-frequency_lowercase.get(s, 0), s)
 
 	plover_briefed_words: Set[str]={plover_dict.get(x, "") for x in plover_briefs}
-	for (frequency_, word), x in group_sort(items, key=key_):
-		if not word_filter(word): continue
+	for (frequency_, word_lower), x in group_sort(items, key=key_):
+		if not word_filter(word_lower): continue
 		outlines: Set[Strokes]=set()  # set of outlines generated for this word
-
-		generated_words.add(word)
 
 		m: Matches
 		for m in x:
@@ -180,9 +186,9 @@ if 1: # steno generation
 			if 0:  # print (word, pronounce) pairs that does not generate any strokes
 				if not current_strokes:
 					pronounce=pronounce_of_(m)
-					if (word, pronounce) not in errors:
-						errors.add((word, pronounce))
-						print_error("error (no steno_strokes generated):", word, pronounce)
+					if (word_lower, pronounce) not in errors:
+						errors.add((word_lower, pronounce))
+						print_error("error (no steno_strokes generated):", word_lower, pronounce)
 						print_matches(m)
 
 						if 1:  # exit on (particular count of) (word-pronounce pair) errors
@@ -193,13 +199,13 @@ if 1: # steno generation
 
 		if 1:  # print words that does not generate any strokes
 			if not outlines:
-				print_error("error (no steno_strokes generated):", word)
-				errors.add((word, ""))
-				for pronounce in pronunciation.get(word, []):
+				print_error("error (no steno_strokes generated):", word_lower)
+				errors.add((word_lower, ""))
+				for pronounce in pronunciation.get(word_lower, []):
 					print("\t", pronounce)
 				print("==")
 				strokes_: str
-				for strokes_ in plover_reverse_dict.get(word, []):
+				for strokes_ in plover_reverse_dict.get(word_lower, []):
 					print("\t", to_strokes(strokes_))
 
 				
@@ -208,14 +214,19 @@ if 1: # steno generation
 						raise RuntimeError()
 
 		for outline in outlines:
-			append_generated(outline, word)
+			for word in casereverse.get(word_lower, [word_lower]):
+				append_generated(outline, word)
 
 
 		# ======== print steno mismatches with respect to Plover's dictionary
 
-		if word not in plover_reverse_dict: continue
 		if error_dump is None: continue
-		plover_entries: Sequence[str]=plover_reverse_dict[word]
+		plover_entries: Sequence[str]=[
+				outline_
+				for word in casereverse.get(word_lower, [word_lower])
+				for outline_ in plover_reverse_dict.get(word, ())
+				]
+		if not plover_entries: continue
 		failed_strokes: List[Strokes]=[ # Plover outlines that is not ignored and cannot be guessed by the program
 				plover_outline
 				for plover_outline_ in plover_entries
@@ -226,14 +237,14 @@ if 1: # steno generation
 				]
 		#cannot_guess_any=len(failed_strokes)==len(plover_entries)
 		cannot_guess_any=all(
-				plover_translate(outline)!=word
+				plover_translate(outline)!=word_lower
 				for outline in outlines)
 		if cannot_guess_any:
 			assert len(plover_entries)!=0
 		#if failed_strokes:
-		if cannot_guess_any and failed_strokes and word not in plover_briefed_words:
+		if cannot_guess_any and failed_strokes and word_lower not in plover_briefed_words:
 			for outline in failed_strokes:
-				print(f'"{"/".join(x.raw_str() for x in outline)}", # {"!! " if cannot_guess_any else ""}{outline}: {word} -- {pronunciation.get(word)}',
+				print(f'"{"/".join(x.raw_str() for x in outline)}", # {"!! " if cannot_guess_any else ""}{outline}: {word_lower} -- {pronunciation.get(word_lower)}',
 						file=error_dump
 						)
 			print(

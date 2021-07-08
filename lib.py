@@ -118,8 +118,12 @@ def from_skeys(skeys: str)->str:
 			)
 
 def frequency_()->Dict[str, float]:
+	"""
+	Return a dict that maps a word (with correct case) to the number of occurrences in 10**9 words.
+	Frequency list taken from Wikipedia.
+	"""
 	frequency_=[
-			(b.lower(), float(c))
+			(b, float(c))
 			for a in Path("frequency-list").read_text().splitlines()
 			for b, c in (a.split("\t"),)
 			]
@@ -167,6 +171,9 @@ def spell_out(word: str)->Optional[str]:
 		return None
 
 def pronunciation_(p: Path)->Dict[str, List[str]]:
+	"""
+	For each word spelling (lower case), return a list of pronunciation in open-dict's IPA format.
+	"""
 	pronunciation_=[
 			(word, pronunciations_filtered)
 			for a in p.read_text().splitlines()
