@@ -211,7 +211,14 @@ def print_matches(x: Matches)->None:
 	print(spell_)
 	print(pronounce_)
 
-
+vowel_diphthongs: Set[Tuple[str, str]]={
+		("a", "ɪ"),
+		("a", "ʊ"),
+		("e", "ɪ"),
+		("ɔ", "ɪ"),
+		("o", "ʊ"),
+		("ə", "ʊ"),
+		}
 def matched_pronunciation_dictionary_(p: Path)->List[Matches]:
 	"""
 	Read and return a matched pronunciation dictionary (as outputted by main2).
@@ -249,8 +256,11 @@ def matched_pronunciation_dictionary_(p: Path)->List[Matches]:
 							assert d==c
 							break
 				if {*x.pronounce}&vowel_pronounce_characters:
-					result[j]=Match(x.spell, x.pronounce, stress)
-					stress=Stress.no
+					if stress==Stress.no and j!=0 and (result[j-1].pronounce, x.pronounce) in vowel_diphthongs:
+						result[j]=Match(x.spell, x.pronounce, result[j-1].stress)
+					else:
+						result[j]=Match(x.spell, x.pronounce, stress)
+						stress=Stress.no
 				else:
 					result[j]=Match(x.spell, x.pronounce, Stress.no)
 			assert i==len(pronounce_original)
