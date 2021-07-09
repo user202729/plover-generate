@@ -4,763 +4,627 @@
 
 
 plover_briefs={
-"THER",
-"SEBGD",
-"TPR-T",
-"TOT",
-"OEFB",
-"OFB",
-"S-T",
-"RAER",
-"THR-LGS",
-"O*EUPL",
-"*UR",
-"TOPBT",
-"K-B",
-"SKP-T",
-"PHOEURPL",
-"TPEU",
-"UL",
-"UR",
-"KWRAOUPB",
-"SUD",
-"TKPWEPB",
-"WH",
-"THOUZ",
-"TPORGT",
-"TPO*RGT",
-"SHOPBT",
-"SHOB",
-"TPORPBLT",
-"TPORPBT",
-"SERPT",
-"TKROPL",
-"TPU",
-"TPHARL",
-"REB",
-"T-S",
-"AOEUPLT",
-"-FT",
-"TAOULT",
-"PWAOERT",
-"TAOUL",
-"RULT",
-"RUL",
-"PEPL",
-"TPH-T",
-"KRAR",
-"TP-RT",
-"TP-R",
-"OEPBT",
-"PAERPB",
-"PARPB",
-"EZ",
-"TPHOPBLG",
-"W-T",
-"UBGT",
-"THR-R",
-"KAPBLT",
-"PWOF",
-"WOPBD",
-"*EURB",
-"WA*EU",
-"OPBL",
-"HAP",
-"PRO*B",
-"TPREBGT",
-"AOUPT",
-"PROUPBS",
-"HRAOUP",
-"AEU",
-"STA*TS",
-"STOEUPB",
-"SKWRAEUT",
-"TKPWRAEUGS",
-"TPR*EBGS",
-"SRAPBS", # (VANS,): advance -- ['ədvæns']
-"KWRA*EUR", # !! (YAI*R,): area -- ['ɛɹiə']
-"TRAER", # !! (TRAER,): temporary -- ['tɛmpəɹɛɹi']
-"PHAPLT", # (MAMT,): management -- ['mænədʒmənt', 'mænɪdʒmənt']
-"PHA*PLT", # (MA*MT,): management -- ['mænədʒmənt', 'mænɪdʒmənt']
-"PH-GT", # (M-GT,): management -- ['mænədʒmənt', 'mænɪdʒmənt']
-"ROFR", # (ROFR,): recover -- ['ɹɪkəvəɹ']
-"PHAEUB", # !! (MAIB,): maybe -- ['meɪbi']
-"PHAEB", # !! (MAEB,): maybe -- ['meɪbi']
-"AO*ERS", # (EE*RS,): easier -- ['iziəɹ']
-"TKP-PT", # (DP-PT,): department -- ['dɪpɑɹtmənt']
-"TKEPT", # (DEPT,): department -- ['dɪpɑɹtmənt']
-"TKEPLT", # (DEMT,): department -- ['dɪpɑɹtmənt']
-"TK-PT", # (D-PT,): department -- ['dɪpɑɹtmənt']
-"-RLD", # (-RLD,): recalled -- ['ɹɪkɔɫd']
-"AERPLTS", # (AERMTS,): arguments -- ['ɑɹɡjəmənts']
-"SEPG", # (SEPG,): accepting -- ['æksɛptɪŋ', 'əksɛptɪŋ']
-"RARDZ", # (RARDZ,): regards -- ['ɹɪɡɑɹdz']
-"TPH-BG", # (N-K,): income -- ['ɪnkəm']
-"TKPH-BG", # (DM-K,): income -- ['ɪnkəm']
-"KO*EPD", # !! (KOE*PD,): copied -- ['kɑpid']
-"WEP", # (WEP,): weapon -- ['wɛpən']
-"TPHEG", # (NEG,): neglect -- ['nəɡɫɛkt', 'nɪɡɫɛkt']
-"OBGS", # (OKS,): objection -- ['əbdʒɛkʃən']
-"ROEUR", # (ROIR,): error -- ['ɛɹəɹ']
-"RO*ER", # (ROE*R,): error -- ['ɛɹəɹ']
-"PHO*DZ", # (MO*DZ,): methods -- ['mɛθədz']
-"REG", # (REG,): regular -- ['ɹeɪɡjəɫəɹ', 'ɹɛɡjəɫəɹ']
-"REGT", # (REGT,): regularity -- ['ɹɛɡjəɫɛɹəti']
-"RA*EPB", # !! (RAE*N,): rein -- ['ɹeɪn']
-"TPHAOGS", # (NAOʃn,): intuition -- ['ɪntuɪʃən']
-"SHRUS", # (SLUS,): stimulus -- ['stɪmjəɫəs']
-"KHA*EURPL", # (ChAI*RM,): chairman -- ['tʃɛɹmən']
-"SA*ES", # !! (SAE*S,): essays -- ['ɛseɪz', 'ɛseɪz']
-"OERPT", # (OERPT,): operate -- ['ɑpəɹeɪt', 'ɔpəɹeɪt']
-"PRAEUT", # (PRAIT,): operate -- ['ɑpəɹeɪt', 'ɔpəɹeɪt']
-"PRAEURT", # (PRAIRT,): operator -- ['ɑpəɹeɪtəɹ']
-"PA*EL", # !! (PAE*L,): peal -- ['piɫ']
-"T-PBS", # !! (T-NS,): continuous -- ['kəntɪnjuəs']
-"PAPBLG", # (PAJ,): package -- ['pækədʒ', 'pækɪdʒ']
-"TPH*FGT", # (N*FGT,): investigate -- ['ɪnvɛstəɡeɪt']
-"SREGT", # (VEGT,): investigate -- ['ɪnvɛstəɡeɪt']
-"SREUBGT", # (VIKT,): convict -- ['kɑnvɪkt', 'kənvɪkt']
-"K-FBGT", # (K-FKT,): convict -- ['kɑnvɪkt', 'kənvɪkt']
-"EFRG", # !! (EFRG,): everything -- ['ɛvɹiθɪŋ']
-"POPB", # !! (PON,): upon -- ['əpɑn']
-"PHAPBLGD", # !! (MAJD,): imagined -- ['ɪmædʒənd']
-"TPHAO*EUGT", # !! (NII*GT,): knight -- ['naɪt']
-"PWRAEG", # !! (BRAEG,): breaking -- ['bɹeɪkɪŋ']
-"PWRAEBG/-G", # !! (BRAEK, -G): breaking -- ['bɹeɪkɪŋ']
-"PUPBD", # !! (PUND,): punished -- ['pənɪʃt']
-"P-RBD", # !! (P-ʃD,): punished -- ['pənɪʃt']
-"P-RB/-D", # !! (P-ʃ, -D): punished -- ['pənɪʃt']
-"PUR/-D", # !! (PUR, -D): purchased -- ['pəɹtʃəst']
-"PUFPD", # !! (PUChD,): purchased -- ['pəɹtʃəst']
-"PR-FPD", # !! (PR-ChD,): purchased -- ['pəɹtʃəst']
-"PR-FP/-D", # !! (PR-Ch, -D): purchased -- ['pəɹtʃəst']
-"EFRPB", # !! (ERch,): everyone -- ['ɛvɹiwən']
-"*EFRPB", # !! (E*Rch,): everyone -- ['ɛvɹiwən']
-"PHRARS", # !! (PLARS,): particulars -- ['pəɹtɪkjəɫəɹz']
-"TOED", # !! (TOED,): today -- ['tədeɪ', 'tudeɪ']
-"SRAOEPBT", # !! (VEENT,): convenient -- ['kənvinjənt']
-"SRAOEPB", # !! (VEEN,): convenient -- ['kənvinjənt']
-"SROLS", # !! (VOLS,): volumes -- ['vɑɫjumz']
-"SROL/-S", # !! (VOL, -S): volumes -- ['vɑɫjumz']
-"A/K-P", # !! (A, K-P): accompany -- ['əkəmpəni']
-"TPH*PB", # !! (N*N,): inn -- ['ɪn']
-"R*EUBGS", # !! (RI*KS,): ridiculous -- ['ɹɪdɪkjəɫəs']
-"PROEUPT", # !! (PROIPT,): proprietary -- ['pɹəpɹaɪətɛɹi']
-"PRAFS", # !! (PRAFS,): paragraphs -- ['pæɹəɡɹæfs', 'pɛɹəɡɹæfs']
-"TH-R/PWAOEU", # !! (TH-R, BII): thereby -- ['ðɛɹbaɪ']
-"THR/PW*EU", # !! (TL, BI*): thereby -- ['ðɛɹbaɪ']
-"THR-B", # !! (TL-B,): thereby -- ['ðɛɹbaɪ']
-"THR*RB", # !! (TL*ʃ,): thereby -- ['ðɛɹbaɪ']
-"HAPS", # !! (HAPS,): happens -- ['hæpənz']
-"WEPS", # !! (WEPS,): weapons -- ['wɛpənz']
-"TPHAOURB/A*L", # !! (NUUʃ, A*L): unusual -- ['ənjuʒuəɫ', 'ənjuʒwəɫ']
-"TPHAOURB", # !! (NUUʃ,): unusual -- ['ənjuʒuəɫ', 'ənjuʒwəɫ']
-"K-TS", # !! (K-TS,): accounts -- ['əkaʊnts']
-"PW-GS", # !! (B-ʃn,): beings -- ['biɪŋz']
-"-BGZ", # !! (-KZ,): beings -- ['biɪŋz']
-"HUPBS", # !! (HUNS,): hundreds -- ['həndəɹdz', 'həndɹədz', 'hənəɹdz']
-"HOEUPBS", # !! (HOINS,): hundreds -- ['həndəɹdz', 'həndɹədz', 'hənəɹdz']
-"SPHA*EUPB", # !! (SMAI*N,): mistaken -- ['mɪsteɪkən']
-"TPOFR", # !! (FOFR,): forever -- ['fəɹɛvəɹ']
-"TPR-FR", # !! (FR-FR,): forever -- ['fəɹɛvəɹ']
-"TPR*FR", # !! (FR*FR,): forever -- ['fəɹɛvəɹ']
-"SUGS", # !! (SUʃn,): suggestion -- ['sədʒɛstʃən']
-"HOEUR", # !! (HOIR,): hero -- ['hiɹoʊ', 'hɪɹoʊ']
-"HO*EUR", # !! (HOI*R,): hero -- ['hiɹoʊ', 'hɪɹoʊ']
-"WAFS", # !! (WAFS,): waves -- ['weɪvz']
-"WAF/-S", # !! (WAF, -S): waves -- ['weɪvz']
-"RA*EUPBG", # !! (RAI*NG,): reign -- ['ɹeɪn']
-"AO*ELG", # !! (EE*LG,): emotion -- ['imoʊʃən', 'ɪmoʊʃən']
-"AO*EGS", # !! (EE*ʃn,): emotion -- ['imoʊʃən', 'ɪmoʊʃən']
-"TKPW-PBS", # !! (G-NS,): guns -- ['ɡənz']
-"WHAOEULS", # !! (WHIILS,): whilst -- ['waɪɫst']
-"KPRORD", # !! (XRORD,): extraordinary -- ['ɛkstɹəɔɹdənɛɹi', 'ɪkstɹɔɹdənɛɹi']
-"KPRAORD", # !! (XRAORD,): extraordinary -- ['ɛkstɹəɔɹdənɛɹi', 'ɪkstɹɔɹdənɛɹi']
-"KPAORD", # !! (XAORD,): extraordinary -- ['ɛkstɹəɔɹdənɛɹi', 'ɪkstɹɔɹdənɛɹi']
-"TPOLS", # !! (FOLS,): follows -- ['fɑɫoʊz']
-"KROEURD", # !! (KROIRD,): occurred -- ['əkəɹd']
-"POEUPBD", # !! (POIND,): appointed -- ['əpɔɪntɪd']
-"SRAPBS/-D", # !! (VANS, -D): advanced -- ['ədvænst']
-"PREUPBZ", # !! (PRINZ,): principles -- ['pɹɪnsəpəɫz']
-"PREUPB", # !! (PRIN,): principle -- ['pɹɪnsəpəɫ']
-"TUPBG", # !! (TUNG,): tongue -- ['təŋ']
-"O*ERZ", # !! (OE*RZ,): otherwise -- ['əðəɹwaɪz']
-"AOEPBTS", # !! (EENTS,): events -- ['ivɛnts', 'ɪvɛnts']
-"*EFD", # !! (E*FD,): evidence -- ['ɛvədəns']
-"KAPT", # !! (KAPT,): captain -- ['kæptən']
-"TPHORT", # !! (NORT,): north -- ['nɔɹθ']
-"*URPBD", # !! (U*RND,): understood -- ['əndəɹstʊd']
-"URBL", # !! (UʃL,): usual -- ['juʒəwəɫ', 'juʒuəɫ']
-"A*FRDZ", # !! (A*FRDZ,): afterwards -- ['æftəɹwəɹdz']
-"SAF", # !! (SAF,): save -- ['seɪv']
-"SERPBL", # !! (SERNL,): certainly -- ['səɹtənɫi']
-"PREUT", # !! (PRIT,): pretty -- ['pɹɪti']
-"HUPBD", # !! (HUND,): hundred -- ['həndəɹd', 'həndɹəd', 'həndɹɪd', 'hənəɹd']
-"HOEUPB", # !! (HOIN,): hundred -- ['həndəɹd', 'həndɹəd', 'həndɹɪd', 'hənəɹd']
-"TPHU", # !! (NU,): new -- ['nju', 'nu']
-"AULS", # !! (AULS,): always -- ['ɔɫweɪz', 'ɔɫwiz']
-"TPHAE", # !! (NAE,): anyway -- ['ˈɛniˌweɪ']
-"PRAOERBT", # !! (PREEʃT,): appreciate -- ['əˈpɹiʃiˌeɪt']
-"PRAOERB/KWRAEUT", # !! (PREEʃ, YAIT): appreciate -- ['əˈpɹiʃiˌeɪt']
-"PRAOERB", # !! (PREEʃ,): appreciate -- ['əˈpɹiʃiˌeɪt']
-"SOERBGS", # !! (SOERKS,): association -- ['əˌsoʊsiˈeɪʃən', 'əˌsoʊʃiˈeɪʃən']
-"SOEGS", # !! (SOEʃn,): association -- ['əˌsoʊsiˈeɪʃən', 'əˌsoʊʃiˈeɪʃən']
-"R-PBG", # !! (R-NG,): reasoning -- ['ˈɹizənɪŋ']
-"R-PB/-G", # !! (R-N, -G): reasoning -- ['ˈɹizənɪŋ']
-"PW-FR/HAPBD", # !! (B-FR, HAND): beforehand -- ['bɪˈfɔɹˌhænd']
-"PW*F/HAPBD", # !! (B*F, HAND): beforehand -- ['bɪˈfɔɹˌhænd']
-"PW*F/HA*PBD", # !! (B*F, HA*ND): beforehand -- ['bɪˈfɔɹˌhænd']
-"PROET", # !! (PROET,): appropriate -- ['əˈpɹoʊpɹiˌeɪt', 'əˈpɹoʊpɹiət']
-"PROEPT", # !! (PROEPT,): appropriate -- ['əˈpɹoʊpɹiˌeɪt', 'əˈpɹoʊpɹiət']
-"PHREURB", # !! (PLIʃ,): accomplish -- ['əˈkɑmpɫɪʃ']
-"UPB/TPHES", # !! (UN, NES): unnecessary -- ['ənˈnɛsəˌsɛɹi']
-"SWAEUL", # !! (SWAIL,): sexually -- ['ˈsɛkʃuəɫi']
-"SWAUL/TEU", # !! (SWAUL, TI): sexuality -- ['ˌsɛkʃuˈæɫəti']
-"SWALT", # !! (SWALT,): sexuality -- ['ˌsɛkʃuˈæɫəti']
-"SWEPB", # !! (SWEN,): sewn -- ['ˈsoʊn']
-"SWE", # !! (SWE,): sew -- ['ˈsoʊ']
-"SWEPBG", # !! (SWENG,): sewing -- ['ˈsoʊɪŋ']
-"SWEG", # !! (SWEG,): sewing -- ['ˈsoʊɪŋ']
-"SWE/-G", # !! (SWE, -G): sewing -- ['ˈsoʊɪŋ']
-"SWAUL", # !! (SWAUL,): sexual -- ['ˈsɛkʃuəɫ']
-"S-B", # !! (S-B,): somebody -- ['ˈsəmˌbɑdi', 'ˈsəmbəˌdi']
-"SPH-B", # !! (SM-B,): somebody -- ['ˈsəmˌbɑdi', 'ˈsəmbəˌdi']
-"HR-PLTS", # !! (L-MTS,): elements -- ['ˈɛɫəmənts']
-"PREZ", # !! (PREZ,): president -- ['ˈpɹɛzəˌdɛnt', 'ˈpɹɛzɪdənt']
-"KWRA*ER", # !! (YAE*R,): area -- ['ˈɛɹiə']
-"SWR", # !! (SWR,): somewhere -- ['ˈsəmˌwɛɹ']
-"SW-R", # !! (SW-R,): somewhere -- ['ˈsəmˌwɛɹ']
-"SPW-R", # !! (SB-R,): somewhere -- ['ˈsəmˌwɛɹ']
-"SPH/WR", # !! (SM, WR): somewhere -- ['ˈsəmˌwɛɹ']
-"OEB", # !! (OEB,): observe -- ['əbˈzəɹv']
-"PW-PB", # !! (B-N,): been -- ['ˈbɪn', 'bən', 'bɪn']
-"SPOPBS/-BLT", # !! (SPONS, -BLT): responsibility -- ['ɹiˌspɑnsəˈbɪɫəti']
-"SPOPBLT", # !! (SPONLT,): responsibility -- ['ɹiˌspɑnsəˈbɪɫəti']
-"SPOPBLGT", # !! (SPOJT,): responsibility -- ['ɹiˌspɑnsəˈbɪɫəti']
-"SPOPBGT", # !! (SPONGT,): responsibility -- ['ɹiˌspɑnsəˈbɪɫəti']
-"SPOPB/EUBLT", # !! (SPON, IBLT): responsibility -- ['ɹiˌspɑnsəˈbɪɫəti']
-"SPOBLT", # !! (SPOBLT,): responsibility -- ['ɹiˌspɑnsəˈbɪɫəti']
-"SPOPBT", # !! (SPONT,): responsibility -- ['ɹiˌspɑnsəˈbɪɫəti']
-"REPT", # !! (REPT,): represent -- ['ˌɹɛpɹɪˈzɛnt']
-"W-R/*EUPB", # !! (W-R, I*N): wherein -- ['hwɛˈɹɪn', 'wɛˈɹɪn']
-"WR-PB", # !! (WR-N,): wherein -- ['hwɛˈɹɪn', 'wɛˈɹɪn']
-"TPHAOUP", # !! (NUUP,): newspaper -- ['ˈnuzˌpeɪpəɹ']
-"WR-FR", # !! (WR-FR,): wherever -- ['hwɛˈɹɛvəɹ', 'wɛˈɹɛvəɹ']
-"WHR-FR", # !! (WL-FR,): wherever -- ['hwɛˈɹɛvəɹ', 'wɛˈɹɛvəɹ']
-"W-R/-FR", # !! (W-R, -FR): wherever -- ['hwɛˈɹɛvəɹ', 'wɛˈɹɛvəɹ']
-"W-FR", # !! (W-FR,): wherever -- ['hwɛˈɹɛvəɹ', 'wɛˈɹɛvəɹ']
-"P-FRGS", # !! (P-FRʃn,): perfection -- ['pəɹˈfɛkʃən']
-"WRELS", # !! (WRELS,): elsewhere -- ['ˈɛɫˌswɛɹ']
-"ELS/W-R", # !! (ELS, W-R): elsewhere -- ['ˈɛɫˌswɛɹ']
-"T-PB/WAEL", # !! (T-N, WAEL): continually -- ['kənˈtɪnjuəɫi', 'kənˈtɪnjuɫi']
-"T-PB/HREU", # !! (T-N, LI): continually -- ['kənˈtɪnjuəɫi', 'kənˈtɪnjuɫi']
-"THROF", # !! (TLOF,): thereof -- ['ˌðɛˈɹəv']
-"THR/*F", # !! (TL, *F): thereof -- ['ˌðɛˈɹəv']
-"S-BGS", # !! (S-KS,): sex -- ['ˈsɛks']
-"HROEL", # !! (LOEL,): local -- ['ˈɫoʊkəɫ']
-"TKPW-PB", # !! (G-N,): gun -- ['ˈɡən']
-"TPHEUB", # !! (NIB,): anybody -- ['ˈɛnibədi']
-"*UPBG", # !! (U*NG,): uncle -- ['ˈəŋkəɫ']
-"PHAOED", # !! (MEED,): immediate -- ['ˌɪˈmiˌdiət']
-"RERD", # !! (RERD,): remembered -- ['ɹiˈmɛmbəɹd', 'ɹɪˈmɛmbəɹd']
-"RER/-D", # !! (RER, -D): remembered -- ['ɹiˈmɛmbəɹd', 'ɹɪˈmɛmbəɹd']
-"TKPWEPBS", # !! (GENS,): against -- ['əˈɡeɪnst', 'əˈɡɛnst']
-"TKPW*EPBS", # !! (GE*NS,): against -- ['əˈɡeɪnst', 'əˈɡɛnst']
-"TPHEUR", # !! (NIR,): anywhere -- ['ˈɛniˌwɛɹ', 'ˈɛnihˌwɛɹ']
-"TPHEU/WR*", # !! (NI, WR*): anywhere -- ['ˈɛniˌwɛɹ', 'ˈɛnihˌwɛɹ']
-"TPHAOEUR", # !! (NIIR,): anywhere -- ['ˈɛniˌwɛɹ', 'ˈɛnihˌwɛɹ']
-"RERL", # !! (RERL,): earlier -- ['ˈəɹɫiəɹ']
-"SERPB", # !! (SERN,): certain -- ['ˈsɝtən']
-"HOUFR", # !! (HOUFR,): however -- ['ˌhaʊˈɛvɝ']
-"HOUF", # !! (HOUF,): however -- ['ˌhaʊˈɛvɝ']
-"TPHUF", # !! (NUF,): enough -- ['iˈnəf', 'ɪˈnəf']
-"OERS", # !! (OERS,): others -- ['ˈəðɝz']
-"OER/-S", # !! (OER, -S): others -- ['ˈəðɝz']
-"SKRETD", # (SKRETD,): credit -- ['ˈkɹɛdət', 'ˈkɹɛdɪt']
-"KREUTD", # (KRITD,): credit -- ['ˈkɹɛdət', 'ˈkɹɛdɪt']
-"KRETD", # (KRETD,): credit -- ['ˈkɹɛdət', 'ˈkɹɛdɪt']
-"KRET", # (KRET,): credit -- ['ˈkɹɛdət', 'ˈkɹɛdɪt']
-"KROL", # (KROL,): control -- ['kənˈtɹoʊɫ']
-"SREUBL", # (VIBL,): visible -- ['ˈvɪzəbəɫ']
-"SELD", # (SELD,): seldom -- ['ˈsɛɫdəm']
-"HR-PBS", # (L-NS,): license -- ['ˈɫaɪsəns']
-"HR-PB", # (L-N,): license -- ['ˈɫaɪsəns']
-"KREU", # (KRI,): country -- ['ˈkəntɹi']
-"TKPW/-G", # (G, -G): going -- ['ˈɡoʊɪn', 'ˈɡoʊɪŋ']
-"TKPW-G", # (G-G,): going -- ['ˈɡoʊɪn', 'ˈɡoʊɪŋ']
-"SK-D", # (SK-D,): asked -- ['ˈæskt', 'ˈæst']
-"-T", # (-T,): the -- ['ˈðə', 'ðə', 'ði']
-"PEFGS", # (PEFʃn,): possession -- ['pəˈzɛʃən']
-"P*EGS", # (PE*ʃn,): possession -- ['pəˈzɛʃən']
-"TKWEUD/A*L", # (DWID, A*L): individual -- ['ˌɪndəˈvɪdʒəwəɫ']
-"TKWAL", # (DWAL,): individual -- ['ˌɪndəˈvɪdʒəwəɫ']
-"SREUPBLG", # (VIJ,): individual -- ['ˌɪndəˈvɪdʒəwəɫ']
-"SREUD", # (VID,): individual -- ['ˌɪndəˈvɪdʒəwəɫ']
-"SR*EUD", # (VI*D,): individual -- ['ˌɪndəˈvɪdʒəwəɫ']
-"SKES", # (SKES,): success -- ['səkˈsɛs']
-"WRO", # (WRO,): wrote -- ['ˈɹoʊt']
-"HOEUF", # (HOIF,): heavy -- ['ˈhɛvi']
-"TPOL", # (FOL,): follow -- ['ˈfɑɫoʊ']
-"THEUG", # (THIG,): thinking -- ['ˈθɪŋkɪŋ']
-"THEU/-G", # (THI, -G): thinking -- ['ˈθɪŋkɪŋ']
-"KORG", # (KORG,): according -- ['əˈkɔɹdɪŋ']
-"TPO*EUL", # (FOI*L,): fellow -- ['ˈfɛɫoʊ']
-"TP*EL", # (FE*L,): fellow -- ['ˈfɛɫoʊ']
-"HEUFRT", # (HIFRT,): history -- ['ˈhɪstɝi', 'ˈhɪstɹi']
-"OEPD", # (OEPD,): opened -- ['ˈoʊpənd']
-"OEP/-D", # (OEP, -D): opened -- ['ˈoʊpənd']
-"PWHRO", # (BLO,): below -- ['biˈɫoʊ', 'bɪˈɫoʊ']
-"S*FS", # (S*FS,): service -- ['ˈsɝvəs', 'ˈsɝvɪs']
-"TPEBG", # (FEK,): effect -- ['ˈifɛkt', 'əˈfɛkt', 'ɪˈfɛkt']
-"SULD", # (SULD,): suddenly -- ['ˈsədənɫi']
-"SUD/HREU", # (SUD, LI): suddenly -- ['ˈsədənɫi']
-"PHUPB", # (MUN,): money -- ['ˈməni']
-"TK*T", # (D*T,): death -- ['ˈdɛθ']
-"TKPWAPB", # (GAN,): began -- ['biˈɡæn', 'bɪˈɡæn']
-"STKPWAPB", # (SGAN,): began -- ['biˈɡæn', 'bɪˈɡæn']
-"TWAOEPB", # (TWEEN,): between -- ['bitˈwin', 'bɪtˈwin']
-"PWAU", # (BAU,): because -- ['bɪˈkɑz', 'bɪˈkəz', 'bɪˈkɔz', 'bɪkəz']
-"TKR-BT/-G", # (DR-BT, -G): distributing -- ['dɪˈstɹɪbjutɪŋ']
-"RULTS", # (RULTS,): results -- ['ɹiˈzəɫts', 'ɹɪˈzəɫts']
-"RULT/-S", # (RULT, -S): results -- ['ɹiˈzəɫts', 'ɹɪˈzəɫts']
-"EFRB", # (EFRB,): everybody -- ['ˈɛvɹiˌbɑdi']
-"SAOEFD", # (SEEFD,): received -- ['ɹəˈsivd', 'ɹiˈsivd', 'ɹɪˈsivd']
-"SAO*EFD", # (SEE*FD,): received -- ['ɹəˈsivd', 'ɹiˈsivd', 'ɹɪˈsivd']
-"SPH/WHA", # (SM, WHA): somewhat -- ['ˈsəmˈwət', 'ˈsəmhˈwət']
-"SWHA", # (SWHA,): somewhat -- ['ˈsəmˈwət', 'ˈsəmhˈwət']
-"OUDZ", # (OUDZ,): outside -- ['ˈaʊtˈsaɪd']
-"PHAOELD", # (MEELD,): immediately -- ['ˌɪˈmiˌdiətɫi']
-"PHAOED/HREU", # (MEED, LI): immediately -- ['ˌɪˈmiˌdiətɫi']
-"PHAO*ELD", # (MEE*LD,): immediately -- ['ˌɪˈmiˌdiətɫi']
-"POGS", # (POʃn,): position -- ['pəˈzɪʃən']
-"PWAEUPL", # (BAIM,): became -- ['biˈkeɪm', 'bɪˈkeɪm']
-"TPHOEBD", # (NOEBD,): nobody -- ['ˈnoʊˌbɑˌdi', 'ˈnoʊbədi']
-"TPHOEB", # (NOEB,): nobody -- ['ˈnoʊˌbɑˌdi', 'ˈnoʊbədi']
-"SPHAEUBG", # (SMAIK,): mistake -- ['mɪˈsteɪk']
-"SPHA*EUFBG", # (SMAI*FK,): mistake -- ['mɪˈsteɪk']
-"SPHA*EUBG", # (SMAI*K,): mistake -- ['mɪˈsteɪk']
-"KEBGTD", # (KEKTD,): connected -- ['kəˈnɛktɪd']
-"KEBGD/-D", # (KEKD, -D): connected -- ['kəˈnɛktɪd']
-"KEBG/-D", # (KEK, -D): connected -- ['kəˈnɛktɪd']
-"R*ELGS", # (RE*Lʃn,): relation -- ['ɹiˈɫeɪʃən']
-"PWAERPBG", # (BAERNG,): bearing -- ['ˈbɛɹɪŋ']
-"PWAERG", # (BAERG,): bearing -- ['ˈbɛɹɪŋ']
-"PWAER/-G", # (BAER, -G): bearing -- ['ˈbɛɹɪŋ']
-"URPBGD", # (URNGD,): understanding -- ['ˌəndɝˈstændɪŋ']
-"URPBD/-G", # (URND, -G): understanding -- ['ˌəndɝˈstændɪŋ']
-"URBGD", # (URKD,): understanding -- ['ˌəndɝˈstændɪŋ']
-"STPA*BGS", # (SFA*KS,): satisfaction -- ['ˌsætəsˈfækʃən', 'ˌsætɪsˈfækʃən']
-"PRAEP", # (PRAEP,): prepare -- ['pɹiˈpɛɹ']
-"PRAO*EP", # (PREE*P,): prepare -- ['pɹiˈpɛɹ']
-"PRAOEP", # (PREEP,): prepare -- ['pɹiˈpɛɹ']
-"TPHUPLS", # (NUMS,): numbers -- ['ˈnəmbɝz']
-"TR-D", # (TR-D,): interested -- ['ˈɪntɝəstəd', 'ˈɪntɝɪstɪd', 'ˈɪntɹəstɪd', 'ˈɪntɹɪstɪd']
-"WHR*", # (WL*,): weather -- ['ˈwɛðɝ']
-"TPHEUPB", # (NIN,): anyone -- ['ˈɛniˌwən', 'ˈɛniwən']
-"TPHEU/W*UPB", # (NI, WU*N): anyone -- ['ˈɛniˌwən', 'ˈɛniwən']
-"RORT", # (RORT,): report -- ['ɹiˈpɔɹt', 'ɹɪˈpɔɹt']
-"RORPT", # (RORPT,): report -- ['ɹiˈpɔɹt', 'ɹɪˈpɔɹt']
-"RORP", # (RORP,): report -- ['ɹiˈpɔɹt', 'ɹɪˈpɔɹt']
-"ORP", # (ORP,): report -- ['ɹiˈpɔɹt', 'ɹɪˈpɔɹt']
-"SOES/-D", # (SOES, -D): associated -- ['əˈsoʊsiˌeɪtɪd', 'əˈsoʊʃiˌeɪtɪd']
-"WHAFR", # (WHAFR,): whatever -- ['ˌhwəˈtɛvɝ', 'ˌwəˈtɛvɝ']
-"SRAPBG", # (VANG,): advantage -- ['ædˈvæntɪdʒ']
-"SOET/-D", # (SOET, -D): associated -- ['əˈsoʊsiˌeɪtɪd', 'əˈsoʊʃiˌeɪtɪd']
-"SOERBTD", # (SOEʃTD,): associated -- ['əˈsoʊsiˌeɪtɪd', 'əˈsoʊʃiˌeɪtɪd']
-"SOERBT/-D", # (SOEʃT, -D): associated -- ['əˈsoʊsiˌeɪtɪd', 'əˈsoʊʃiˌeɪtɪd']
-"SOERBD", # (SOEʃD,): associated -- ['əˈsoʊsiˌeɪtɪd', 'əˈsoʊʃiˌeɪtɪd']
-"TPAEFT", # (FAEFT,): fifty -- ['ˈfɪfti']
-"KO*EPS", # (KOE*PS,): copies -- ['ˈkɑpiz']
-"TPEUS", # (FIS,): physical -- ['ˈfɪzɪkəɫ']
-"PHAO*EPL", # (MEE*M,): medium -- ['ˈmidiəm']
-"PRAOEPD", # (PREEPD,): prepared -- ['pɹiˈpɛɹd']
-"PRAOEP/-D", # (PREEP, -D): prepared -- ['pɹiˈpɛɹd']
-"PRAO*EPD", # (PREE*PD,): prepared -- ['pɹiˈpɛɹd']
-"HRAPBLG", # (LAJ,): language -- ['ˈɫæŋɡwədʒ', 'ˈɫæŋɡwɪdʒ']
-"AOEPBG", # (EENG,): evening -- ['ˈivnɪŋ']
-"AOEPB/-G", # (EEN, -G): evening -- ['ˈivnɪŋ']
-"TPAEPL", # (FAEM,): family -- ['ˈfæməɫi', 'ˈfæmɫi']
-"THOUD", # (THOUD,): thousand -- ['ˈθaʊzən', 'ˈθaʊzənd']
-"HEUPBD", # (HIND,): behind -- ['bɪˈhaɪnd']
-"RURPB", # (RURN,): return -- ['ɹiˈtɝn', 'ɹɪˈtɝn']
-"TOGT", # (TOGT,): together -- ['təˈɡɛðɝ']
-"W-PB", # (W-N,): within -- ['wɪˈðɪn', 'wɪˈθɪn']
-"-FR", # (-FR,): ever -- ['ˈɛvɝ']
-"TPHO*ER", # (NOE*R,): another -- ['əˈnəðɝ']
-"TPHOER", # (NOER,): another -- ['əˈnəðɝ']
-"WOPL", # (WOM,): woman -- ['ˈwʊmən']
-"TPHOG", # (NOG,): nothing -- ['ˈnəθɪŋ']
-"PHAEPB", # (MAEN,): many -- ['ˈmɛni']
-"AOEPB", # (EEN,): even -- ['ˈivɪn']
-"THEU", # (THI,): think -- ['ˈθɪŋk']
-"EFR", # (EFR,): every -- ['ˈɛvɝi', 'ˈɛvɹi']
-"EF", # (EF,): every -- ['ˈɛvɝi', 'ˈɛvɹi']
-"THRU", # (TLU,): through -- ['ˈθɹu']
-"TKPW", # (G,): go -- ['ˈɡoʊ']
-"WOUT", # (WOUT,): without -- ['wɪˈðaʊt', 'wɪˈθaʊt']
-"WO*UT", # (WOU*T,): without -- ['wɪˈðaʊt', 'wɪˈθaʊt']
-"WAOUT", # (WUUT,): without -- ['wɪˈðaʊt', 'wɪˈθaʊt']
-"W/OUT", # (W, OUT): without -- ['wɪˈðaʊt', 'wɪˈθaʊt']
-"RURPBG", # (RURNG,): returning -- ['ɹiˈtɝnɪŋ', 'ɹɪˈtɝnɪŋ']
-"REPTD", # (REPTD,): represented -- ['ˌɹɛpɹɪˈzɛntɪd']
-"REPD", # (REPD,): represented -- ['ˌɹɛpɹɪˈzɛntɪd']
-"TPH-PBT", # (N-NT,): innocent -- ['ˈɪnəsənt']
-"REFD", # (REFD,): recognized -- ['ˈɹɛkəɡˌnaɪzd']
-"KUZ", # (KUZ,): cousin -- ['ˈkəzən']
-"SROL", # (VOL,): volume -- ['ˈvɑɫjum']
-"*EF/REU/WR", # (E*F, RI, WR): everywhere -- ['ˈɛvɹiˌwɛɹ', 'ˈɛvɹihˌwɛɹ']
-"*EFR/WR", # (E*FR, WR): everywhere -- ['ˈɛvɹiˌwɛɹ', 'ˈɛvɹihˌwɛɹ']
-"EF/REU/WR", # (EF, RI, WR): everywhere -- ['ˈɛvɹiˌwɛɹ', 'ˈɛvɹihˌwɛɹ']
-"EFR/WR", # (EFR, WR): everywhere -- ['ˈɛvɹiˌwɛɹ', 'ˈɛvɹihˌwɛɹ']
-"EFR/W-R", # (EFR, W-R): everywhere -- ['ˈɛvɹiˌwɛɹ', 'ˈɛvɹihˌwɛɹ']
-"WEFR", # (WEFR,): everywhere -- ['ˈɛvɹiˌwɛɹ', 'ˈɛvɹihˌwɛɹ']
-"PREUZ", # (PRIZ,): prison -- ['ˈpɹɪzən']
-"TKWOPLT", # (DWOMT,): development -- ['dɪˈvɛɫəpmənt']
-"SREPLT", # (VEMT,): development -- ['dɪˈvɛɫəpmənt']
-"SREL/*PLT", # (VEL, *MT): development -- ['dɪˈvɛɫəpmənt']
-"PW-BG/-G", # (B-K, -G): becoming -- ['bɪˈkəmɪŋ']
-"TROUD", # (TROUD,): introduced -- ['ˌɪntɹəˈdust', 'ˌɪntɹoʊˈdust']
-"TRO*UD", # (TROU*D,): introduced -- ['ˌɪntɹəˈdust', 'ˌɪntɹoʊˈdust']
-"SK/-G", # (SK, -G): asking -- ['ˈæskɪŋ']
-"SK-G", # (SK-G,): asking -- ['ˈæskɪŋ']
-"STEUS", # (STIS,): cities -- ['ˈsɪtiz']
-"STEU/-S", # (STI, -S): cities -- ['ˈsɪtiz']
-"TKEG/-S", # (DEG, -S): degrees -- ['dɪˈɡɹiz']
-"TK*EGS", # (DE*ʃn,): degrees -- ['dɪˈɡɹiz']
-"PWREU/-G", # (BRI, -G): bringing -- ['ˈbɹɪŋɪŋ']
-"PWREUG", # (BRIG,): bringing -- ['ˈbɹɪŋɪŋ']
-"AEFT", # (AEFT,): evident -- ['ˈɛvədənt']
-"*EFT", # (E*FT,): evident -- ['ˈɛvədənt']
-"WHEFR", # (WHEFR,): whenever -- ['hwɛˈnɛvɝ', 'wɛˈnɛvɝ']
-"WH-FR", # (WH-FR,): whenever -- ['hwɛˈnɛvɝ', 'wɛˈnɛvɝ']
-"WH*FR", # (WH*FR,): whenever -- ['hwɛˈnɛvɝ', 'wɛˈnɛvɝ']
-"RAOEUR", # (RIIR,): require -- ['ˌɹiˈkwaɪɝ', 'ɹiˈkwaɪɹ', 'ɹɪˈkwaɪɝ']
-"TKEGS", # (DEʃn,): degrees -- ['dɪˈɡɹiz']
-"AGS", # (Aʃn,): addition -- ['əˈdɪʃən']
-"TPHOEUPBLG", # (NOIJ,): enjoy -- ['ˌɛnˈdʒɔɪ', 'ɪnˈdʒɔɪ']
-"KAEUFL", # (KAIFL,): careful -- ['ˈkɛɹfəɫ']
-"THEUS", # (THIS,): thinks -- ['ˈθɪŋks']
-"KOEURBG", # (KOIʃG,): circle -- ['ˈsɝkəɫ']
-"SOEURBG", # (SOIʃG,): circle -- ['ˈsɝkəɫ']
-"SUFL", # (SUFL,): sufficiently -- ['səˈfɪʃəntɫi']
-"SUF/HREU", # (SUF, LI): sufficiently -- ['səˈfɪʃəntɫi']
-"PARD", # (PARD,): pardon -- ['ˈpɑɹdən']
-"KEBGS", # (KEKS,): connection -- ['kəˈnɛkʃən']
-"EFPBT", # (EFNT,): event -- ['iˈvɛnt', 'ɪˈvɛnt']
-"AOEFPBT", # (EEFNT,): event -- ['iˈvɛnt', 'ɪˈvɛnt']
-"AOEPBT", # (EENT,): event -- ['iˈvɛnt', 'ɪˈvɛnt']
-"SR-PB", # (V-N,): haven't -- ['ˈhævən', 'ˈhævənt']
-"HRAEUB", # (LAIB,): labor -- ['ˈɫeɪbɝ']
-"PHEPL", # (MEM,): member -- ['ˈmɛmbɝ']
-"PHEB", # (MEB,): member -- ['ˈmɛmbɝ']
-"SEURL", # (SIRL,): circle -- ['ˈsɝkəɫ']
-"SKHR", # (SChR,): circle -- ['ˈsɝkəɫ']
-"KPERZ", # (XERZ,): exercise -- ['ˈɛksɝˌsaɪz']
-"AOUFL", # (UUFL,): useful -- ['ˈjusfəɫ']
-"PROEUS", # (PROIS,): process -- ['ˈpɹɑˌsɛs', 'ˈpɹɔˌsɛs']
-"KHRUD", # (ChRUD,): included -- ['ˌɪnˈkɫudəd', 'ˌɪnˈkɫudɪd']
-"PHEPBLG", # (MEJ,): message -- ['ˈmɛsədʒ', 'ˈmɛsɪdʒ']
-"STKOFR", # (SDOFR,): discover -- ['dɪˈskəvɝ']
-"SKOFR", # (SKOFR,): discover -- ['dɪˈskəvɝ']
-"KUPBTSZ", # (KUNTSZ,): countries -- ['ˈkəntɹiz']
-"KUPBTS", # (KUNTS,): countries -- ['ˈkəntɹiz']
-"PHAPBLG", # (MAJ,): imagine -- ['ˌɪˈmædʒən']
-"SREUS", # (VIS,): advice -- ['ædˈvaɪs', 'ədˈvaɪs']
-"P*UG", # (PU*G,): putting -- ['ˈpətɪŋ', 'ˈpʊtɪŋ']
-"TR-S", # (TR-S,): interests -- ['ˈɪntɝəsts', 'ˈɪntɝɪsts', 'ˈɪntɹəsts', 'ˈɪntɹɪsts']
-"TPHAOETD", # (NEETD,): needed -- ['ˈnidəd', 'ˈnidɪd']
-"WAUG", # (WAUG,): walking -- ['ˈwɔkɪŋ']
-"TAEF", # (TAEF,): active -- ['ˈæktɪv']
-"A*UG", # (AU*G,): august -- ['ˈɑɡəst', 'ˈɔɡəst']
-"SUGD", # (SUGD,): suggested -- ['səˈdʒɛstɪd']
-"SUG/-D", # (SUG, -D): suggested -- ['səˈdʒɛstɪd']
-"SAEFD", # (SAEFD,): satisfied -- ['ˈsætəsˌfaɪd', 'ˈsætɪsˌfaɪd']
-"SAEF/-D", # (SAEF, -D): satisfied -- ['ˈsætəsˌfaɪd', 'ˈsætɪsˌfaɪd']
-"OEPG", # (OEPG,): opening -- ['ˈoʊpənɪŋ']
-"AO*PLT", # (AO*MT,): amount -- ['əˈmaʊnt']
-"APLT", # (AMT,): amount -- ['əˈmaʊnt']
-"A*PLT", # (A*MT,): amount -- ['əˈmaʊnt']
-"TPHAPBL", # (NANL,): animal -- ['ˈænəməɫ']
-"PHAPBL", # (MANL,): animal -- ['ˈænəməɫ']
-"PHA*PBL", # (MA*NL,): animal -- ['ˈænəməɫ']
-"SEP", # (SEP,): accept -- ['ækˈsɛpt', 'əkˈsɛpt']
-"PH*ERB", # (ME*ʃ,): measure -- ['ˈmɛʒɝ']
-"HROGT", # (LOGT,): altogether -- ['ˌɔɫtəˈɡɛðɝ']
-"TPHO*EUR", # (NOI*R,): narrow -- ['ˈnæɹoʊ', 'ˈnɛɹoʊ']
-"SHREURPL", # (SLIRM,): similar -- ['ˈsɪməɫɝ']
-"SHRAR", # (SLAR,): similar -- ['ˈsɪməɫɝ']
-"SEUPL", # (SIM,): similar -- ['ˈsɪməɫɝ']
-"KWRE", # (YE,): yes -- ['ˈjɛs']
-"ELG", # (ELG,): exactly -- ['ɪɡˈzæktɫi']
-"K-FD", # (K-FD,): confidence -- ['ˈkɑnfədəns']
-"PHO*ED", # (MOE*D,): method -- ['ˈmɛθəd']
-"PHO*D", # (MO*D,): method -- ['ˈmɛθəd']
-"S-PBLT", # (S-NLT,): isn't -- ['ˈɪzən', 'ˈɪzənt', 'ɪzənt']
-"S-PBT", # (S-NT,): isn't -- ['ˈɪzən', 'ˈɪzənt', 'ɪzənt']
-"KR", # (KR,): consider -- ['kənˈsɪdɝ']
-"S*EPD", # (SE*PD,): accepted -- ['ækˈsɛptɪd', 'əkˈsɛptɪd']
-"SEPD", # (SEPD,): accepted -- ['ækˈsɛptɪd', 'əkˈsɛptɪd']
-"KW", # (KW,): request -- ['ɹiˈkwɛst', 'ɹɪˈkwɛst']
-"PRAF", # (PRAF,): paragraph -- ['ˈpæɹəˌɡɹæf', 'ˈpɛɹəˌɡɹæf']
-"PRA*F", # (PRA*F,): paragraph -- ['ˈpæɹəˌɡɹæf', 'ˈpɛɹəˌɡɹæf']
-"WUFL", # (WUFL,): wonderful -- ['ˈwəndɝfəɫ']
-"KP-PL", # (X-M,): example -- ['ɪɡˈzæmpəɫ']
-"TKREU", # (DRI,): drink -- ['ˈdɹɪŋk']
-"ORDZ", # (ORDZ,): orders -- ['ˈɔɹdɝz']
-"TKEG", # (DEG,): degree -- ['dɪˈɡɹi']
-"PROU", # (PROU,): produce -- ['ˈpɹoʊdus', 'pɹəˈdus']
-"PRO*UD", # (PROU*D,): produced -- ['pɹəˈdust']
-"ORPBLG", # (ORJ,): original -- ['ɝˈɪdʒənəɫ']
-"OERPBLG", # (OERJ,): original -- ['ɝˈɪdʒənəɫ']
-"TKPWA*RPB", # (GA*RN,): garden -- ['ˈɡɑɹdən']
-"TKPWEUPB", # (GIN,): begin -- ['bɪˈɡɪn']
-"A*FPB", # (A*FN,): afternoon -- ['ˌæftɝˈnun']
-"SPOR", # (SPOR,): support -- ['səˈpɔɹt']
-"WREUG", # (WRIG,): writing -- ['ˈɹaɪtɪŋ']
-"SPEBGT", # (SPEKT,): respect -- ['ɹiˈspɛkt', 'ɹɪˈspɛkt']
-"RAEUPL", # (RAIM,): remain -- ['ɹiˈmeɪn', 'ɹɪˈmeɪn']
-"SOEUT", # (SOIT,): society -- ['səˈsaɪəti']
-"SOET", # (SOET,): society -- ['səˈsaɪəti']
-"RULT", # (RULT,): result -- ['ɹiˈzəɫt', 'ɹɪˈzəɫt']
-"RARD", # (RARD,): regard -- ['ɹɪˈɡɑɹd']
-"S*EUPL", # (SI*M,): simple -- ['ˈsɪmpəɫ']
-"TPEUG", # (FIG,): figure -- ['ˈfɪɡjɝ']
-"TPRORPL", # (FRORM,): former -- ['ˈfɔɹmɝ']
-"TPROERPL", # (FROERM,): former -- ['ˈfɔɹmɝ']
-"WEPBS", # (WENS,): influence -- ['ˈɪnfɫuəns']
-"WREU", # (WRI,): write -- ['ˈɹaɪt']
-"TPH-LS", # (N-LS,): unless -- ['ənˈɫɛs']
-"PWROEPB", # (BROEN,): broken -- ['ˈbɹoʊkən']
-"TPHAEPL", # (NAEM,): enemy -- ['ˈɛnəmi']
-"PROEBL", # (PROEBL,): probably -- ['ˈpɹɑbəˌbɫi', 'ˈpɹɑbɫi']
-"PROBL", # (PROBL,): probably -- ['ˈpɹɑbəˌbɫi', 'ˈpɹɑbɫi']
-"PRO*BL", # (PRO*BL,): probably -- ['ˈpɹɑbəˌbɫi', 'ˈpɹɑbɫi']
-"PORPBT", # (PORNT,): important -- ['ˌɪmˈpɔɹtənt']
-"PORPB", # (PORN,): important -- ['ˌɪmˈpɔɹtənt']
-"RER", # (RER,): remember -- ['ɹiˈmɛmbɝ', 'ɹɪˈmɛmbɝ']
-"HUS", # (HUS,): husband -- ['ˈhəzbənd']
-"KO*EP", # (KOE*P,): copy -- ['ˈkɑpi']
-"KWROPBD", # (YOND,): beyond -- ['ˌbiˈɔnd', 'bɪˈɑnd', 'bɪˈɔnd']
-"SOUT", # (SOUT,): south -- ['ˈsaʊθ']
-"TAEUG", # (TAIG,): taking -- ['ˈteɪkɪŋ']
-"HAEP", # (HAEP,): happy -- ['ˈhæpi']
-"PURP", # (PURP,): purpose -- ['ˈpɝpəs']
-"TPURT", # (FURT,): further -- ['ˈfɝðɝ']
-"TP*URT", # (FU*RT,): further -- ['ˈfɝðɝ']
-"KWRAOEU", # (YII,): eye -- ['ˈaɪ']
-"T-PBD", # (T-ND,): continued -- ['kənˈtɪnjud']
-"KWR-D", # (Y-D,): idea -- ['aɪˈdiə']
-"K-PBT", # (K-NT,): can't -- ['ˈkænt']
-"WR*EUPB", # (WRI*N,): written -- ['ˈɹɪtən']
-"KARBG", # (KAʃG,): character -- ['ˈkɛɹɪktɝ']
-"TPOLD", # (FOLD,): followed -- ['ˈfɑɫoʊd']
-"ARPBD", # (ARND,): around -- ['ɝˈaʊn', 'ɝˈaʊnd']
-"PHAEUG", # (MAIG,): making -- ['ˈmeɪkɪŋ']
-"URPBD", # (URND,): understand -- ['ˌəndɝˈstænd']
-"AEPBS", # (AENS,): answer -- ['ˈænsɝ']
-"RURPBD", # (RURND,): returned -- ['ɹiˈtɝnd', 'ɹɪˈtɝnd']
-"RURPB/-D", # (RURN, -D): returned -- ['ɹiˈtɝnd', 'ɹɪˈtɝnd']
-"PWREU", # (BRI,): bring -- ['ˈbɹɪŋ']
-"TPOLG", # (FOLG,): following -- ['ˈfɑɫoʊɪŋ']
-"TPOL/-G", # (FOL, -G): following -- ['ˈfɑɫoʊɪŋ']
-"SK", # (SK,): ask -- ['ˈæsk']
-"KWE", # (KWE,): question -- ['ˈkwɛstʃən', 'ˈkwɛʃən']
-"PWEUS", # (BIS,): business -- ['ˈbɪznəs', 'ˈbɪznɪs']
-"PW-Z/-PBS", # (B-Z, -NS): business -- ['ˈbɪznəs', 'ˈbɪznɪs']
-"AEPBS/-D", # (AENS, -D): answered -- ['ˈænsɝd']
-"WEUPL", # (WIM,): women -- ['ˈwɪmən']
-"THR*FR", # (TL*FR,): therefore -- ['ˈðɛɹˌfɔɹ']
-"TH-FR", # (TH-FR,): therefore -- ['ˈðɛɹˌfɔɹ']
-"TPHURPL", # (NURM,): number -- ['ˈnəmbɝ']
-"TPHUPL", # (NUM,): number -- ['ˈnəmbɝ']
-"HEP", # (HEP,): help -- ['ˈhɛɫp']
-"TPHEUG", # (NIG,): anything -- ['ˈɛniˌθɪŋ']
-"ORD", # (ORD,): order -- ['ˈɔɹdɝ']
-"PERPB", # (PERN,): person -- ['ˈpɝsən']
-"STEU", # (STI,): city -- ['ˈsɪti']
-"PWO*ED", # (BOE*D,): body -- ['ˈbɑdi']
-"OEP", # (OEP,): open -- ['ˈoʊpən']
-"HREF", # (LEF,): leave -- ['ˈɫiv']
-"POB", # (POB,): possible -- ['ˈpɑsəbəɫ']
-"PO*B", # (PO*B,): possible -- ['ˈpɑsəbəɫ']
-"WHR", # (WL,): whether -- ['ˈhwɛðɝ', 'ˈwɛðɝ']
-"R-PB", # (R-N,): reason -- ['ˈɹizən']
-"KWR", # (Y,): why -- ['ˈhwaɪ', 'ˈwaɪ']
-"PW-BG", # (B-K,): become -- ['bɪˈkəm']
-"HRAOG", # (LAOG,): looking -- ['ˈɫʊkɪŋ']
-"KO*G", # (KO*G,): coming -- ['ˈkəmɪŋ']
-"TPHES", # (NES,): necessary -- ['ˈnɛsəˌsɛɹi']
-"TR", # (TR,): interest -- ['ˈɪntɝəst', 'ˈɪntɝɪst', 'ˈɪntɹəst', 'ˈɪntɹɪst']
-"T-R", # (T-R,): interest -- ['ˈɪntɝəst', 'ˈɪntɝɪst', 'ˈɪntɹəst', 'ˈɪntɹɪst']
-"K-T", # (K-T,): account -- ['əˈkaʊnt']
-"A/K-T", # (A, K-T): account -- ['əˈkaʊnt']
-"PAERT", # (PAERT,): party -- ['ˈpɑɹti']
-"R*ED", # (RE*D,): ready -- ['ˈɹɛdi']
-"R-D", # (R-D,): ready -- ['ˈɹɛdi']
-"RURPB/-G", # (RURN, -G): returning -- ['ɹiˈtɝnɪŋ', 'ɹɪˈtɝnɪŋ']
-"REPT/-D", # (REPT, -D): represented -- ['ˌɹɛpɹɪˈzɛntɪd']
-"K-RBS", # (K-ʃS,): conscious -- ['ˈkɑnʃəs']
-"SR-PBT", # (V-NT,): haven't -- ['ˈhævən', 'ˈhævənt']
-"TPEUG/-S", # (FIG, -S): figures -- ['ˈfɪɡjɝz']
-"TPH-RPBLG", # (N-RJ,): energy -- ['ˈɛnɝdʒi']
-"TPH-RG", # (N-RG,): energy -- ['ˈɛnɝdʒi']
-"T-PB", # (T-N,): continue -- ['kənˈtɪnju']
-"R-PBS", # (R-NS,): reasons -- ['ˈɹizənz']
-"K-RPBD", # (K-RND,): concerned -- ['kənˈsɝnd']
-"PAERT/-S", # (PAERT, -S): parties -- ['ˈpɑɹtiz']
-"TPH-FD", # (N-FD,): informed -- ['ˌɪnˈfɔɹmd']
-"HR-BG", # (L-K,): welcome -- ['ˈwɛɫkəm']
-"TPH-DZ", # (N-DZ,): inside -- ['ˈɪnˌsaɪd', 'ˌɪnˈsaɪd']
-"PW-Z", # (B-Z,): busy -- ['ˈbɪzi']
-"A/K-PD", # (A, K-PD): accompanied -- ['əˈkəmpənid']
-"K-RGS", # (K-Rʃn,): consideration -- ['kənˌsɪdɝˈeɪʃən']
-"PH-PB", # (M-N,): machine -- ['məˈʃin']
-"K-R/RAEUGS", # (K-R, RAIʃn): consideration -- ['kənˌsɪdɝˈeɪʃən']
-"STPH-PBS", # (SN-NS,): sentence -- ['ˈsɛntəns']
-"PW-BGS", # (B-KS,): becomes -- ['bɪˈkəmz']
-"HR-G", # (L-G,): willing -- ['ˈwɪɫɪŋ']
-"-LG", # (-LG,): willing -- ['ˈwɪɫɪŋ']
-"S-PB", # (S-N,): season -- ['ˈsizən']
-"OEP/-G", # (OEP, -G): opening -- ['ˈoʊpənɪŋ']
-"K-FRT", # (K-FRT,): comfort -- ['ˈkəmfɝt']
-"THR-S", # (TL-S,): there's -- ['ˈðɛɹz']
-"K-PBS", # (K-NS,): conditions -- ['kənˈdɪʃənz']
-"K-B/-S", # (K-B, -S): conditions -- ['kənˈdɪʃənz']
-"PWHR-G", # (BL-G,): building -- ['ˈbɪɫdɪŋ']
-"PW-LG", # (B-LG,): building -- ['ˈbɪɫdɪŋ']
-"HR-GT", # (L-GT,): altogether -- ['ˌɔɫtəˈɡɛðɝ']
-"KERPB/-G", # (KERN, -G): concerning -- ['kənˈsɝnɪŋ']
-"K-RPBG", # (K-RNG,): concerning -- ['kənˈsɝnɪŋ']
-"TR-G", # (TR-G,): interesting -- ['ˈɪntɝəstɪŋ', 'ˈɪntɝɪstɪŋ', 'ˈɪntɹəstɪŋ', 'ˈɪntɹɪstɪŋ']
-"K-F", # (K-F,): confidence -- ['ˈkɑnfədəns']
-"PW-DZ", # (B-DZ,): besides -- ['ˌbiˈsaɪdz', 'bɪˈsaɪdz']
-"KWR-DZ", # (Y-DZ,): ideas -- ['aɪˈdiəz']
-"KWR-D/-S", # (Y-D, -S): ideas -- ['aɪˈdiəz']
-"K-R", # (K-R,): consider -- ['kənˈsɪdɝ']
-"TKR-BT", # (DR-BT,): distribute -- ['dɪˈstɹɪbjut']
-"KP-PT", # (X-PT,): expect -- ['ɪkˈspɛkt']
-"PHEPL/-S", # (MEM, -S): members -- ['ˈmɛmbɝz']
-"PHEB/-S", # (MEB, -S): members -- ['ˈmɛmbɝz']
-"ORD/-D", # (ORD, -D): ordered -- ['ˈɔɹdɝd']
-"KWE/-S", # (KWE, -S): questions -- ['ˈkwɛstʃənz']
-"TP-RPB", # (F-RN,): fortune -- ['ˈfɔɹtʃən', 'ˈfɔɹtʃun']
-"TPH-GS", # (N-ʃn,): nation -- ['ˈneɪʃən']
-"PROU/-D", # (PROU, -D): produced -- ['pɹəˈdust']
-"PRAOU/-D", # (PRUU, -D): produced -- ['pɹəˈdust']
-"ST-PL", # (ST-M,): system -- ['ˈsɪstəm']
-"ST-FPL", # (ST-ChL,): system -- ['ˈsɪstəm']
-"S-PL", # (S-M,): system -- ['ˈsɪstəm']
-"K-PB", # (K-N,): condition -- ['kənˈdɪʃən']
-"TK-PBT", # (D-NT,): didn't -- ['ˈdɪdən', 'ˈdɪdənt', 'ˈdɪdnt', 'ˈdɪnt']
-"S-FS", # (S-FS,): service -- ['ˈsɝvəs', 'ˈsɝvɪs']
-"THR-FR", # (TL-FR,): therefore -- ['ˈðɛɹˌfɔɹ']
-"THR-F", # (TL-F,): therefore -- ['ˈðɛɹˌfɔɹ']
-"HR-RD", # (L-RD,): already -- ['ɔˈɹɛdi', 'ɔɫˈɹɛdi']
-"HR-R", # (L-R,): already -- ['ɔˈɹɛdi', 'ɔɫˈɹɛdi']
-"TPH-L", # (N-L,): until -- ['ənˈtɪɫ']
-"SR/-G", # (V, -G): having -- ['ˈhævɪŋ']
-"SR-G", # (V-G,): having -- ['ˈhævɪŋ']
-"HR-PL", # (L-M,): almost -- ['ˈɔɫˌmoʊst']
-"ST-G", # (ST-G,): something -- ['ˈsəmθɪŋ']
-"SPH-G", # (SM-G,): something -- ['ˈsəmθɪŋ']
-"S-G", # (S-G,): something -- ['ˈsəmθɪŋ']
-"HR-S", # (L-S,): also -- ['ˈɔɫsoʊ']
-"TPH-PB", # (N-N,): under -- ['ˈəndɝ']
-"PW-G", # (B-G,): being -- ['ˈbiɪŋ']
-"-BG", # (-K,): being -- ['ˈbiɪŋ']
-"-B/-G", # (-B, -G): being -- ['ˈbiɪŋ']
-"R-PT", # (R-PT,): respect -- ['ɹiˈspɛkt', 'ɹɪˈspɛkt']
-"KP-PTD", # (X-PTD,): expected -- ['ɪkˈspɛktəd', 'ɪkˈspɛktɪd']
-"TKPW/-S", # (G, -S): goes -- ['ˈɡoʊz']
-"TKPW-S", # (G-S,): goes -- ['ˈɡoʊz']
-"TPH-TS", # (N-TS,): notice -- ['ˈnoʊtəs', 'ˈnoʊtɪs']
-"SRAOUL", # (VUUL,): value -- ['ˈvæɫju']
-"SRAO*UL", # (VUU*L,): value -- ['ˈvæɫju']
-"P*FR", # (P*FR,): perfect -- ['ˈpɝˌfɪkt', 'pɝˈfɛkt']
-"P-FRT", # (P-FRT,): perfect -- ['ˈpɝˌfɪkt', 'pɝˈfɛkt']
-"P-FR", # (P-FR,): perfect -- ['ˈpɝˌfɪkt', 'pɝˈfɛkt']
-"P-F", # (P-F,): perfect -- ['ˈpɝˌfɪkt', 'pɝˈfɛkt']
-"OEBD", # (OEBD,): observed -- ['əbˈzɝvd']
-"OEB/-D", # (OEB, -D): observed -- ['əbˈzɝvd']
-"KR/-D", # (KR, -D): considered -- ['kənˈsɪdɝd']
-"KR-D", # (KR-D,): considered -- ['kənˈsɪdɝd']
-"K-R/-D", # (K-R, -D): considered -- ['kənˈsɪdɝd']
-"K-FRGS", # (K-FRʃn,): conversation -- ['ˌkɑnvɝˈseɪʃən']
-"AFPB", # (AFN,): afternoon -- ['ˌæftɝˈnun']
-"K-RBL", # (K-ʃL,): considerable -- ['kənˈsɪdɝəbəɫ']
-"K-R/-BL", # (K-R, -BL): considerable -- ['kənˈsɪdɝəbəɫ']
-"KR-BL", # (KR-BL,): considerable -- ['kənˈsɪdɝəbəɫ']
-"PROR", # (PROR,): proper -- ['ˈpɹɑpɝ']
-"SPAOEG", # (SPEEG,): speaking -- ['ˈspikɪŋ']
-"TK*G", # (D*G,): doing -- ['ˈduɪŋ']
-"OFS", # (OFS,): office -- ['ˈɔfɪs']
-"AUFS", # (AUFS,): office -- ['ˈɔfɪs']
-"TAEPBGS", # (TAENʃn,): attention -- ['əˈtɛnʃən']
-"K-P", # (K-P,): company -- ['ˈkəmpəˌni']
-"AG", # (AG,): ago -- ['əˈɡoʊ']
-"P-PB", # (P-N,): opinion -- ['əˈpɪnjən']
-"WOEUPBD", # (WOIND,): window -- ['ˈwɪndoʊ']
-"SEUPBLG", # (SIJ,): single -- ['ˈsɪŋɡəɫ']
-"KAER", # (KAER,): carry -- ['ˈkæɹi', 'ˈkɛɹi']
-"KHRUG", # (ChRUG,): including -- ['ˌɪnˈkɫudɪŋ']
-"KHRUD/-G", # (ChRUD, -G): including -- ['ˌɪnˈkɫudɪŋ']
-"KHRU/-G", # (ChRU, -G): including -- ['ˌɪnˈkɫudɪŋ']
-"ST-R", # (ST-R,): sister -- ['ˈsɪstɝ']
-"PAOERD", # (PEERD,): period -- ['ˈpɪɹiəd']
-"EUPL/POB", # (IM, POB): impossible -- ['ˌɪmˈpɑsəbəɫ']
-"STPHED", # (SNED,): instead -- ['ˌɪnˈstɛd']
-"PWHRU", # (BLU,): blue -- ['ˈbɫu']
-"TPA*ER/AES", # (FAE*R, AES): father's -- ['ˈfɑðɝz']
-"THOZ", # (THOZ,): those -- ['ˈðoʊz']
-"W-R", # (W-R,): where -- ['ˈhwɛɹ', 'ˈwɛɹ']
-"AFT", # (AFT,): after -- ['ˈæftɝ']
-"AF", # (AF,): after -- ['ˈæftɝ']
-"THEZ", # (THEZ,): these -- ['ˈðiz']
-"PWOFR", # (BOFR,): before -- ['ˌbiˈfɔɹ', 'bɪˈfɔɹ']
-"SPWAO", # (SBAO,): into -- ['ˈɪntu', 'ɪnˈtu', 'ɪntə']
-"PW-FR", # (B-FR,): before -- ['ˌbiˈfɔɹ', 'bɪˈfɔɹ']
-"TK", # (D,): did -- ['ˈdɪd', 'dɪd']
-"SHO", # (SHO,): should -- ['ˈʃʊd']
-"-RBD", # (-ʃD,): should -- ['ˈʃʊd']
-"K", # (K,): can -- ['ˈkæn', 'kən']
-"HREUL", # (LIL,): little -- ['ˈɫɪtəɫ']
-"OEPBL", # (OENL,): only -- ['ˈoʊnɫi']
-"PW", # (B,): about -- ['əˈbaʊt']
-"SRE", # (VE,): very -- ['ˈvɛɹi']
-"OER", # (OER,): other -- ['ˈəðɝ']
-"KO", # (KO,): could -- ['ˈkʊd']
-"WHA", # (WHA,): what -- ['ˈhwət', 'ˈwət']
-"KWRAOUR", # (YUUR,): your -- ['ˈjɔɹ', 'ˈjʊɹ']
-"TPHEU", # (NI,): any -- ['ˈɛni']
-"TPHAO*", # (NAO*,): into -- ['ˈɪntu', 'ɪnˈtu', 'ɪntə']
-"TPHAO", # (NAO,): into -- ['ˈɪntu', 'ɪnˈtu', 'ɪntə']
-"TP", # (F,): if -- ['ˈɪf', 'ɪf']
-"THR", # (TL,): there -- ['ˈðɛɹ']
-"TH-R", # (TH-R,): there -- ['ˈðɛɹ']
-"HR", # (L,): will -- ['ˈwɪɫ', 'wəɫ']
-"WO", # (WO,): would -- ['ˈwʊd']
-"R", # (R,): are -- ['ˈɑɹ', 'ɝ']
-"-R", # (-R,): are -- ['ˈɑɹ', 'ɝ']
-"PHEU", # (MI,): my -- ['ˈmaɪ']
-"WR", # (WR,): were -- ['ˈwɝ']
-"-RP", # (-RP,): were -- ['ˈwɝ']
-"THE", # (THE,): they -- ['ˈðeɪ']
-"TH", # (TH,): this -- ['ˈðɪs', 'ðɪs']
-"TPR", # (FR,): from -- ['ˈfɹəm']
-"SR", # (V,): have -- ['ˈhæv']
-"WEU", # (WI,): which -- ['ˈhwɪtʃ', 'ˈwɪtʃ']
-"-B", # (-B,): be -- ['ˈbi', 'bi']
-"U", # (U,): you -- ['ˈju']
-"H", # (H,): had -- ['ˈhæd']
-"S", # (S,): is -- ['ˈɪz', 'ɪz']
-"W", # (W,): with -- ['ˈwɪð', 'ˈwɪθ', 'wɪð', 'wɪθ']
-"T", # (T,): it -- ['ˈɪt', 'ɪt']
-"WUZ", # (WUZ,): was -- ['ˈwɑz', 'wəz']
-"THA", # (THA,): that -- ['ˈðæt', 'ðət']
-"TPH", # (N,): in -- ['ˈɪn', 'ɪn']
-"SKP", # (SX,): and -- ['ˈænd', 'ənd']
-"-F", # (-F,): of -- ['ˈəv']
-		}
+"KEBGT",
+"KERPB",
+"-RL",
+"THER",                   # they're
+"SEBGD",                  # second
+"TPR-T",                  # from the
+"TOT",                    # to the
+"OEFB",                   # obvious
+"OFB",                    # obvious
+"S-T",                    # is the
+"RAER",                   # rather
+"THR-LGS",                # there is
+"O*EUPL",                 # I am
+"*UR",                    # you are
+"TOPBT",                  # tonight
+"K-B",                    # can be
+"SKP-T",                  # and the
+"PHOEURPL",               # memory
+"TPEU",                   # if I
+"UL",                     # you'll
+"UR",                     # you're
+"KWRAOUPB",               # you know
+"SUD",                    # sudden
+"TKPWEPB",                # again
+"WH",                     # when
+"THOUZ",                  # thousand
+"TPORGT",                 # forget
+"TPO*RGT",                # forgot
+"SHOPBT",                 # shouldn't
+"SHOB",                   # should be
+"TPORPBLT",               # fortunately
+"TPORPBT",                # fortunate
+"SERPT",                  # separate
+"TKROPL",                 # random
+"TPU",                    # if you
+"TPHARL",                 # natural
+"REB",                    # remember
+"T-S",                    # it's
+"AOEUPLT",                # item
+"-FT",                    # of the
+"TAOULT",                 # actually
+"PWAOERT",                # better
+"TAOUL",                  # actual
+"RULT",                   # result
+"RUL",                    # result
+"PEPL",                   # people
+"TPH-T",                  # in the
+"KRAR",                   # character
+"TP-RT",                  # for the
+"TP-R",                   # for
+"OEPBT",                  # onto
+"PAERPB",                 # pattern
+"PARPB",                  # partner
+"EZ",                     # easy
+"TPHOPBLG",               # knowledge
+"W-T",                    # with the
+"UBGT",                   # you can't
+"THR-R",                  # there are
+"KAPBLT",                 # cannot
+"PWOF",                   # above
+"WOPBD",                  # wonder
+"*EURB",                  # issue
+"WA*EU",                  # away
+"OPBL",                   # only
+"HAP",                    # happen
+"PRO*B",                  # problem
+"TPREBGT",                # frequent
+"AOUPT",                  # output
+"PROUPBS",                # pronounce
+"HRAOUP",                 # lookup
+"AEU",                    # a
+"STA*TS",                 # status
+"STOEUPB",                # steno
+"SKWRAEUT",               # generate
+"TKPWRAEUGS",             # configuration
+"TPR*EBGS",               # frequency
+"SRAPBS",                 # advance
+"KWRA*EUR",               # area
+"TRAER",                  # temporary
+"PHAPLT",                 # management
+"PHA*PLT",                # management
+"PH-GT",                  # management
+"ROFR",                   # recover
+"PHAEUB",                 # maybe
+"PHAEB",                  # maybe
+"AO*ERS",                 # easier
+"TKP-PT",                 # department
+"TKEPT",                  # department
+"TKEPLT",                 # department
+"TK-PT",                  # department
+"TPH-BG",                 # income
+"TKPH-BG",                # income
+"WEP",                    # weapon
+"TPHEG",                  # neglect
+"OBGS",                   # objection
+"ROEUR",                  # error
+"RO*ER",                  # error
+"REG",                    # regular
+"REGT",                   # regularity
+"RA*EPB",                 # rein
+"TPHAOGS",                # intuition
+"SHRUS",                  # stimulus
+"KHA*EURPL",              # chairman
+"OERPT",                  # operate
+"PRAEUT",                 # operate
+"PRAEURT",                # operator
+"PA*EL",                  # peal
+"T-PBS",                  # continuous
+"PAPBLG",                 # package
+"TPH*FGT",                # investigate
+"SREGT",                  # investigate
+"SREUBGT",                # convict
+"K-FBGT",                 # convict
+"EFRG",                   # everything
+"POPB",                   # upon
+"TPHAO*EUGT",             # knight
+"PWRAEG",                 # breaking
+"PUPBD",                  # punished
+"PUR/-D",                 # purchased
+"EFRPB",                  # everyone
+"*EFRPB",                 # everyone
+"TOED",                   # today
+"SRAOEPBT",               # convenient
+"SRAOEPB",                # convenient
+"A/K-P",                  # accompany
+"TPH*PB",                 # inn
+"R*EUBGS",                # ridiculous
+"PROEUPT",                # proprietary
+"TH-R/PWAOEU",            # thereby
+"THR/PW*EU",              # thereby
+"THR-B",                  # thereby
+"THR*RB",                 # thereby
+"TPHAOURB/A*L",           # unusual
+"TPHAOURB",               # unusual
+"SPHA*EUPB",              # mistaken
+"TPOFR",                  # forever
+"TPR-FR",                 # forever
+"TPR*FR",                 # forever
+"SUGS",                   # suggestion
+"HOEUR",                  # hero
+"HO*EUR",                 # hero
+"RA*EUPBG",               # reign
+"AO*ELG",                 # emotion
+"AO*EGS",                 # emotion
+"WHAOEULS",               # whilst
+"KPRORD",                 # extraordinary
+"KPRAORD",                # extraordinary
+"KPAORD",                 # extraordinary
+"PREUPB",                 # principle
+"TUPBG",                  # tongue
+"O*ERZ",                  # otherwise
+"*EFD",                   # evidence
+"KAPT",                   # captain
+"TPHORT",                 # north
+"*URPBD",                 # understood
+"URBL",                   # usual
+"SAF",                    # save
+"SERPBL",                 # certainly
+"PREUT",                  # pretty
+"HUPBD",                  # hundred
+"HOEUPB",                 # hundred
+"TPHU",                   # new
+"AULS",                   # always
+"TPHAE",                  # anyway
+"PRAOERBT",               # appreciate
+"PRAOERB/KWRAEUT",        # appreciate
+"PRAOERB",                # appreciate
+"SOERBGS",                # association
+"SOEGS",                  # association
+"PW-FR/HAPBD",            # beforehand
+"PW*F/HAPBD",             # beforehand
+"PW*F/HA*PBD",            # beforehand
+"PROET",                  # appropriate
+"PROEPT",                 # appropriate
+"PHREURB",                # accomplish
+"UPB/TPHES",              # unnecessary
+"SWAEUL",                 # sexually
+"SWAUL/TEU",              # sexuality
+"SWALT",                  # sexuality
+"SWEPB",                  # sewn
+"SWE",                    # sew
+"SWEPBG",                 # sewing
+"SWAUL",                  # sexual
+"S-B",                    # somebody
+"SPH-B",                  # somebody
+"HR-PLTS",                # elements
+"PREZ",                   # president
+"KWRA*ER",                # area
+"SWR",                    # somewhere
+"SW-R",                   # somewhere
+"SPW-R",                  # somewhere
+"SPH/WR",                 # somewhere
+"OEB",                    # observe
+"PW-PB",                  # been
+"SPOPBS/-BLT",            # responsibility
+"SPOPBLT",                # responsibility
+"SPOPBLGT",               # responsibility
+"SPOPBGT",                # responsibility
+"SPOPB/EUBLT",            # responsibility
+"SPOBLT",                 # responsibility
+"SPOPBT",                 # responsibility
+"REPT",                   # represent
+"W-R/*EUPB",              # wherein
+"WR-PB",                  # wherein
+"TPHAOUP",                # newspaper
+"WR-FR",                  # wherever
+"WHR-FR",                 # wherever
+"W-R/-FR",                # wherever
+"W-FR",                   # wherever
+"P-FRGS",                 # perfection
+"WRELS",                  # elsewhere
+"ELS/W-R",                # elsewhere
+"T-PB/WAEL",              # continually
+"T-PB/HREU",              # continually
+"THROF",                  # thereof
+"THR/*F",                 # thereof
+"S-BGS",                  # sex
+"HROEL",                  # local
+"TKPW-PB",                # gun
+"TPHEUB",                 # anybody
+"*UPBG",                  # uncle
+"PHAOED",                 # immediate
+"TKPWEPBS",               # against
+"TKPW*EPBS",              # against
+"TPHEUR",                 # anywhere
+"TPHEU/WR*",              # anywhere
+"TPHAOEUR",               # anywhere
+"RERL",                   # earlier
+"SERPB",                  # certain
+"HOUFR",                  # however
+"HOUF",                   # however
+"TPHUF",                  # enough
+"SKRETD",                 # credit
+"KREUTD",                 # credit
+"KRETD",                  # credit
+"KRET",                   # credit
+"KROL",                   # control
+"SREUBL",                 # visible
+"SELD",                   # seldom
+"HR-PBS",                 # license
+"HR-PB",                  # license
+"KREU",                   # country
+"-T",                     # the
+"PEFGS",                  # possession
+"P*EGS",                  # possession
+"TKWEUD/A*L",             # individual
+"TKWAL",                  # individual
+"SREUPBLG",               # individual
+"SREUD",                  # individual
+"SR*EUD",                 # vid
+"SKES",                   # success
+"WRO",                    # wrote
+"HOEUF",                  # heavy
+"TPOL",                   # follow
+"KORG",                   # according
+"TPO*EUL",                # fellow
+"TP*EL",                  # fellow
+"HEUFRT",                 # history
+"PWHRO",                  # below
+"S*FS",                   # service
+"TPEBG",                  # effect
+"SULD",                   # suddenly
+"SUD/HREU",               # suddenly
+"PHUPB",                  # money
+"TK*T",                   # death
+"TKPWAPB",                # began
+"STKPWAPB",               # began
+"TWAOEPB",                # between
+"PWAU",                   # because
+"EFRB",                   # everybody
+"SAO*EFD",                # received
+"SPH/WHA",                # somewhat
+"SWHA",                   # somewhat
+"OUDZ",                   # outside
+"PHAOELD",                # immediately
+"PHAOED/HREU",            # immediately
+"PHAO*ELD",               # immediately
+"POGS",                   # position
+"PWAEUPL",                # became
+"TPHOEBD",                # nobody
+"TPHOEB",                 # nobody
+"SPHAEUBG",               # mistake
+"SPHA*EUFBG",             # mistake
+"SPHA*EUBG",              # mistake
+"KEBGD/-D",               # connected
+"KEBG/-D",                # connected
+"R*ELGS",                 # relation
+"PWAERPBG",               # bearing
+"URBGD",                  # understanding
+"STPA*BGS",               # satisfaction
+"PRAEP",                  # prepare
+"PRAO*EP",                # prepare
+"PRAOEP",                 # prepare
+"WHR*",                   # weather
+"TPHEUPB",                # anyone
+"TPHEU/W*UPB",            # anyone
+"RORT",                   # report
+"RORPT",                  # report
+"RORP",                   # report
+"ORP",                    # report
+"SOES/-D",                # associated
+"WHAFR",                  # whatever
+"SRAPBG",                 # advantage
+"SOET/-D",                # associated
+"SOERBD",                 # associated
+"TPAEFT",                 # fifty
+"TPEUS",                  # physical
+"PHAO*EPL",               # medium
+"HRAPBLG",                # language
+"TPAEPL",                 # family
+"THOUD",                  # thousand
+"HEUPBD",                 # behind
+"RURPB",                  # return
+"TOGT",                   # together
+"W-PB",                   # within
+"-FR",                    # ever
+"TPHO*ER",                # nowhere
+"TPHOER",                 # another
+"WOPL",                   # woman
+"TPHOG",                  # nothing
+"PHAEPB",                 # many
+"AOEPB",                  # even
+"THEU",                   # think
+"EFR",                    # every
+"EF",                     # every
+"THRU",                   # through
+"TKPW",                   # go
+"WOUT",                   # without
+"WO*UT",                  # without
+"WAOUT",                  # without
+"W/OUT",                  # without
+"REPD",                   # represented
+"TPH-PBT",                # innocent
+"REFD",                   # recognized
+"KUZ",                    # cousin
+"SROL",                   # volume
+"*EF/REU/WR",             # everywhere
+"*EFR/WR",                # everywhere
+"EF/REU/WR",              # everywhere
+"EFR/WR",                 # everywhere
+"EFR/W-R",                # everywhere
+"WEFR",                   # everywhere
+"PREUZ",                  # prison
+"TKWOPLT",                # development
+"SREPLT",                 # development
+"SREL/*PLT",              # development
+"TRO*UD",                 # introduced
+"TK*EGS",                 # degrees
+"AEFT",                   # evident
+"*EFT",                   # evident
+"WHEFR",                  # whenever
+"WH-FR",                  # whenever
+"WH*FR",                  # whenever
+"RAOEUR",                 # require
+"AGS",                    # addition
+"TPHOEUPBLG",             # enjoy
+"KAEUFL",                 # careful
+"KOEURBG",                # circle
+"SOEURBG",                # circle
+"SUFL",                   # sufficiently
+"SUF/HREU",               # sufficiently
+"PARD",                   # pardon
+"KEBGS",                  # connection
+"EFPBT",                  # event
+"AOEFPBT",                # event
+"AOEPBT",                 # event
+"SR-PB",                  # haven't
+"HRAEUB",                 # labor
+"PHEPL",                  # member
+"PHEB",                   # member
+"SEURL",                  # circle
+"SKHR",                   # circle
+"KPERZ",                  # exercise
+"AOUFL",                  # useful
+"PROEUS",                 # process
+"PHEPBLG",                # message
+"STKOFR",                 # discover
+"SKOFR",                  # discover
+"KUPBTSZ",                # countries
+"PHAPBLG",                # imagine
+"SREUS",                  # advice
+"P*UG",                   # putting
+"TPHAOETD",               # needed
+"WAUG",                   # walking
+"TAEF",                   # active
+"A*UG",                   # august
+"AO*PLT",                 # amount
+"APLT",                   # amount
+"A*PLT",                  # amount
+"TPHAPBL",                # animal
+"PHAPBL",                 # animal
+"PHA*PBL",                # animal
+"SEP",                    # accept
+"PH*ERB",                 # measure
+"HROGT",                  # altogether
+"TPHO*EUR",               # narrow
+"SHREURPL",               # similar
+"SHRAR",                  # similar
+"SEUPL",                  # similar
+"KWRE",                   # yes
+"ELG",                    # exactly
+"K-FD",                   # confidence
+"PHO*ED",                 # method
+"PHO*D",                  # method
+"S-PBLT",                 # is not
+"S-PBT",                  # isn't
+"KR",                     # consider
+"S*EPD",                  # accepted
+"KW",                     # request
+"PRAF",                   # paragraph
+"PRA*F",                  # paragraph
+"WUFL",                   # wonderful
+"KP-PL",                  # example
+"TKREU",                  # drink
+"TKEG",                   # degree
+"PROU",                   # produce
+"PRO*UD",                 # produced
+"ORPBLG",                 # original
+"OERPBLG",                # original
+"TKPWA*RPB",              # garden
+"TKPWEUPB",               # begin
+"A*FPB",                  # afternoon
+"SPOR",                   # support
+"SPEBGT",                 # suspect
+"RAEUPL",                 # remain
+"SOEUT",                  # society
+"SOET",                   # society
+"RARD",                   # regard
+"S*EUPL",                 # simple
+"TPEUG",                  # figure
+"TPRORPL",                # former
+"TPROERPL",               # former
+"WEPBS",                  # influence
+"WREU",                   # write
+"TPH-LS",                 # unless
+"PWROEPB",                # broken
+"TPHAEPL",                # enemy
+"PROEBL",                 # probably
+"PROBL",                  # probably
+"PRO*BL",                 # probably
+"PORPBT",                 # important
+"PORPB",                  # important
+"RER",                    # remember
+"HUS",                    # husband
+"KO*EP",                  # copy
+"KWROPBD",                # beyond
+"SOUT",                   # south
+"TAEUG",                  # taking
+"HAEP",                   # happy
+"PURP",                   # purpose
+"TPURT",                  # further
+"TP*URT",                 # further
+"KWRAOEU",                # eye
+"KWR-D",                  # idea
+"K-PBT",                  # can't
+"WR*EUPB",                # written
+"KARBG",                  # character
+"ARPBD",                  # around
+"PHAEUG",                 # making
+"URPBD",                  # understand
+"AEPBS",                  # answer
+"PWREU",                  # bring
+"SK",                     # ask
+"KWE",                    # question
+"PWEUS",                  # business
+"PW-Z/-PBS",              # business
+"WEUPL",                  # women
+"THR*FR",                 # therefore
+"TH-FR",                  # therefore
+"TPHURPL",                # number
+"TPHUPL",                 # number
+"HEP",                    # help
+"TPHEUG",                 # anything
+"ORD",                    # order
+"PERPB",                  # person
+"STEU",                   # city
+"PWO*ED",                 # body
+"OEP",                    # open
+"HREF",                   # leave
+"POB",                    # possible
+"PO*B",                   # possible
+"WHR",                    # whether
+"R-PB",                   # reason
+"KWR",                    # why
+"PW-BG",                  # become
+"HRAOG",                  # looking
+"KO*G",                   # coming
+"TPHES",                  # necessary
+"TR",                     # interest
+"T-R",                    # interest
+"K-T",                    # account
+"A/K-T",                  # account
+"PAERT",                  # party
+"R*ED",                   # ready
+"R-D",                    # ready
+"K-RBS",                  # conscious
+"SR-PBT",                 # haven't
+"TPH-RPBLG",              # energy
+"TPH-RG",                 # energy
+"T-PB",                   # continue
+"HR-BG",                  # welcome
+"TPH-DZ",                 # inside
+"PW-Z",                   # busy
+"K-RGS",                  # consideration
+"PH-PB",                  # machine
+"K-R/RAEUGS",             # consideration
+"STPH-PBS",               # sentence
+"-LG",                    # willing
+"S-PB",                   # season
+"K-FRT",                  # comfort
+"THR-S",                  # there's
+"PW-LG",                  # building
+"HR-GT",                  # altogether
+"K-F",                    # confidence
+"PW-DZ",                  # besides
+"K-R",                    # consider
+"TKR-BT",                 # distribute
+"KP-PT",                  # expect
+"TP-RPB",                 # fortune
+"TPH-GS",                 # nation
+"ST-PL",                  # system
+"ST-FPL",                 # system
+"S-PL",                   # system
+"K-PB",                   # condition
+"TK-PBT",                 # didn't
+"S-FS",                   # service
+"THR-FR",                 # therefore
+"THR-F",                  # thereof
+"HR-RD",                  # already
+"HR-R",                   # already
+"TPH-L",                  # until
+"HR-PL",                  # almost
+"ST-G",                   # something
+"SPH-G",                  # something
+"S-G",                    # something
+"HR-S",                   # also
+"TPH-PB",                 # under
+"PW-G",                   # being
+"R-PT",                   # respect
+"TKPW/-S",                # goes
+"TKPW-S",                 # goes
+"TPH-TS",                 # notice
+"SRAOUL",                 # value
+"SRAO*UL",                # value
+"P*FR",                   # perfect
+"P-FRT",                  # perfect
+"P-FR",                   # perfect
+"P-F",                    # perfect
+"K-FRGS",                 # conversation
+"AFPB",                   # afternoon
+"K-RBL",                  # considerable
+"K-R/-BL",                # considerable
+"KR-BL",                  # considerable
+"PROR",                   # proper
+"SPAOEG",                 # speaking
+"TK*G",                   # doing
+"OFS",                    # office
+"AUFS",                   # office
+"TAEPBGS",                # attention
+"K-P",                    # company
+"AG",                     # ago
+"P-PB",                   # opinion
+"WOEUPBD",                # window
+"SEUPBLG",                # single
+"KAER",                   # carry
+"ST-R",                   # sister
+"PAOERD",                 # period
+"EUPL/POB",               # impossible
+"STPHED",                 # instead
+"PWHRU",                  # blue
+"TPA*ER/AES",             # father's
+"THOZ",                   # those
+"W-R",                    # where
+"AFT",                    # after
+"AF",                     # after
+"THEZ",                   # these
+"PWOFR",                  # before
+"SPWAO",                  # into
+"PW-FR",                  # before
+"TK",                     # did
+"SHO",                    # should
+"-RBD",                   # should
+"K",                      # can
+"HREUL",                  # little
+"OEPBL",                  # only
+"PW",                     # about
+"SRE",                    # very
+"OER",                    # other
+"KO",                     # could
+"WHA",                    # what
+"KWRAOUR",                # your
+"TPHEU",                  # any
+"TPHAO*",                 # into
+"TPHAO",                  # into
+"TP",                     # if
+"THR",                    # there
+"TH-R",                   # there
+"HR",                     # will
+"WO",                     # would
+"R",                      # are
+"-R",                     # are
+"PHEU",                   # my
+"WR",                     # were
+"-RP",                    # were
+"THE",                    # they
+"TH",                     # this
+"TPR",                    # from
+"SR",                     # have
+"WEU",                    # which
+"-B",                     # be
+"U",                      # you
+"H",                      # had
+"S",                      # is
+"W",                      # with
+"T",                      # it
+"WUZ",                    # was
+"THA",                    # that
+"TPH",                    # in
+"SKP",                    # and
+"-F",                     # of
+}
 plover_ortho_briefs={
 "PWO*T",
 "TKOS",
@@ -785,6 +649,9 @@ plover_ortho_briefs={
 "HE", # (HE,): he -- ['ˈhi']
 		}
 plover_misstrokes={
+"PRAOU/-D",               # produced
+"KHRUD/-G",               # including
+"K-B/-S",                 # conditions
 "TKWRA*ER", # !! (DWRAE*R,): area -- ['ɛɹiə']
 "PHRAEUB", # !! (PLAIB,): maybe -- ['meɪbi']
 "TPRAEUPBD", # (FRAIND,): trained -- ['tɹeɪnd']
