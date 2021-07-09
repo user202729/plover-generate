@@ -668,11 +668,10 @@ def fix_outline(x: Strokes)->Strokes:
 	return tuple(result)
 
 def generate_fixed(whole: Matches)->Tuple[Strokes, ...]:
-	return tuple({
-		fix_outline(x.strokes): None
+	return tuple(dict.fromkeys(
+		fix_outline(x.strokes)
 		for x in generate_complete(whole)
-		})  # to remove duplicates
-	# dict to remove duplicates
+		))  # remove duplicates while preserving the order
 	
 def plover_entry_matches_generated_1(plover_outline: Strokes, generated_outlines: Collection[Strokes])->bool:
 	if plover_outline in generated_outlines: return True
