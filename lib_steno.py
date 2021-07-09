@@ -440,6 +440,8 @@ append_(steno_rules_by_spell, "ory      ".strip(), StenoRuleSuffix(Stroke("REU  
 append_(steno_rules_by_spell, "ury      ".strip(), StenoRuleSuffix(Stroke("REU     ".strip()), False))
 append_(steno_rules_by_spell, "self     ".strip(), StenoRuleSuffix(Stroke("SEFL    ".strip()), False))
 append_(steno_rules_by_spell, "selves   ".strip(), StenoRuleSuffix(Stroke("SEFLS   ".strip()), False))
+append_(steno_rules_by_spell, "self     ".strip(), StenoRuleSuffix(Stroke("*S      ".strip()), True))
+append_(steno_rules_by_spell, "selves   ".strip(), StenoRuleSuffix(Stroke("*S      ".strip()), True))
 append_(steno_rules_by_spell, "istic    ".strip(), StenoRuleSuffix(Stroke("ST-BG   ".strip()), False))
 append_(steno_rules_by_spell, "astic    ".strip(), StenoRuleSuffix(Stroke("ST-BG   ".strip()), False))
 append_(steno_rules_by_spell, "ment     ".strip(), StenoRuleSuffix(Stroke("*PLT    ".strip()), False))
