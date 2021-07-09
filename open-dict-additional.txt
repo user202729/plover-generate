@@ -2,3 +2,8 @@ raw	/ˈɹɔ/
 mere	/ˈmiɹ/
 merely	/ˈmiɹɫi/
 mozzarella	/mɑtsəˈɹɛɫə/
+def	/dˈɛf/
+stenography	/stɛnˈɑɡɹəfi/
+stenograph	/stˈɛnəɡɹˌæf/
+dict	/dˈɪkt/
+var	/vˈɑɹ/
