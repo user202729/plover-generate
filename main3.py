@@ -96,6 +96,11 @@ frequency_lowercase: Dict[str, float]={
 casereverse: Dict[str, List[str]]={ #only consist of words in the frequency file
 		word_lower: [x[0] for x in items_] for word_lower, items_ in frequency_items}
 
+base_form_lower: Dict[str, str]={
+		word.lower(): base.lower()
+		for word, base in base_form_().items()
+		}
+
 plover_dict=plover_dict_()
 plover_dict_by_frequency=plover_dict_by_frequency_(plover_dict, frequency)
 plover_reverse_dict: Dict[str, Sequence[str]]={
@@ -166,13 +171,15 @@ if 1: # steno generation
 	#out_dump=None
 	#error_count=0
 	
-	def key_(x: Matches):
-	# optional (set dictionary to be used by the translator, if `translate_stroke` is used)
+	def key_(x: Matches)->Tuple[float, float, str]:
 		s=spell_of_(x)
-		return (-frequency_lowercase.get(s, 0), s)
+		return (
+				-frequency_lowercase.get(s, 0),
+				-frequency_lowercase.get(base_form_lower.get(s, ""), 0),
+				s)
 
 	plover_briefed_words: Set[str]={plover_dict.get(x, "") for x in plover_briefs}
-	for (frequency_, word_lower), x in group_sort(items, key=key_):
+	for (frequency__, frequency_base_, word_lower), x in group_sort(items, key=key_):
 		if not word_filter(word_lower): continue
 		outlines: Set[Strokes]=set()  # set of outlines generated for this word
 

@@ -214,7 +214,12 @@ def plover_dict_by_frequency_(plover_dict: Dict[str, str], frequency: Dict[str, 
 					)
 				]
 
-
+def base_form_()->Dict[str, str]:
+	return {
+			word: base
+			for line in Path("lemmatization.txt").read_text().splitlines()
+			for base, word in [line.split()]
+			}
 	
 from dataclasses import dataclass
 
