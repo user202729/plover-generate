@@ -653,7 +653,7 @@ def generate_complete(whole: Matches)->Tuple[S, ...]:
 
 right_half=Stroke("-FRPBLGTSDZ")
 
-def fix_outline(x: Strokes)->Strokes:
+def fix_outline(x: Strokes)->Iterable[Strokes]:
 	result: List[Stroke]=[]
 	for s in x:
 		if s in Stroke("-RPBLGTSDZ") and result and (result[-1]&right_half)==Stroke("-S"):
@@ -665,12 +665,13 @@ def fix_outline(x: Strokes)->Strokes:
 		else:
 			result.append(s)
 
-	return tuple(result)
+	yield tuple(result)
 
 def generate_fixed(whole: Matches)->Tuple[Strokes, ...]:
 	return tuple(dict.fromkeys(
-		fix_outline(x.strokes)
+		outline
 		for x in generate_complete(whole)
+		for outline in fix_outline(x.strokes)
 		))  # remove duplicates while preserving the order
 	
 def plover_entry_matches_generated_1(plover_outline: Strokes, generated_outlines: Collection[Strokes])->bool:
