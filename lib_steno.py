@@ -443,6 +443,8 @@ append_(steno_rules_by_spell, "selves   ".strip(), StenoRuleSuffix(Stroke("SEFLS
 append_(steno_rules_by_spell, "istic    ".strip(), StenoRuleSuffix(Stroke("ST-BG   ".strip()), False))
 append_(steno_rules_by_spell, "astic    ".strip(), StenoRuleSuffix(Stroke("ST-BG   ".strip()), False))
 append_(steno_rules_by_spell, "ment     ".strip(), StenoRuleSuffix(Stroke("*PLT    ".strip()), False))
+append_(steno_rules_by_spell, "le       ".strip(), StenoRuleSuffix(Stroke("-L      ".strip()), False))
+append_(steno_rules_by_spell, "le       ".strip(), StenoRuleSuffix(Stroke("*L      ".strip()), False))
 append_(steno_rules_by_spell, "ed       ".strip(), StenoRuleSuffix(Stroke("-D      ".strip()), True))
 append_(steno_rules_by_spell, "ing      ".strip(), StenoRuleSuffix(Stroke("-G      ".strip()), True))
 
