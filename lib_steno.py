@@ -699,6 +699,7 @@ for line in [
 		combining_suffix=Stroke(combining_suffix_.strip())
 		assert not combining_suffix or stroke.is_prefix(combining_suffix)
 		disallowed_suffixes.add(stroke+combining_suffix)
+disallowed_suffixes.remove(Stroke("AD"))
 
 disallowed_prefixes: Set[Stroke]={Stroke(x.strip()) for x in [
 	"EU",
