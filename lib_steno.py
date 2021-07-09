@@ -687,9 +687,18 @@ for line in [
 		assert not combining_suffix or stroke.is_prefix(combining_suffix)
 		disallowed_suffixes.add(stroke+combining_suffix)
 
+disallowed_prefixes: Set[Stroke]={Stroke(x.strip()) for x in [
+	"EU",
+	"AEU",
+	]}
+
+
 def fix_outline(x: Strokes)->Iterable[Strokes]:
-	if len(x)>=2 and x[-1] in disallowed_suffixes:
-		return
+	if len(x)>=2:
+		if x[-1] in disallowed_suffixes:
+			return
+		if x[0] in disallowed_prefixes:
+			return
 
 	result: List[Stroke]=[]
 	for s in x:
