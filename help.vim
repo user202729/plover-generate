@@ -1,5 +1,5 @@
 map \bo :rightbelow vsplit /tmp/errors.txt<cr><c-w><c-w>
-" open the other window
+" open the errors window
 
 "the following key binds should be used when the focus is in the errors window 
 map \bb "add<c-w><c-w>/^plover_briefs<cr>"ap<c-w><c-w>
