@@ -317,39 +317,24 @@ steno_rules_by_pronounce_no_hide: Dict[str, List[StenoRule]]={}  # independent, 
 x1: List[str]
 for pronounce, stroke, x1 in [  # type: ignore
 		("æ     ", "A     ", []),
-		("aɪə   ", "AOEU  ", []),
+
 		("aɪ    ", "AOEU  ", []),
+		("aɪə   ", "AOEU  ", []),
+
 		("aʊ    ", "OU    ", []),
+
+		("ɛ     ", "E     ", [
+			"a ai ei ay      | AEU   "
+			]),
 		("eɪ    ", "AEU   ", []),
-		("wə    ", "U     ", []),    # (temporary)
-		("əw    ", "U     ", []),    # (temporary)
-		("jə    ", "U     ", []),
-		("ju    ", "AOU   ", []),
-		("jʊ    ", "AOU   ", []),
-		("oʊ    ", "OE    ", [
-			"oa              | AO OE",
+
+		("ɪ     ", "EU    ", [
+			"ee ea ie e      | AOE  ",
 			]),
-		("əʊ    ", "OE    ", [
-			"oa              | AO OE",
-			]),
-		("ɔɪ    ", "OEU   ", []),
-		("u     ", "AOU   ", [
-			"oo              | AO   ",
-			"o               | O    ",
-			"ou              | OU AOU",
-			]),
-		("ʊ     ", "U     ", [
-			"oo              | AO   ",
-			"o               | O    ",
-			]),
-		("ə     ", "U     ", [
-			"a aa           | A    ",
-			"e ea           | E    ",
-			"i y ia ui ieu  | EU   ",
-			"o              | O    ",
-			"u              | U    ",
-			"ou             | OU U ",
-			]), # this may be /ʌ/ too
+		("i     ", "AOE   ", [
+			"y i             | EU   ",
+			]), # may be /iː/ but open ipa dict does not use /ː/
+
 		("ɔ     ", "AU    ", [
 			"o ou            | O    ",
 			"oa              | AO AU",
@@ -359,15 +344,40 @@ for pronounce, stroke, x1 in [  # type: ignore
 			"ea              | A    ",
 			"a               | A    ",
 			]),
-		("ɪ     ", "EU    ", [
-			"ee ea ie e      | AOE  ",
+
+		("oʊ    ", "OE    ", [
+			"oa              | AO OE",
 			]),
-		("i     ", "AOE   ", [
-			"y i             | EU   ",
-			]), # may be /iː/ but open ipa dict does not use /ː/
-		("ɛ     ", "E     ", [
-			"a ai ei ay      | AEU   "
+		("əʊ    ", "OE    ", [
+			"oa              | AO OE",
 			]),
+
+		("ɔɪ    ", "OEU   ", []),
+
+		("ju    ", "AOU   ", []),
+		("jʊ    ", "AOU   ", []),
+
+		("u     ", "AOU   ", [
+			"oo              | AO   ",
+			"o               | O    ",
+			"ou              | OU AOU",
+			]),
+		("ʊ     ", "U     ", [
+			"oo              | AO   ",
+			"o               | O    ",
+			]),
+
+		("wə    ", "U     ", []),    # (temporary)
+		("əw    ", "U     ", []),    # (temporary)
+		("jə    ", "U     ", []),
+		("ə     ", "U     ", [
+			"a aa           | A    ",
+			"e ea           | E    ",
+			"i y ia ui ieu  | EU   ",
+			"o              | O    ",
+			"u              | U    ",
+			"ou             | OU U ",
+			]), # this may be /ʌ/ too
 ]:
 	pronounce=pronounce.strip()
 	stroke=stroke.strip()
