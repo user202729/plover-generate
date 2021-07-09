@@ -462,6 +462,7 @@ append_(steno_rules_by_spell, "ary      ".strip(), StenoRuleSuffix(Stroke("AER  
 append_(steno_rules_by_spell, "ary      ".strip(), StenoRuleSuffix(Stroke("REU     ".strip()), False))
 append_(steno_rules_by_spell, "ory      ".strip(), StenoRuleSuffix(Stroke("REU     ".strip()), False))
 append_(steno_rules_by_spell, "ury      ".strip(), StenoRuleSuffix(Stroke("REU     ".strip()), False))
+append_(steno_rules_by_spell, "tory     ".strip(), StenoRuleSuffix(Stroke("TOER    ".strip()), False))
 append_(steno_rules_by_spell, "self     ".strip(), StenoRuleSuffix(Stroke("SEFL    ".strip()), False))
 append_(steno_rules_by_spell, "selves   ".strip(), StenoRuleSuffix(Stroke("SEFLS   ".strip()), False))
 append_(steno_rules_by_spell, "self     ".strip(), StenoRuleSuffix(Stroke("*S      ".strip()), True))
