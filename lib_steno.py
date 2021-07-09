@@ -653,7 +653,30 @@ def generate_complete(whole: Matches)->Tuple[S, ...]:
 
 right_half=Stroke("-FRPBLGTSDZ")
 
+disallowed_suffixes: Set[Stroke]=set()
+for line in [
+		"A     ",
+		"EU    ",
+		"AOE   ",
+		"AEU   ",
+		]:
+	stroke=Stroke(line.strip())
+	assert stroke not in disallowed_suffixes
+	for combining_suffix_ in [
+			"",
+			"-S",
+			"-G",
+			"-D",
+			"-Z",
+			]:
+		combining_suffix=Stroke(combining_suffix_.strip())
+		assert not combining_suffix or stroke.is_prefix(combining_suffix)
+		disallowed_suffixes.add(stroke+combining_suffix)
+
 def fix_outline(x: Strokes)->Iterable[Strokes]:
+	if len(x)>=2 and x[-1] in disallowed_suffixes:
+		return
+
 	result: List[Stroke]=[]
 	for s in x:
 		if s in Stroke("-RPBLGTSDZ") and result and (result[-1]&right_half)==Stroke("-S"):
