@@ -336,6 +336,7 @@ for pronounce, stroke, x1 in [  # type: ignore
 		("u     ", "AOU   ", [
 			"oo              | AO   ",
 			"o               | O    ",
+			"ou              | OU AOU",
 			]),
 		("ʊ     ", "U     ", [
 			"oo              | AO   ",
@@ -347,6 +348,7 @@ for pronounce, stroke, x1 in [  # type: ignore
 			"i y ia ui ieu  | EU   ",
 			"o              | O    ",
 			"u              | U    ",
+			"ou             | OU U ",
 			]), # this may be /ʌ/ too
 		("ɔ     ", "AU    ", [
 			"o ou            | O    ",
