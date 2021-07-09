@@ -697,3 +697,8 @@ def fix_match(x: List[MatchResult])->List[Tuple[str, str]]:
 			result.append(b)
 	return result
 
+def warn_if_not_optimization()->None:
+	try:
+		assert False
+	except AssertionError:
+		print("Note: assertions are enabled. May slow down the program.", file=sys.stderr)

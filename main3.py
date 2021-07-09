@@ -16,6 +16,7 @@ from collections import defaultdict
 
 from lib import*
 
+warn_if_not_optimization()
 
 try:
 	del sys.modules["lib_steno"]

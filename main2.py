@@ -13,6 +13,7 @@ except KeyError:
 from lib import *
 from pathlib import Path
 
+warn_if_not_optimization()
 
 # parse args
 
