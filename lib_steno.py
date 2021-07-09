@@ -343,6 +343,7 @@ for pronounce, stroke, x1 in [  # type: ignore
 		("ɑ     ", "O     ", [
 			"ea              | A    ",
 			"a               | A    ",
+			"au              | AU   ",
 			]),
 
 		("oʊ    ", "OE    ", [
