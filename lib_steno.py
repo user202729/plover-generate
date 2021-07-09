@@ -196,6 +196,13 @@ class StenoRuleSkip(StenoRule):
 	def apply(self, s: S, whole: Matches, left: int, right: int)->Iterator[S]:
 		yield s
 
+@dataclass
+class StenoRuleCombine(StenoRule):
+	a: StenoRule
+	b: StenoRule
+	def apply(self, s: S, whole: Matches, left: int, right: int)->Iterator[S]:
+		for t in self.a.apply(s, (), -1, -1):
+			yield from self.b.apply(t, (), -1, -1)
 
 ##
 
@@ -400,6 +407,12 @@ def append_(d: Dict[K, List[V]], key: K, value: V)->None:
 		d[key]=[value]
 	else:
 		d[key].append(value)
+
+assert ("o", "wə") not in steno_rules_by_both
+steno_rules_by_both["o", "wə"]=[StenoRuleCombine(
+		StenoRuleConsonant(Stroke("W"), Stroke(), False),
+		StenoRuleVowel(Stroke("U")),
+		)]
 
 # prefix
 append_(steno_rules_by_spell, "re      ".strip(), StenoRulePrefix(Stroke("RE       ".strip())))
