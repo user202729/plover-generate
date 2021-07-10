@@ -607,6 +607,14 @@ for line in [
 			for b__ in b_
 			]
 
+for spell in "t tu".split():
+	for pronounce in "ʃ tʃ".split():
+		assert spell, pronounce not in steno_rules_by_both
+		steno_rules_by_both[spell, pronounce]=(
+				steno_rules_by_pronounce["t"] +
+				steno_rules_by_pronounce["tʃ"]
+				)
+
 def unstressed_schwa(match: Match)->bool:
 	return match.pronounce in ("ə", "jə", "ɪ") and (
 			# match.stress==Stress.no
