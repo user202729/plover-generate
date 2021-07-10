@@ -571,6 +571,10 @@ for line in [
 			]
 
 
+assert "comb" not in steno_rules_by_spell
+steno_rules_by_spell["comb"]=[
+		StenoRuleConsonant(Stroke("KPW"), Stroke(), False)
+		]
 
 
 # recall that steno_rules_by_both overrides steno_rules_by_pronounce, if there's a match.
