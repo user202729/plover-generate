@@ -562,6 +562,8 @@ for line in [
 		"mɛnt  |       | -PLT          ",
 		"dθ    |       | *TD           ", # inversion
 		"ʃənt  |       | -RBT          ",
+		"ɫəti  |       | -LT           ",
+		"ɫɪti  |       | -LT           ",
 		"kəmp  | KP    |               ",
 		"kɑmp  | KP    |               ",
 		"ɛks   | KP    |               ",
