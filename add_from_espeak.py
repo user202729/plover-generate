@@ -4,10 +4,12 @@ import subprocess
 from typing import List, Tuple
 
 import argparse
+import sys
 parser=argparse.ArgumentParser(
 		usage="Append to open-dict-additional.txt, use espeak to generate the pronunciation",
 		formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument("words", help="List of words", nargs="*")
+parser.add_argument("-n", "--dry-run", help="Print to stdout instead.", action="store_true")
 args=parser.parse_args()
 words: List[str]=[*dict.fromkeys(args.words)]
 if not words: exit()
@@ -20,7 +22,7 @@ pronounces: List[str]=subprocess.check_output([
 	]).decode('u8').split()
 
 
-with open("open-dict-additional.txt", "a") as f:
+with (sys.stdout if args.dry_run else open("open-dict-additional.txt", "a")) as f:
 	for word, pronounce in zip(words, pronounces):
 		pronounce=pronounce.replace("əʊ", "oʊ").replace("ɜː", "əɹ").replace("eə", "ɛɹ"
 				).translate({
