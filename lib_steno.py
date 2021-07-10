@@ -483,6 +483,9 @@ append_(steno_rules_by_spell, "down     ".strip(), StenoRuleSuffix(Stroke("SKWRO
 append_(steno_rules_by_spell, "ed       ".strip(), StenoRuleSuffix(Stroke("-D      ".strip()), True))
 append_(steno_rules_by_spell, "ing      ".strip(), StenoRuleSuffix(Stroke("-G      ".strip()), True))
 
+steno_rules_by_both["d", "t"]=steno_rules_by_spell["ed"]
+steno_rules_by_both["ed", "t"]=steno_rules_by_spell["ed"]
+
 # some rules are sufficiently natural that the program can figure them out
 # however if they're not explicitly listed as suffix, they cannot be used after (listed) suffixes
 
