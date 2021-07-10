@@ -555,6 +555,7 @@ for line in [
 		"mənt  | -     | -PLT          ",
 		"mɛnt  | -     | -PLT          ",
 		"dθ    | -     | *TD           ", # inversion
+		"ʃənt  | -     | -RBT          ",
 		"kəmp  | KP    | -             ",
 		"ɛks   | KP    | -             ",
 		"ɛɡz   | KP    | -             ",
