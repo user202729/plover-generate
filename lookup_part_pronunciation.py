@@ -45,7 +45,7 @@ for m in items:
 		if start is not None and end is not None:
 			d[pronounce_of_(m[start:end])].append(word)
 
-max_pronounce_len=max(len(pronounce) for pronounce in d.items())
+max_pronounce_len=max(len(pronounce) for pronounce, words in d.items())
 for pronounce, words in sorted(d.items(), key=lambda x: len(x[1]), reverse=True):
 	prefix=f"{pronounce:{max_pronounce_len}}  {len(words):5}  "
 	lines=textwrap.wrap(' '.join(dict.fromkeys(words)), args.width)[:args.lines]
