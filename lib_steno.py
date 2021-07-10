@@ -103,23 +103,24 @@ class StenoRuleSuffixS(StenoRule): # suffix in a separate stroke
 
 @dataclass
 class StenoRuleConsonant(StenoRule):
-	a: Stroke
-	b: Stroke
+	a: Optional[Stroke]
+	b: Optional[Stroke]
 	dupe: bool
-	# if type is consonant, a is left half and b is right half (**must** not be zero)
-	#     if zero => none
+	# if type is consonant, a is left half and b is right half
+	#     if zero => empty stroke
+	#     if None => not applicable
 	def apply(self, s: S, whole: Matches, left: int, right: int)->Iterator[S]:
 		if s.state==State.suffix:
 			return
 
 		elif s.state in (State.outline_start, State.prefix):
 			# separate left
-			if self.a:
+			if self.a is not None:
 				yield S(s.strokes+(self.a,), State.left, False, s.mark)
 
 		elif s.state==State.left:
 			# try to put in the left part (if fail, separate left)
-			if self.a:
+			if self.a is not None:
 				t=stroke_append(s.strokes, self.a)
 				if t is not None:
 					yield S(t, State.left, s.seen_schwa_in_cluster, s.mark)
@@ -135,7 +136,7 @@ class StenoRuleConsonant(StenoRule):
 		else:
 			# try to put in the right (if fail, separate right)
 			assert s.state in (State.vowel, State.right, State.right_separate)
-			if self.b:
+			if self.b is not None:
 				t=stroke_append(s.strokes, self.b)
 				if t is not None:
 					yield S(t,
@@ -155,7 +156,7 @@ class StenoRuleConsonant(StenoRule):
 				pass
 
 			# try to make a new syllable (this syllable has a vowel already)
-			if self.a:
+			if self.a is not None:
 				yield S(s.strokes+(self.a,), State.left, False, s.mark)
 
 
@@ -410,14 +411,14 @@ def append_(d: Dict[K, List[V]], key: K, value: V)->None:
 
 assert ("o", "wə") not in steno_rules_by_both
 steno_rules_by_both["o", "wə"]=[StenoRuleCombine(
-		StenoRuleConsonant(Stroke("W"), Stroke(), False),
+		StenoRuleConsonant(Stroke("W"), None, False),
 		StenoRuleVowel(Stroke("U")),
 		)]
 
 assert "ary" not in steno_rules_by_spell
 steno_rules_by_spell["ary"]=[StenoRuleCombine(
 		StenoRuleVowel(Stroke("AE")),
-		StenoRuleConsonant(Stroke(), Stroke("-R"), False),
+		StenoRuleConsonant(None, Stroke("-R"), False),
 		)]
 
 # prefix
@@ -523,51 +524,51 @@ for line in [
 		"θ     | TH    | *T            ",
 		"ð     | TH    | *T            ",
 		"v     | SR    | -F            ",
-		"w     | W     | -             ",
-		"hw    | WH    | -             ",
-		"h     | H     | -             ",
-		"j     | KWR   | -             ",
-		"kʃən  | -     | -BGS  *BGS    ",
-		"kʃɪn  | -     | -BGS  *BGS    ",
-		"kʃn   | -     | -BGS  *BGS    ",
-		"ŋ     | -     | -PBG          ",
-		"ŋɡ    | -     | -PBG          ",
-		"ndʒ   | -     | -PBG          ",
-		"ŋk    | -     | *PBG          ",
-		"ŋkʃən | -     | -PBGS         ",
-		"ŋʃən  | -     | -PBGS         ",
-		"mp    | -     | -FRP   *PL    ",
-		"ɹv    | -     | -FRB          ",
-		"st    | -     | *S            ",
-		"kst   | -     | -GT    *BGS   ", # xt -> *x (Plover borrowed) -- with a special case below (ignore sed and ksed)
-		"ks    | -     | -BGS          ", # -x
-		"kʃ    | -     | -BGS          ", # -x (when followed by i → sound change)
-		"ɡz    | -     | -BGS          ",
-		"tʃən  | -     | -GS           ", # (weird dialect? open IPA dict use this for some -ʃən words)
-		"ʃən   | -     | -GS           ",
-		"ʒən   | -     | -GS           ",
-		"dʒən  | -     | -GS           ",
-		"ʃn    | -     | -GS           ",
-		"ʃəs   | -     | -RBS          ",
-		"dʒəs  | -     | -RBS          ",
-		"ntʃ   | -     | -FRPB -FRPBLG ",
-		"ɹtʃ   | -     | -FRPB         ",
-		"ɫv    | -     | -FL           ",
-		"ɹʃ    | -     | *RB           ",
-		"mənt  | -     | -PLT          ",
-		"mɛnt  | -     | -PLT          ",
-		"dθ    | -     | *TD           ", # inversion
-		"ʃənt  | -     | -RBT          ",
-		"kəmp  | KP    | -             ",
-		"kɑmp  | KP    | -             ",
-		"ɛks   | KP    | -             ",
-		"ɛɡz   | KP    | -             ",
-		"ɪks   | KP    | -             ",
-		"ɪɡz   | KP    | -             ",
+		"w     | W     |               ",
+		"hw    | WH    |               ",
+		"h     | H     |               ",
+		"j     | KWR   |               ",
+		"kʃən  |       | -BGS  *BGS    ",
+		"kʃɪn  |       | -BGS  *BGS    ",
+		"kʃn   |       | -BGS  *BGS    ",
+		"ŋ     |       | -PBG          ",
+		"ŋɡ    |       | -PBG          ",
+		"ndʒ   |       | -PBG          ",
+		"ŋk    |       | *PBG          ",
+		"ŋkʃən |       | -PBGS         ",
+		"ŋʃən  |       | -PBGS         ",
+		"mp    |       | -FRP   *PL    ",
+		"ɹv    |       | -FRB          ",
+		"st    |       | *S            ",
+		"kst   |       | -GT    *BGS   ", # xt -> *x (Plover borrowed) -- with a special case below (ignore sed and ksed)
+		"ks    |       | -BGS          ", # -x
+		"kʃ    |       | -BGS          ", # -x (when followed by i → sound change)
+		"ɡz    |       | -BGS          ",
+		"tʃən  |       | -GS           ", # (weird dialect? open IPA dict use this for some -ʃən words)
+		"ʃən   |       | -GS           ",
+		"ʒən   |       | -GS           ",
+		"dʒən  |       | -GS           ",
+		"ʃn    |       | -GS           ",
+		"ʃəs   |       | -RBS          ",
+		"dʒəs  |       | -RBS          ",
+		"ntʃ   |       | -FRPB -FRPBLG ",
+		"ɹtʃ   |       | -FRPB         ",
+		"ɫv    |       | -FL           ",
+		"ɹʃ    |       | *RB           ",
+		"mənt  |       | -PLT          ",
+		"mɛnt  |       | -PLT          ",
+		"dθ    |       | *TD           ", # inversion
+		"ʃənt  |       | -RBT          ",
+		"kəmp  | KP    |               ",
+		"kɑmp  | KP    |               ",
+		"ɛks   | KP    |               ",
+		"ɛɡz   | KP    |               ",
+		"ɪks   | KP    |               ",
+		"ɪɡz   | KP    |               ",
 		]:
 	pronounce, a, b=line.split("|")
-	a_=[Stroke(x) for x in a.split()]
-	b_=[Stroke(x) for x in b.split()]
+	a_: List[Optional[Stroke]]=[Stroke(x) for x in a.split()] or [None]
+	b_: List[Optional[Stroke]]=[Stroke(x) for x in b.split()] or [None]
 	pronounce=pronounce.strip()
 	assert pronounce not in steno_rules_by_pronounce, pronounce
 	steno_rules_by_pronounce[pronounce]=[
@@ -579,13 +580,17 @@ for line in [
 
 assert "comb" not in steno_rules_by_spell
 steno_rules_by_spell["comb"]=[
-		StenoRuleConsonant(Stroke("KPW"), Stroke(), False)
+		StenoRuleConsonant(Stroke("KPW"), None, False)
 		]
 
 assert "ture" not in steno_rules_by_spell
 steno_rules_by_spell["ture"]=[
-		StenoRuleConsonant(Stroke(), Stroke("-FP"), False)
+		StenoRuleConsonant(None, Stroke("-FP"), False)
 		]
+
+
+assert "" not in steno_rules_by_pronounce
+steno_rules_by_pronounce[""]=[skip_rule]  # unless overridden
 
 
 # recall that steno_rules_by_both overrides steno_rules_by_pronounce, if there's a match.
@@ -599,7 +604,7 @@ for line in [
 		"ss    | z   | S-         | -S   ",
 		"sse   | z   | S-         | -S   ",
 		"h     |     | H          | -    ",
-		"wh    | w   | WH         | -    ",
+		"wh    | w   | WH         |      ",
 		"w     |     | W          | -    ",
 		"c     | s   | S KR       | -S   ",
 		"sc    | s   | S SK SKR   | -S   ",
@@ -607,8 +612,8 @@ for line in [
 	spell, pronounce, a, b=line.split("|")
 	spell=spell.strip()
 	pronounce=pronounce.strip()
-	a_=[Stroke(x) for x in a.split()]
-	b_=[Stroke(x) for x in b.split()]
+	a_=[Stroke(x) for x in a.split()] or [None]
+	b_=[Stroke(x) for x in b.split()] or [None]
 	assert (spell, pronounce) not in steno_rules_by_both, (spell, pronounce)
 	steno_rules_by_both[spell, pronounce]=[
 			StenoRuleConsonant(a__, b__, False)
@@ -643,16 +648,6 @@ suffix_s_rule=StenoRuleSuffixS()
 def get_steno_rules(whole: Matches, left: int, right: int)->Iterator[StenoRule]:
 	assert left<right
 
-	if right==left+1:
-		if not whole[left].pronounce:
-			yield skip_rule
-			# ... consider other cases too...
-
-	#if not whole[left].pronounce or not whole[right-1].pronounce:
-	#	return  # to avoid duplicates, separate the empty unless it's inside the block
-
-	# cannot apply this right now because empty pronounce parts can be matched
-
 	pronounce=pronounce_of_(whole[left:right])
 	spell=spell_of_(whole[left:right])
 
@@ -668,10 +663,15 @@ def get_steno_rules(whole: Matches, left: int, right: int)->Iterator[StenoRule]:
 	except KeyError:
 		pass
 
-	try:
-		yield from steno_rules_by_pronounce_no_hide[pronounce]
-	except KeyError:
-		pass
+	do_pure_pronounce_lookup=(not pronounce) or (whole[left].pronounce and whole[right-1].pronounce)
+	# for example, /ɹ/-"wr" should not be matched to pronunciation rule of /ɹ/
+	# let //-"w" and /ɹ/-"r" be matched separately
+
+	if do_pure_pronounce_lookup:
+		try:
+			yield from steno_rules_by_pronounce_no_hide[pronounce]
+		except KeyError:
+			pass
 
 	if (
 			right==left+1 and right<len(whole)
@@ -690,20 +690,21 @@ def get_steno_rules(whole: Matches, left: int, right: int)->Iterator[StenoRule]:
 		yield StenoRuleVowel(Stroke("AO"))
 		return  # strict rule.
 
-	if pronounce=="ŋk" and pronounce_of_(whole[right:]).startswith(("t", "ʃ")):
+	if do_pure_pronounce_lookup and pronounce=="ŋk" and pronounce_of_(whole[right:]).startswith(("t", "ʃ")):
 		yield from steno_rules_by_pronounce["ŋ"]  # not a strict rule
 
-	if right==left+1 and pronounce=="ɔ" and spell_of_(whole[right:]).startswith("ll"):
+	if do_pure_pronounce_lookup and right==left+1 and pronounce=="ɔ" and spell_of_(whole[right:]).startswith("ll"):
 		yield StenoRuleVowel(Stroke("AU"))
 		return
 
 	try:
 		yield from steno_rules_by_both[spell, pronounce]
 	except KeyError:
-		try:
-			yield from steno_rules_by_pronounce[pronounce]
-		except KeyError:
-			pass
+		if do_pure_pronounce_lookup:
+			try:
+				yield from steno_rules_by_pronounce[pronounce]
+			except KeyError:
+				pass
 
 def generate_iterator(whole: Matches, right: int)->Iterator[S]:
 	# generate for whole[:right]. Need context
