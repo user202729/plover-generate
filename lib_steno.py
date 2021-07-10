@@ -553,6 +553,7 @@ for line in [
 		"ɹʃ    | -     | *RB           ",
 		"mənt  | -     | -PLT          ",
 		"mɛnt  | -     | -PLT          ",
+		"dθ    | -     | *TD           ", # inversion
 		"kəmp  | KP    | -             ",
 		"ɛks   | KP    | -             ",
 		"ɛɡz   | KP    | -             ",
