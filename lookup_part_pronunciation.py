@@ -48,7 +48,7 @@ for m in items:
 max_pronounce_len=max(len(pronounce) for pronounce in d.items())
 for pronounce, words in sorted(d.items(), key=lambda x: len(x[1]), reverse=True):
 	prefix=f"{pronounce:{max_pronounce_len}}  {len(words):5}  "
-	lines=textwrap.wrap(' '.join(words), args.width)[:args.lines]
+	lines=textwrap.wrap(' '.join(dict.fromkeys(words)), args.width)[:args.lines]
 	print(prefix+lines[0])
 	prefix=' '*len(prefix)
 	for line in lines[1:]:
