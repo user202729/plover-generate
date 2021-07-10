@@ -551,6 +551,8 @@ for line in [
 		"ɹtʃ   | -     | -FRPB         ",
 		"ɫv    | -     | -FL           ",
 		"ɹʃ    | -     | *RB           ",
+		"mənt  | -     | -PLT          ",
+		"mɛnt  | -     | -PLT          ",
 		"kəmp  | KP    | -             ",
 		"ɛks   | KP    | -             ",
 		"ɛɡz   | KP    | -             ",
