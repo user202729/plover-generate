@@ -580,6 +580,11 @@ steno_rules_by_spell["comb"]=[
 		StenoRuleConsonant(Stroke("KPW"), Stroke(), False)
 		]
 
+assert "ture" not in steno_rules_by_spell
+steno_rules_by_spell["ture"]=[
+		StenoRuleConsonant(Stroke(), Stroke("-FP"), False)
+		]
+
 
 # recall that steno_rules_by_both overrides steno_rules_by_pronounce, if there's a match.
 # therefore don't use `-` arbitrarily.
