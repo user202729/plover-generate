@@ -478,6 +478,7 @@ append_(steno_rules_by_spell, "ment     ".strip(), StenoRuleSuffix(Stroke("*PLT 
 append_(steno_rules_by_spell, "le       ".strip(), StenoRuleSuffix(Stroke("-L      ".strip()), False))
 append_(steno_rules_by_spell, "le       ".strip(), StenoRuleSuffix(Stroke("*L      ".strip()), False))
 append_(steno_rules_by_spell, "up       ".strip(), StenoRuleSuffix(Stroke("SKWRUP  ".strip()), False))
+append_(steno_rules_by_spell, "down     ".strip(), StenoRuleSuffix(Stroke("SKWROUPB".strip()), False))
 append_(steno_rules_by_spell, "ed       ".strip(), StenoRuleSuffix(Stroke("-D      ".strip()), True))
 append_(steno_rules_by_spell, "ing      ".strip(), StenoRuleSuffix(Stroke("-G      ".strip()), True))
 
@@ -725,6 +726,7 @@ right_half=Stroke("-FRPBLGTSDZ")
 disallowed_suffixes: Set[Stroke]={
 		Stroke("OPB"),
 		Stroke("UP"),
+		Stroke("TKOUPB"),
 		}
 for line in [
 		"A     ",
