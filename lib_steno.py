@@ -489,6 +489,7 @@ for line in [
 		"ɪ      KWREU  0",
 		"i      KWREU  0",
 		"kəɫ    K-L    0",
+		"pəɫ    P-L    0",
 		"uəɫ    WAL    0",
 		"wəɫ    WAL    0",
 		]:
