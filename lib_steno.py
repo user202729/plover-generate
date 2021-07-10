@@ -706,7 +706,9 @@ def generate_complete(whole: Matches)->Tuple[S, ...]:
 
 right_half=Stroke("-FRPBLGTSDZ")
 
-disallowed_suffixes: Set[Stroke]=set()
+disallowed_suffixes: Set[Stroke]={
+		Stroke("OPB"),
+		}
 for line in [
 		"A     ",
 		"EU    ",
