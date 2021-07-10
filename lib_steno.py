@@ -414,6 +414,12 @@ steno_rules_by_both["o", "wə"]=[StenoRuleCombine(
 		StenoRuleVowel(Stroke("U")),
 		)]
 
+assert "ary" not in steno_rules_by_spell
+steno_rules_by_spell["ary"]=[StenoRuleCombine(
+		StenoRuleVowel(Stroke("AE")),
+		StenoRuleConsonant(Stroke(), Stroke("-R"), False),
+		)]
+
 # prefix
 append_(steno_rules_by_spell, "re      ".strip(), StenoRulePrefix(Stroke("RE       ".strip())))
 append_(steno_rules_by_spell, "pre     ".strip(), StenoRulePrefix(Stroke("PRE      ".strip())))
@@ -458,7 +464,6 @@ append_(steno_rules_by_spell, "fully    ".strip(), StenoRuleSuffix(Stroke("TPHRE
 append_(steno_rules_by_spell, "some     ".strip(), StenoRuleSuffix(Stroke("SO*PL   ".strip()), False))
 append_(steno_rules_by_spell, "some     ".strip(), StenoRuleSuffix(Stroke("SO*EPL  ".strip()), False))
 append_(steno_rules_by_spell, "man      ".strip(), StenoRuleSuffix(Stroke("PHA*PB  ".strip()), False))
-append_(steno_rules_by_spell, "ary      ".strip(), StenoRuleSuffix(Stroke("AER     ".strip()), False))
 append_(steno_rules_by_spell, "ary      ".strip(), StenoRuleSuffix(Stroke("REU     ".strip()), False))
 append_(steno_rules_by_spell, "ory      ".strip(), StenoRuleSuffix(Stroke("REU     ".strip()), False))
 append_(steno_rules_by_spell, "ury      ".strip(), StenoRuleSuffix(Stroke("REU     ".strip()), False))
