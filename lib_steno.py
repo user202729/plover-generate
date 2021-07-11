@@ -571,6 +571,7 @@ for line in [
 		"ʃənt  |       | -RBT          ",
 		"ɫəti  |       | -LT           ",
 		"ɫɪti  |       | -LT           ",
+		"ɫədʒi |       | -LG           ",
 		"kəmp  | KP    |               ",
 		"kɑmp  | KP    |               ",
 		"ɛks   | KP    |               ",

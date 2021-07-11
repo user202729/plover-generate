@@ -10,3 +10,8 @@ var	/vˈɑɹ/
 solidarity	/sˌɑɫɪdˈæɹɪti/
 shan't	/ʃˈɑnt/
 escape	/ɛskˈeɪp/
+mixology	/mɪksˈɑɫədʒi/
+psychopathology	/sˌaɪkoʊpəθˈɑɫədʒi/
+phenomenology	/fɪnˌɑmɪnˈɑɫədʒi/
+typology	/taɪpˈɑɫədʒi/
+phraseology	/fɹeɪsˈɑɫədʒi/
