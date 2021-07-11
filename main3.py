@@ -136,33 +136,33 @@ def have_ignore_part(outline: str)->bool:
 
 ##
 
-if 1: # steno generation
-	##
-	errors: Set[Tuple[str, str]]=set()
-	generated: MutableMapping[Strokes, List[str]]=defaultdict(list)
+errors: Set[Tuple[str, str]]=set()
+generated: MutableMapping[Strokes, List[str]]=defaultdict(list)
 
-	count=0
-	out_dump=open(args.output, "w", buffering=1)
-	error_dump=None if args.no_output_errors else open(args.output_errors, "w", buffering=1)
+count=0
+out_dump=open(args.output, "w", buffering=1)
+error_dump=None if args.no_output_errors else open(args.output_errors, "w", buffering=1)
 
-	if out_dump and args.last_entry:
-		print("{", file=out_dump)
+def append_generated(outline: Strokes, word: str)->None:
+	generated[outline].append(word)
+	if out_dump:
+		print(
+			json.dumps(outline_to_str(
+				outline + (args.disambiguation_stroke,)*(len(generated[outline])-1)
+				if args.disambiguation_stroke else outline
+				), ensure_ascii=False)+
+			":"+
+			json.dumps(word, ensure_ascii=False)+
+			",", file=out_dump)
 
-	def append_generated(outline: Strokes, word: str)->None:
-		generated[outline].append(word)
-		if out_dump:
-			print(
-				json.dumps(outline_to_str(
-					outline + (args.disambiguation_stroke,)*(len(generated[outline])-1)
-					if args.disambiguation_stroke else outline
-					), ensure_ascii=False)+
-				":"+
-				json.dumps(word, ensure_ascii=False)+
-				",", file=out_dump)
+def print_error(*args, **kwargs):
+	print(*args, **kwargs)
+	if error_dump: print(*args, **kwargs, file=error_dump)
 
-	def print_error(*args, **kwargs):
-		print(*args, **kwargs)
-		if error_dump: print(*args, **kwargs, file=error_dump)
+if out_dump and args.last_entry:
+	print("{", file=out_dump)
+
+try:
 
 	if args.include_briefs:
 		for x in plover_briefs|plover_ortho_briefs:
@@ -257,5 +257,6 @@ if 1: # steno generation
 					,
 					file=error_dump)
 
+finally:
 	if out_dump and args.last_entry:
 		print(args.last_entry+"\n}", file=out_dump)
