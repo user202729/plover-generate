@@ -183,6 +183,7 @@ def pronunciation_(p: Path)->Dict[str, List[str]]:
 					for pronunciation_ in pronunciations.split(", ")
 					for pronunciation in [pronunciation_
 						.strip("/")  # the pronunciation is stored in the file as /<actual pronunciation>/
+						.replace("ɝɹ", "əɹ")
 						.replace("ɝ", "əɹ")]  # the dictionary uses both convention. ər is easier to process.
 					if remove_stressed_mark(pronunciation)!=spell_out(word)
 			]]
