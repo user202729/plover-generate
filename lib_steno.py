@@ -779,6 +779,7 @@ disallowed_suffixes.remove(Stroke("AD"))
 disallowed_prefixes: Set[Stroke]={Stroke(x.strip()) for x in [
 	"EU",
 	"AEU",
+	"OUT",
 	]}
 
 
