@@ -347,6 +347,7 @@ for pronounce, stroke, x1 in [  # type: ignore
 		("iæ    ", "AOE   ", []),
 		# in both cases AOE/E can be used if the vowel is stressed
 		# and (/ə/ rule) can be used if it's unstressed
+		("ieɪ   ", "AOE   ", []),
 
 		("ɔ     ", "AU    ", [
 			"o ou            | O    ",
