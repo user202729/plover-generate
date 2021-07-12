@@ -15,3 +15,4 @@ psychopathology	/sˌaɪkoʊpəθˈɑɫədʒi/
 phenomenology	/fɪnˌɑmɪnˈɑɫədʒi/
 typology	/taɪpˈɑɫədʒi/
 phraseology	/fɹeɪsˈɑɫədʒi/
+iterable	/ˈaɪtəɹəbəɫ/
