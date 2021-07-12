@@ -582,6 +582,9 @@ for line in [
 		"ɛɡz   | KP    |               ",
 		"ɪks   | KP    |               ",
 		"ɪɡz   | KP    |               ",
+		"ɪnt   | SPW   |               ",
+		"ɛnt   | SPW   |               ",
+		"ənt   | SPW   |               ",
 		]:
 	pronounce, a, b=line.split("|")
 	a_: List[Optional[Stroke]]=[Stroke(x) for x in a.split()] or [None]
