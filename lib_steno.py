@@ -578,6 +578,8 @@ for line in [
 		"məti  |       | -PLT          ",
 		"mɪti  |       | -PLT          ",
 		"mpʃən |       | -PLGS         ",
+		"ŋθ    |       | -PBGT -PBG    ",
+		"ŋkθ   |       | -PBGT -PBG    ",
 		"kəmp  | KP    |               ",
 		"kɑmp  | KP    |               ",
 		"ɛks   | KP    |               ",
