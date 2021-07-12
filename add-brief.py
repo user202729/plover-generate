@@ -34,15 +34,21 @@ briefs_path: Path=Path(CONFIG_DIR)/"briefs.json"
 
 
 def lookup(strokes: Tuple[str, ...])->str:
-	if len(strokes)==2 and strokes[1]==mark_stroke:
-		return f"[:: '{strokes[0]}' -> '{main_dict[strokes[0]]}' ?]"
-	if len(strokes)==3 and strokes[1]==strokes[2]==mark_stroke:
+	if len(strokes)>=2 and all(x==mark_stroke for x in strokes[1:]):
 		stroke=strokes[0]
 		translation=main_dict[stroke]
-		return (
-				"{plover:shell:python " +
-				' '.join(shlex.quote(x) for x in [
-					str(script_path), "--add", str(briefs_path), stroke, translation])+"}"
-				"{plover:set_config}" + translation
-				)
+		if len(strokes)==2:
+			translation_escaped: str=translation.translate({
+				ord("{"): r"\{",
+				ord("}"): r"\}",
+				})
+			return f"[:: '{stroke}' -> '{translation_escaped}' ?]"
+		else:
+			assert len(strokes)==3
+			return (
+					"{plover:shell:python " +
+					' '.join(shlex.quote(x) for x in [
+						str(script_path), "--add", str(briefs_path), stroke, translation])+"}"
+					"{plover:set_config}" + translation
+					)
 	raise KeyError
