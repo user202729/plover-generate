@@ -28,3 +28,18 @@ Run `python3 main3.py --help` to see what's the default output path. Can be chan
 
 Most other files have either documentation at the top of the file, or otherwise (if they're executable)
 run them with `--help` flag to read the documentation.
+
+### Tips
+
+* The programs are also compatible with `pypy3`. It's also possible to pass `-OO` flag to `pypy3` to
+disable assertions to speed up the programs.
+* It's possible to run `main3.py --generate --output a.json && cp a.json b.json` and load `b.json`
+into Plover, so that it's possible to use a dictionary while waiting for the new dictionary to be
+generated.
+
+### Testing
+
+It's possible to preview the result of a rule modification on some words by running with
+`--word-filter`. A typical run is (on Unix systems)
+
+    python3 main3.py --output /dev/stdout --no-output-errors --word-filter word1,word2
