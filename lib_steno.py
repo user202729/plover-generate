@@ -576,6 +576,7 @@ for line in [
 		"nɪti  |       | -PBT          ",
 		"məti  |       | -PLT          ",
 		"mɪti  |       | -PLT          ",
+		"mpʃən |       | -PLGS         ",
 		"kəmp  | KP    |               ",
 		"kɑmp  | KP    |               ",
 		"ɛks   | KP    |               ",
