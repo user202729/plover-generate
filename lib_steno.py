@@ -602,7 +602,8 @@ steno_rules_by_spell["comb"]=[
 
 assert "ture" not in steno_rules_by_spell
 steno_rules_by_spell["ture"]=[
-		StenoRuleConsonant(None, Stroke("-FP"), False)
+		StenoRuleConsonant(None, Stroke("-FP"), False),
+		StenoRuleSuffix(Stroke("TAOUR"), False),
 		]
 
 
