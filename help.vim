@@ -1,3 +1,8 @@
+" Quickly copy entries from `errors.txt` file to `plover_ignore.py` (open them
+" side by side in vim)
+" Only vim is supported.
+" Use `help.json` to quickly enter the key binds.
+
 map \bo :rightbelow vsplit /tmp/errors.txt<cr><c-w><c-w>
 " open the errors window
 
