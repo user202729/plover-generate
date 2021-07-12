@@ -472,7 +472,6 @@ plover_briefs={
 "AOUFL",                  # useful
 "PROEUS",                 # process
 "PHEPBLG",                # message
-"STKOFR",                 # discover
 "SKOFR",                  # discover
 "KUPBTSZ",                # countries
 "PHAPBLG",                # imagine
