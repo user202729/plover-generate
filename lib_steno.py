@@ -460,6 +460,7 @@ append_(steno_rules_by_spell, "an       ".strip(), StenoRuleSuffix(Stroke("A*PB 
 append_(steno_rules_by_spell, "en       ".strip(), StenoRuleSuffix(Stroke("*EPB    ".strip()), False))
 append_(steno_rules_by_spell, "ol       ".strip(), StenoRuleSuffix(Stroke("O*L     ".strip()), False))
 append_(steno_rules_by_spell, "on       ".strip(), StenoRuleSuffix(Stroke("O*PB    ".strip()), False))
+append_(steno_rules_by_spell, "in       ".strip(), StenoRuleSuffix(Stroke("*EUPB   ".strip()), False))
 append_(steno_rules_by_spell, "out      ".strip(), StenoRuleSuffix(Stroke("SKWROUT ".strip()), False))
 append_(steno_rules_by_spell, "ure      ".strip(), StenoRuleSuffix(Stroke("AOUR    ".strip()), False))
 append_(steno_rules_by_spell, "'s       ".strip(), StenoRuleSuffix(Stroke("AES     ".strip()), False))
@@ -765,6 +766,7 @@ def generate_complete(whole: Matches)->Tuple[S, ...]:
 right_half=Stroke("-FRPBLGTSDZ")
 
 disallowed_suffixes: Set[Stroke]={
+		Stroke("EUPB"),
 		Stroke("OPB"),
 		Stroke("UP"),
 		Stroke("TKOUPB"),
