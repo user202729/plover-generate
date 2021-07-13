@@ -489,6 +489,13 @@ append_(steno_rules_by_spell, "le       ".strip(), StenoRuleSuffix(Stroke("*L   
 append_(steno_rules_by_spell, "up       ".strip(), StenoRuleSuffix(Stroke("SKWRUP  ".strip()), False))
 append_(steno_rules_by_spell, "down     ".strip(), StenoRuleSuffix(Stroke("SKWROUPB".strip()), False))
 append_(steno_rules_by_spell, "out      ".strip(), StenoRuleSuffix(Stroke("SKWROUT ".strip()), False))
+append_(steno_rules_by_spell, "a        ".strip(), StenoRuleSuffix(Stroke("KWRA    ".strip()), False))
+append_(steno_rules_by_spell, "a        ".strip(), StenoRuleSuffix(Stroke("SKWRA   ".strip()), False))
+append_(steno_rules_by_spell, "o        ".strip(), StenoRuleSuffix(Stroke("KWRO    ".strip()), False))
+append_(steno_rules_by_spell, "o        ".strip(), StenoRuleSuffix(Stroke("SKWRO   ".strip()), False))
+append_(steno_rules_by_spell, "e        ".strip(), StenoRuleSuffix(Stroke("SKWRE   ".strip()), False))
+append_(steno_rules_by_spell, "u        ".strip(), StenoRuleSuffix(Stroke("SKWRU   ".strip()), False))
+append_(steno_rules_by_spell, "i        ".strip(), StenoRuleSuffix(Stroke("SKWREU  ".strip()), False))
 append_(steno_rules_by_spell, "ed       ".strip(), StenoRuleSuffix(Stroke("-D      ".strip()), True))
 append_(steno_rules_by_spell, "ing      ".strip(), StenoRuleSuffix(Stroke("-G      ".strip()), True))
 
@@ -683,7 +690,7 @@ def get_steno_rules(whole: Matches, left: int, right: int)->Iterator[StenoRule]:
 	pronounce=pronounce_of_(whole[left:right])
 	spell=spell_of_(whole[left:right])
 
-	if right==left+1 and left!=0 and unstressed_schwa(whole[left]):
+	if right==left+1 and left!=0 and right!=len(whole) and unstressed_schwa(whole[left]):
 		yield schwa_skip_rule
 		# not return just yet. Consider normal cases too
 
