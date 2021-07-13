@@ -33,7 +33,7 @@ with (sys.stdout if args.dry_run else open("open-dict-additional.txt", "a")) as 
 			ord("ʌ"): "ə",
 			ord("a"): "æ",  # temporary
 			ord("ː"): "",
-			}).replace("æɪ", "aɪ")
+			}).replace("æɪ", "aɪ").replace("æʊ", "aʊ")
 		assert not ({*pronounce}&{'l', 'r', 'ɐ', 'ɒ', 'ɜ', 'ʌ', 'ː'}), pronounce
 		assert "əʊ" not in pronounce, pronounce
 		f.write(f"{word}\t/{pronounce}/\n")
