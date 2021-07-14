@@ -736,6 +736,9 @@ def get_steno_rules(whole: Matches, left: int, right: int)->Iterator[StenoRule]:
 		yield StenoRuleVowel(Stroke("AU"))
 		return
 
+	if spell=="q" and not pronounce_of_(whole[right:]).startswith("w"):
+		yield StenoRuleConsonant(Stroke("KW"), None, False)
+
 	try:
 		yield from steno_rules_by_both[spell, pronounce]
 	except KeyError:
