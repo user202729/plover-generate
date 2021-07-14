@@ -496,6 +496,7 @@ append_(steno_rules_by_spell, "o        ".strip(), StenoRuleSuffix(Stroke("SKWRO
 append_(steno_rules_by_spell, "e        ".strip(), StenoRuleSuffix(Stroke("SKWRE   ".strip()), False))
 append_(steno_rules_by_spell, "u        ".strip(), StenoRuleSuffix(Stroke("SKWRU   ".strip()), False))
 append_(steno_rules_by_spell, "i        ".strip(), StenoRuleSuffix(Stroke("SKWREU  ".strip()), False))
+append_(steno_rules_by_spell, "ually    ".strip(), StenoRuleSuffix(Stroke("WAEL    ".strip()), False))
 append_(steno_rules_by_spell, "ed       ".strip(), StenoRuleSuffix(Stroke("-D      ".strip()), True))
 append_(steno_rules_by_spell, "ing      ".strip(), StenoRuleSuffix(Stroke("-G      ".strip()), True))
 
