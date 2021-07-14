@@ -16,3 +16,5 @@ phenomenology	/fɪnˌɑmɪnˈɑɫədʒi/
 typology	/taɪpˈɑɫədʒi/
 phraseology	/fɹeɪsˈɑɫədʒi/
 iterable	/ˈaɪtəɹəbəɫ/
+bool	/bˈuɫ/
+weird	/ˈwiɹd/
