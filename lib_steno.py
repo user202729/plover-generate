@@ -512,8 +512,6 @@ for line in [
 		"i      KWREU  0",
 		"kəɫ    K-L    0",
 		"pəɫ    P-L    0",
-		"uəɫ    WAL    0",
-		"wəɫ    WAL    0",
 		]:
 	pronounce, stroke, try_join=line.split()
 	append_(steno_rules_by_pronounce_no_hide, pronounce, StenoRuleSuffix(Stroke(stroke), bool(int(try_join))))
@@ -712,13 +710,11 @@ def get_steno_rules(whole: Matches, left: int, right: int)->Iterator[StenoRule]:
 		except KeyError:
 			pass
 
-	if (
-			right==left+1 and right<len(whole)
-			and whole[left].spell in ("i", "e")
-			and whole[left].pronounce=="i"
-			and {*whole[left+1].pronounce}&vowel_pronounce_characters_with_j
-			):
-		yield from steno_rules_by_pronounce["j"]
+	if right==left+1 and right<len(whole):
+		if whole[left].spell in ("i", "e") and whole[left].pronounce=="i" and {*whole[left+1].pronounce}&vowel_pronounce_characters_with_j:
+			yield from steno_rules_by_pronounce["j"]
+		elif whole[left].spell in ("u", "w") and whole[left].pronounce in ("u", "ju") and {*whole[left+1].pronounce}&vowel_pronounce_characters_with_j:
+			yield from steno_rules_by_pronounce["w"]
 
 	if "ed" in spell and pronounce in ("st", "kst"):
 		assert right-left>=2
