@@ -719,7 +719,6 @@ def get_steno_rules(whole: Matches, left: int, right: int)->Iterator[StenoRule]:
 			and {*whole[left+1].pronounce}&vowel_pronounce_characters_with_j
 			):
 		yield from steno_rules_by_pronounce["j"]
-		return
 
 	if "ed" in spell and pronounce in ("st", "kst"):
 		assert right-left>=2
