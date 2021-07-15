@@ -2,6 +2,9 @@
 
 ## read data. run main2.py first.
 
+from time import time
+start_time=time()
+
 import sys
 
 import local_lib
@@ -325,4 +328,4 @@ try:
 finally:
 	if out_dump and args.last_entry:
 		print(args.last_entry+"\n}", file=out_dump)
-	print("Done.")
+	print(f"Done. (total time = {time()-start_time:.3f} seconds)")
