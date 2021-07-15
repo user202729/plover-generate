@@ -613,6 +613,9 @@ for line in [
 		"mpʃən |       | -PLGS         ",
 		"ŋθ    |       | -PBGT -PBG    ",
 		"ŋkθ   |       | -PBGT -PBG    ",
+		"ŋəɹ   |       | -RPBG         ", # inversion
+		"ŋɡəɹ  |       | -RPBG         ",
+		"ndʒəɹ |       | -RPBG         ",
 		"kəmp  | KP    |               ",
 		"kɑmp  | KP    |               ",
 		"ɛks   | KP    |               ",
