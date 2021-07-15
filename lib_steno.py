@@ -197,6 +197,21 @@ class StenoRuleSkip(StenoRule):
 	def apply(self, s: S, whole: Matches, left: int, right: int)->Iterator[S]:
 		yield s
 
+vowel_keys=Stroke("AOEU")
+a_strokes=(Stroke("A"), Stroke("AEU"))
+ae_stroke=Stroke("AE")
+
+
+@dataclass
+class StenoRuleAToAE(StenoRule):
+	def apply(self, s: S, whole: Matches, left: int, right: int)->Iterator[S]:
+		if s.strokes and (s.strokes[-1]&vowel_keys) in a_strokes:
+			yield S(
+					s.strokes[:-1]+((s.strokes[-1]&~vowel_keys)+ae_stroke,),
+					s.state, s.seen_schwa_in_cluster, s.mark
+					)
+
+
 @dataclass
 class StenoRuleCombine(StenoRule):
 	a: StenoRule
@@ -644,6 +659,8 @@ steno_rules_by_spell["ture"]=[
 
 assert "" not in steno_rules_by_pronounce
 steno_rules_by_pronounce[""]=[skip_rule]  # unless overridden
+
+steno_rules_by_both["e", ""]=[skip_rule, StenoRuleAToAE()]
 
 
 # recall that steno_rules_by_both overrides steno_rules_by_pronounce, if there's a match.
