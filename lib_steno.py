@@ -409,6 +409,7 @@ for pronounce, stroke, x1 in [  # type: ignore
 		("jə    ", "U     ", []),
 		("ə     ", "U     ", [
 			"a aa           | A    ",
+			"ai             | A AEU EU",
 			"e              | E    ",
 			"ea             | E AE ",
 			"i y ia ui ieu  | EU   ",
