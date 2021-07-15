@@ -50,6 +50,8 @@ parser.add_argument("-o", "--output", type=Path,
 parser.add_argument("--output-errors", type=Path,
 		default=tempdir/"errors.txt",
 		help="Path to output file to print errors (mismatches)")
+parser.add_argument("--print-push", action="store_true",
+		help=f"Whether to print cases where candidate words are not ordered by frequency.")
 parser.add_argument("--no-output-errors", action="store_true",
 		help="Do not print errors. See also --output-errors")
 parser.add_argument("--raw-steno", action="store_true",
@@ -138,35 +140,41 @@ def have_ignore_part(outline: str)->bool:
 
 errors: Set[Tuple[str, str]]=set()
 generated: MutableMapping[Strokes, List[str]]=defaultdict(list)
+@dataclass
+class Outline_:
+	outline: Strokes
+	frozen: bool
+outlines_for: MutableMapping[str, List[Outline_]]=defaultdict(list)
+
+def direct_strokes(word: str, frozen: bool=None)->List[Outline_]:
+	# number of possible shortest strokes to write this word that doesn't use disambiguation_stroke
+	outlines=[
+			outline
+			for outline in outlines_for[word]
+			if generated[outline.outline][0]==word and (frozen is None or outline.frozen==frozen)
+			]
+	if not outlines: return []
+	length=min(len(x.outline) for x in outlines)
+	return [x for x in outlines if len(x.outline)==length]
 
 count=0
 out_dump=open(args.output, "w", buffering=1)
 error_dump=None if args.no_output_errors else open(args.output_errors, "w", buffering=1)
 
-def append_generated(outline: Strokes, word: str)->None:
-	generated[outline].append(word)
-	if out_dump:
-		print(
-			json.dumps(outline_to_str(
-				outline + (args.disambiguation_stroke,)*(len(generated[outline])-1)
-				if args.disambiguation_stroke else outline
-				), ensure_ascii=False)+
-			":"+
-			json.dumps(word, ensure_ascii=False)+
-			",", file=out_dump)
-
 def print_error(*args, **kwargs):
 	print(*args, **kwargs)
 	if error_dump: print(*args, **kwargs, file=error_dump)
 
-if out_dump and args.last_entry:
-	print("{", file=out_dump)
-
 try:
 
+	briefed_words_lower: Set[str]=set()
 	if args.include_briefs:
 		for x in plover_briefs|plover_ortho_briefs:
-			append_generated(to_strokes(x), plover_dict[x])
+			word=plover_dict[x]
+			briefed_words_lower.add(word.lower())
+			outline=to_strokes(x)
+			outlines_for[word].append(Outline_(outline, frozen=True))
+			generated[outline].append(word)
 
 	#out_dump=None
 	#error_count=0
@@ -212,9 +220,48 @@ try:
 				for strokes_ in plover_reverse_dict.get(word_lower, []):
 					print("\t", to_strokes(strokes_))
 
-		for outline in outlines:
-			for word in casereverse.get(word_lower, [word_lower]):
-				append_generated(outline, word)
+		if word_lower in briefed_words_lower:
+			for outline in [*outlines]:
+				outline_=outline_to_str(outline, raw_steno=True)
+				if outline_ in plover_ignore and plover_dict[outline_].lower()==word_lower:
+					print_error(f"Redundant brief {outline} for {word_lower}")
+					outlines.remove(outline)
+
+		for word in casereverse.get(word_lower, [word_lower]):
+			for outline in outlines:
+				assert all(x.outline!=outline for x in outlines_for[word]), (word, outline, outlines_for[word])
+				outlines_for[word].append(Outline_(outline, frozen=False))
+				generated[outline].append(word)
+
+			# rearrange words
+			# use something similar to the maximum matching algorithm, but only consider one retraction
+			if not direct_strokes(word):
+				for x in sorted(outlines_for[word], key=lambda x: len(x.outline)):
+					outline=x.outline
+					other_word: str=generated[outline][0]
+					d=direct_strokes(other_word)
+					d0=[d_ for d_ in d if d_.outline==outline]
+					assert len(d0)<=1, (word, outline)
+					if d0 and d0[0].frozen:
+						# cannot move other_word
+						continue
+					if (
+							# outline is not a direct stroke of other_word
+							# (it's longer than other_word's shortest stroke)
+							not d0
+
+							# there's another direct stroke
+							or len(d)>=2
+							):
+						# use (outline) for this word
+						# preserve the order of other words
+						assert generated[outline][-1]==word
+						generated[outline]=[word]+generated[outline][:-1]
+						if args.print_push:
+							print(f"{word} push {other_word} from {outline} to " +
+							str([d0.outline for d0 in direct_strokes(other_word)])
+							)
+						break
 
 
 		# ======== print steno mismatches with respect to Plover's dictionary
@@ -257,6 +304,25 @@ try:
 					,
 					file=error_dump)
 
+except KeyboardInterrupt:
+	print("KeyboardInterrupt received, stop generating dictionary and start writing to file")
+
+try:
+	if out_dump and args.last_entry:
+		print("{", file=out_dump)
+
+	for outline, words in generated.items():
+		for i, word in enumerate(words):
+			print(
+				json.dumps(outline_to_str(
+					outline +
+					((args.disambiguation_stroke,)*i if args.disambiguation_stroke else ())
+					), ensure_ascii=False)+
+				":"+
+				json.dumps(word, ensure_ascii=False)+
+				",", file=out_dump)
+
 finally:
 	if out_dump and args.last_entry:
 		print(args.last_entry+"\n}", file=out_dump)
+	print("Done.")
