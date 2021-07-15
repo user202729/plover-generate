@@ -161,7 +161,6 @@ def direct_strokes(word: str, frozen: bool=None)->List[Outline_]:
 	return [x for x in outlines if len(x.outline)==length]
 
 count=0
-out_dump=open(args.output, "w", buffering=1)
 error_dump=None if args.no_output_errors else open(args.output_errors, "w", buffering=1)
 
 def print_error(*args, **kwargs):
@@ -179,7 +178,6 @@ try:
 			outlines_for[word].append(Outline_(outline, frozen=True))
 			generated[outline].append(word)
 
-	#out_dump=None
 	#error_count=0
 	
 	def key_(x: Matches)->Tuple[float, float, str]:
@@ -311,6 +309,7 @@ except KeyboardInterrupt:
 	print("KeyboardInterrupt received, stop generating dictionary")
 
 print("Writing to output file...")
+out_dump=open(args.output, "w", buffering=1)
 try:
 	if out_dump and args.last_entry:
 		print("{", file=out_dump)
