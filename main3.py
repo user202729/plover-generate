@@ -308,8 +308,9 @@ try:
 					file=error_dump)
 
 except KeyboardInterrupt:
-	print("KeyboardInterrupt received, stop generating dictionary and start writing to file")
+	print("KeyboardInterrupt received, stop generating dictionary")
 
+print("Writing to output file...")
 try:
 	if out_dump and args.last_entry:
 		print("{", file=out_dump)
