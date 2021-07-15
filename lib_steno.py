@@ -813,6 +813,8 @@ disallowed_suffixes: Set[Stroke]={
 		Stroke("UP"),
 		Stroke("TKOUPB"),
 		Stroke("OUT"),
+		Stroke("SOPL"),
+		Stroke("PHAPB"),
 		}
 for line in [
 		"A     ",
