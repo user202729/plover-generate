@@ -615,6 +615,8 @@ for line in [
 		"dɪsk  | STK   |               ",
 		"kəns  | SK    |               ",
 		"kɑns  | SK    |               ",
+		"kənv  | KW    |               ",
+		"kɑnv  | KW    |               ",
 		]:
 	pronounce, a, b=line.split("|")
 	a_: List[Optional[Stroke]]=[Stroke(x) for x in a.split()] or [None]
