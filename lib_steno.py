@@ -693,8 +693,12 @@ def get_steno_rules(whole: Matches, left: int, right: int)->Iterator[StenoRule]:
 	spell=spell_of_(whole[left:right])
 
 	if right==left+1 and left!=0 and right!=len(whole) and unstressed_schwa(whole[left]):
-		yield schwa_skip_rule
-		# not return just yet. Consider normal cases too
+		if spell:
+			yield schwa_skip_rule
+			# not return just yet. Consider normal cases too
+		else:
+			yield skip_rule  # like above, but allow right_separate
+			return
 
 	if right==left+1 and pronounce in ("s", "z") and spell=="s":
 		yield suffix_s_rule
