@@ -332,18 +332,25 @@ for pronounce, stroke, x1 in [  # type: ignore
 		("aʊ    ", "OU    ", []),
 
 		("ɛ     ", "E     ", [
-			"a ai ei ay      | AEU   "
+			"a ai ei ay      | AEU   ",
+			"ea              | E AE  ",
 			]),
-		("eɪ    ", "AEU   ", []),
+		("eɪ    ", "AEU   ", [
+			"ea              | AEU AE ",
+			]),
 
 		("ɪ     ", "EU    ", [
-			"ee ea ie e      | AOE  ",
+			"ee ie e         | AOE  ",
+			"ea              | AOE AE ",
 			]),
 		("i     ", "AOE   ", [
 			"y i             | EU   ",
+			"ea              | AOE AE ",
 			]), # may be /iː/ but open ipa dict does not use /ː/
 		("iɛ    ", "AOE   ", []),
-		("iə    ", "AOE   ", []),
+		("iə    ", "AOE   ", [
+			"ea              | AOE AE ",
+			]),
 		("iæ    ", "AOE   ", []),
 		# in both cases AOE/E can be used if the vowel is stressed
 		# and (/ə/ rule) can be used if it's unstressed
@@ -387,7 +394,8 @@ for pronounce, stroke, x1 in [  # type: ignore
 		("jə    ", "U     ", []),
 		("ə     ", "U     ", [
 			"a aa           | A    ",
-			"e ea           | E    ",
+			"e              | E    ",
+			"ea             | E AE ",
 			"i y ia ui ieu  | EU   ",
 			"o              | O    ",
 			"u              | U    ",
