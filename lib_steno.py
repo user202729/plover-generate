@@ -383,7 +383,6 @@ for pronounce, stroke, x1 in [  # type: ignore
 			"o               | O    ",
 			]),
 
-		("wə    ", "U     ", []),    # (temporary)
 		("əw    ", "U     ", []),    # (temporary)
 		("jə    ", "U     ", []),
 		("ə     ", "U     ", [
