@@ -438,18 +438,19 @@ def append_(d: Dict[K, List[V]], key: K, value: V)->None:
 		d[key]=[value]
 	else:
 		d[key].append(value)
+def assign_(d: Dict[K, List[V]], key: K, value: Sequence[V])->None:
+	assert key not in d
+	d[key]=[*value]
 
-assert ("o", "wə") not in steno_rules_by_both
-steno_rules_by_both["o", "wə"]=[StenoRuleCombine(
+assign_(steno_rules_by_both, ("o", "wə"), [StenoRuleCombine(
 		StenoRuleConsonant(Stroke("W"), None, False),
 		StenoRuleVowel(Stroke("U")),
-		)]
+		)])
 
-assert "ary" not in steno_rules_by_spell
-steno_rules_by_spell["ary"]=[StenoRuleCombine(
+assign_(steno_rules_by_spell, "ary", [StenoRuleCombine(
 		StenoRuleVowel(Stroke("AE")),
 		StenoRuleConsonant(None, Stroke("-R"), False),
-		)]
+		)])
 
 # prefix
 append_(steno_rules_by_spell, "re      ".strip(), StenoRulePrefix(Stroke("RE       ".strip())))
@@ -650,22 +651,18 @@ for line in [
 			]
 
 
-assert "comb" not in steno_rules_by_spell
-steno_rules_by_spell["comb"]=[
+assign_(steno_rules_by_spell, "comb", [
 		StenoRuleConsonant(Stroke("KPW"), None, False)
-		]
+		])
 
-assert "ture" not in steno_rules_by_spell
-steno_rules_by_spell["ture"]=[
+assign_(steno_rules_by_spell, "ture", [
 		StenoRuleConsonant(None, Stroke("-FP"), False),
 		StenoRuleSuffix(Stroke("TAOUR"), False),
-		]
+		])
 
+assign_(steno_rules_by_pronounce, "", [skip_rule])  # unless overridden
 
-assert "" not in steno_rules_by_pronounce
-steno_rules_by_pronounce[""]=[skip_rule]  # unless overridden
-
-steno_rules_by_both["e", ""]=[skip_rule, StenoRuleAToAE()]
+assign_(steno_rules_by_both, ("e", ""), [skip_rule, StenoRuleAToAE()])
 
 
 # recall that steno_rules_by_both overrides steno_rules_by_pronounce, if there's a match.
@@ -689,25 +686,22 @@ for line in [
 	pronounce=pronounce.strip()
 	a_=[Stroke(x) for x in a.split()] or [None]
 	b_=[Stroke(x) for x in b.split()] or [None]
-	assert (spell, pronounce) not in steno_rules_by_both, (spell, pronounce)
-	steno_rules_by_both[spell, pronounce]=[
+	assign_(steno_rules_by_both, (spell, pronounce), [
 			StenoRuleConsonant(a__, b__, False)
 			for a__ in a_
 			for b__ in b_
-			]
+			])
 
 for spell in "t tu".split():
 	for pronounce in "ʃ tʃ".split():
-		assert spell, pronounce not in steno_rules_by_both
-		steno_rules_by_both[spell, pronounce]=(
+		assign_(steno_rules_by_both, (spell, pronounce),
 				steno_rules_by_pronounce["t"] +
 				steno_rules_by_pronounce["tʃ"]
 				)
 
 for spell in "d".split():
 	for pronounce in "dʒ".split():
-		assert spell, pronounce not in steno_rules_by_both
-		steno_rules_by_both[spell, pronounce]=(
+		assign_(steno_rules_by_both, (spell, pronounce),
 				steno_rules_by_pronounce["d"] +
 				steno_rules_by_pronounce["dʒ"]
 				)
