@@ -523,6 +523,7 @@ append_(steno_rules_by_spell, "ually    ".strip(), StenoRuleSuffix(Stroke("WAEL 
 append_(steno_rules_by_spell, "ed       ".strip(), StenoRuleSuffix(Stroke("-D      ".strip()), True))
 append_(steno_rules_by_spell, "ing      ".strip(), StenoRuleSuffix(Stroke("-G      ".strip()), True))
 
+append_(steno_rules_by_both, ("re", "əɹ"), StenoRuleSuffix(Stroke("*ER"), False))
 steno_rules_by_both["d", "t"]=steno_rules_by_spell["ed"]
 steno_rules_by_both["ed", "t"]=steno_rules_by_spell["ed"]
 
