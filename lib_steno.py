@@ -357,6 +357,7 @@ for pronounce, stroke, x1 in [  # type: ignore
 		("ɪ     ", "EU    ", [
 			"ee ie e         | AOE  ",
 			"ea              | AOE AE ",
+			"a               | A    ",
 			]),
 		("i     ", "AOE   ", [
 			"y i             | EU   ",
