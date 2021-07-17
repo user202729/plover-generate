@@ -457,6 +457,7 @@ assign_(steno_rules_by_spell, "ary", [StenoRuleCombine(
 append_(steno_rules_by_spell, "re      ".strip(), StenoRulePrefix(Stroke("RE       ".strip())))
 append_(steno_rules_by_spell, "pre     ".strip(), StenoRulePrefix(Stroke("PRE      ".strip())))
 append_(steno_rules_by_spell, "de      ".strip(), StenoRulePrefix(Stroke("TKE      ".strip())))
+append_(steno_rules_by_spell, "be      ".strip(), StenoRulePrefix(Stroke("PWE      ".strip())))
 append_(steno_rules_by_spell, "for     ".strip(), StenoRulePrefix(Stroke("TPAUR    ".strip())))
 append_(steno_rules_by_spell, "on      ".strip(), StenoRulePrefix(Stroke("AUPB     ".strip())))
 append_(steno_rules_by_spell, "co      ".strip(), StenoRulePrefix(Stroke("KAU      ".strip())))
