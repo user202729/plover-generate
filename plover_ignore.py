@@ -2,7 +2,10 @@
 # vsplit this file and errors.txt
 # (load help.json into Plover)
 
-
+plover_brief_solitude={
+"SKP",                    # and
+"TPH",                    # in
+		}
 plover_briefs={
 "HRAOUS",
 "PHR*EURB",
@@ -801,8 +804,6 @@ plover_briefs={
 "T",                      # it
 "WUZ",                    # was
 "THA",                    # that
-"TPH",                    # in
-"SKP",                    # and
 "-F",                     # of
 "PWO*T",
 "TKOS",
@@ -941,4 +942,4 @@ plover_misstrokes={
 "-T/S-P", # (-T, S-P): the -- ['ˈðə', 'ðə', 'ði']
 		}
 from typing import Set
-plover_ignore: Set[str]=plover_briefs|plover_misstrokes
+plover_ignore: Set[str]=plover_briefs|plover_brief_solitude|plover_misstrokes

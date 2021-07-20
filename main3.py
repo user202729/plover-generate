@@ -171,7 +171,7 @@ try:
 
 	briefed_words_lower: Set[str]=set()
 	if args.include_briefs:
-		for x in plover_briefs:
+		for x in plover_briefs|plover_brief_solitude:
 			word=plover_dict[x]
 			briefed_words_lower.add(word.lower())
 			outline=to_strokes(x)
@@ -187,7 +187,7 @@ try:
 				-frequency_lowercase.get(base_form_lower.get(s, ""), 0),
 				s)
 
-	plover_briefed_words: Set[str]={plover_dict.get(x, "") for x in plover_briefs}
+	plover_briefed_words: Set[str]={plover_dict.get(x, "") for x in plover_briefs|plover_brief_solitude}
 	for (frequency__, frequency_base_, word_lower), x in group_sort(items, key=key_):
 		if not word_filter(word_lower): continue
 		outlines: Set[Strokes]=set()  # set of outlines generated for this word
