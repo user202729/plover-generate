@@ -808,8 +808,6 @@ plover_briefs={
 "TPH",                    # in
 "SKP",                    # and
 "-F",                     # of
-}
-plover_ortho_briefs={
 "US",
 "PWO*T",
 "TKOS",
@@ -953,4 +951,4 @@ plover_misstrokes={
 "-T/S-P", # (-T, S-P): the -- ['ˈðə', 'ðə', 'ði']
 		}
 from typing import Set
-plover_ignore: Set[str]=plover_briefs|plover_ortho_briefs|plover_misstrokes
+plover_ignore: Set[str]=plover_briefs|plover_misstrokes

@@ -171,7 +171,7 @@ try:
 
 	briefed_words_lower: Set[str]=set()
 	if args.include_briefs:
-		for x in plover_briefs|plover_ortho_briefs:
+		for x in plover_briefs:
 			word=plover_dict[x]
 			briefed_words_lower.add(word.lower())
 			outline=to_strokes(x)
