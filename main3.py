@@ -187,7 +187,8 @@ try:
 				-frequency_lowercase.get(base_form_lower.get(s, ""), 0),
 				s)
 
-	plover_briefed_words: Set[str]={plover_dict.get(x, "") for x in plover_briefs|plover_brief_solitude}
+	plover_solitude_words: Set[str]={plover_dict.get(x, "") for x in plover_brief_solitude}
+	plover_briefed_words: Set[str]={plover_dict.get(x, "") for x in plover_briefs}|plover_solitude_words
 	for (frequency__, frequency_base_, word_lower), x in group_sort(items, key=key_):
 		if not word_filter(word_lower): continue
 		outlines: Set[Strokes]=set()  # set of outlines generated for this word
@@ -229,6 +230,9 @@ try:
 					outlines.remove(outline)
 
 		for word in casereverse.get(word_lower, [word_lower]):
+			if word in plover_solitude_words:
+				continue
+
 			for outline in outlines:
 				assert all(x.outline!=outline for x in outlines_for[word]), (word, outline, outlines_for[word])
 				outlines_for[word].append(Outline_(outline, frozen=False))
