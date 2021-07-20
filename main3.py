@@ -142,7 +142,7 @@ def have_ignore_part(outline: str)->bool:
 ##
 
 errors: Set[Tuple[str, str]]=set()
-generated: MutableMapping[Strokes, List[str]]=defaultdict(list)
+generated: MutableMapping[Strokes, List[Optional[str]]]=defaultdict(list)
 @dataclass
 class Outline_:
 	outline: Strokes
@@ -170,6 +170,8 @@ def print_error(*args, **kwargs):
 try:
 
 	briefed_words_lower: Set[str]=set()
+	for x in pushed_strokes:
+		generated[x].append(None)
 	if args.include_briefs:
 		for x in plover_briefs|plover_brief_solitude:
 			word=plover_dict[x]
@@ -243,7 +245,10 @@ try:
 			if not direct_strokes(word):
 				for x in sorted(outlines_for[word], key=lambda x: len(x.outline)):
 					outline=x.outline
-					other_word: str=generated[outline][0]
+					other_word: Optional[str]=generated[outline][0]
+					if other_word is None:
+						# pushed_strokes. Consider it frozen
+						continue
 					d=direct_strokes(other_word)
 					d0=[d_ for d_ in d if d_.outline==outline]
 					assert len(d0)<=1, (word, outline)
@@ -261,7 +266,8 @@ try:
 						# use (outline) for this word
 						# preserve the order of other words
 						assert generated[outline][-1]==word
-						generated[outline]=[word]+generated[outline][:-1]
+						generated[outline].insert(0, word)
+						generated[outline].pop()
 						if args.print_push:
 							print(f"{word} push {other_word} from {outline} to " +
 							str([d0.outline for d0 in direct_strokes(other_word)])
@@ -319,14 +325,15 @@ try:
 		print("{", file=out_dump)
 
 	for outline, words in generated.items():
-		for i, word in enumerate(words):
+		for i, word_ in enumerate(words):
+			if word_ is None: continue
 			print(
 				json.dumps(outline_to_str(
 					outline +
 					((args.disambiguation_stroke,)*i if args.disambiguation_stroke else ())
 					), ensure_ascii=False)+
 				":"+
-				json.dumps(word, ensure_ascii=False)+
+				json.dumps(word_, ensure_ascii=False)+
 				",", file=out_dump)
 
 finally:

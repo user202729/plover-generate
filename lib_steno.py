@@ -222,6 +222,12 @@ class StenoRuleCombine(StenoRule):
 
 ##
 
+pushed_strokes: Set[Strokes]={*map(to_strokes, [
+	"EUPB",
+	"APBD",
+	])}
+# words using these strokes are only accessible through disambiguation
+
 
 def print_matches(x: Matches)->None:
 	spell_, pronounce_="", ""
