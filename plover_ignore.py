@@ -192,7 +192,6 @@ plover_briefs={
 "KEBGT",
 "KERPB",
 "-RL",
-"THER",                   # they're
 "SEBGD",                  # second
 "TPR-T",                  # from the
 "TOT",                    # to the
@@ -476,7 +475,6 @@ plover_briefs={
 "KEBGD/-D",               # connected
 "KEBG/-D",                # connected
 "R*ELGS",                 # relation
-"PWAERPBG",               # bearing
 "URBGD",                  # understanding
 "STPA*BGS",               # satisfaction
 "PRAEP",                  # prepare
@@ -744,7 +742,6 @@ plover_briefs={
 "PROR",                   # proper
 "SPAOEG",                 # speaking
 "TK*G",                   # doing
-"OFS",                    # office
 "AUFS",                   # office
 "TAEPBGS",                # attention
 "K-P",                    # company
@@ -756,7 +753,6 @@ plover_briefs={
 "ST-R",                   # sister
 "PAOERD",                 # period
 "EUPL/POB",               # impossible
-"STPHED",                 # instead
 "PWHRU",                  # blue
 "TPA*ER/AES",             # father's
 "THOZ",                   # those
@@ -808,22 +804,16 @@ plover_briefs={
 "TPH",                    # in
 "SKP",                    # and
 "-F",                     # of
-"US",
 "PWO*T",
 "TKOS",
 "EU",
 "TPOUR", # (FOUR,): four -- ['ˈfɔɹ']
-"WAR", # (WAR,): war -- ['ˈwɔɹ']
-"HOUR", # (HOUR,): hour -- ['ˈaʊɝ', 'ˈaʊɹ']
 "OLD", # (OLD,): old -- ['ˈoʊɫd']
-"TWO", # (TWO,): two -- ['ˈtu']
 "SHOULD", # (SHOULD,): should -- ['ˈʃʊd']
 "KOULD", # (KOULD,): could -- ['ˈkʊd']
 "KWROUR", # (YOUR,): your -- ['ˈjɔɹ', 'ˈjʊɹ']
-"TKO", # (DO,): do -- ['ˈdu']
 "TPHO", # (NO,): no -- ['ˈnoʊ']
 "WOULD", # (WOULD,): would -- ['ˈwʊd']
-"WHO", # (WHO,): who -- ['ˈhu']
 "WE", # (WE,): we -- ['ˈwi']
 "SO", # (SO,): so -- ['ˈsoʊ']
 "PHE", # (ME,): me -- ['ˈmi']
