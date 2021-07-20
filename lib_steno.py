@@ -529,6 +529,7 @@ append_(steno_rules_by_spell, "e        ".strip(), StenoRuleSuffix(Stroke("SKWRE
 append_(steno_rules_by_spell, "u        ".strip(), StenoRuleSuffix(Stroke("SKWRU   ".strip()), False))
 append_(steno_rules_by_spell, "i        ".strip(), StenoRuleSuffix(Stroke("SKWREU  ".strip()), False))
 append_(steno_rules_by_spell, "ually    ".strip(), StenoRuleSuffix(Stroke("WAEL    ".strip()), False))
+append_(steno_rules_by_spell, "ex       ".strip(), StenoRuleSuffix(Stroke("SKWREBGS".strip()), False))
 append_(steno_rules_by_spell, "ed       ".strip(), StenoRuleSuffix(Stroke("-D      ".strip()), True))
 append_(steno_rules_by_spell, "ing      ".strip(), StenoRuleSuffix(Stroke("-G      ".strip()), True))
 
@@ -830,6 +831,8 @@ disallowed_suffixes: Set[Stroke]={
 		Stroke("OUT"),
 		Stroke("SOPL"),
 		Stroke("PHAPB"),
+		Stroke("APB"),
+		Stroke("EBGS"),
 		}
 for line in [
 		"A     ",
