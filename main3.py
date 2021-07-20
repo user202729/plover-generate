@@ -71,7 +71,7 @@ parser.add_argument("--last-entry", default='"WUZ/WUZ": ""',
 parser.add_argument("--word-filter",
 		help=f"If not empty, list of comma-separated words to filter the output."
 		)
-parser.add_argument("--generate", action="store_true",
+parser.add_argument("-g", "--generate", action="store_true",
 		help=f"Preset for generating a dictionary. "
 		f"Equivalent to appending '{generate_equivalent}' to the command-line."
 		)
