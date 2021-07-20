@@ -48,8 +48,10 @@ def process_ngram(ngram: List[str])->None:
 				expected_output: str=' '.join(ngram)
 				actual_output: str=dictionary[cat[:i]]
 				if expected_output!=actual_output:
+					outline_: str="/".join(str(Stroke(x)) for x in cat)
 					print(f"Conflict: {expected_output!r} -> {actual_output!r}" +
-							('' if i==len(cat) else ' [...]'))
+							('' if i==len(cat) else ' [...]') +
+							f' ({outline_})')
 					return  # only need to print one instance
 				else:
 					pass  # intentional multiple word definition
