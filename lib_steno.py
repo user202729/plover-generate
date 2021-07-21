@@ -617,6 +617,7 @@ for line in [
 		"ɹʃ    |       | *RB           ",
 		"mənt  |       | -PLT          ",
 		"mɛnt  |       | -PLT          ",
+		"mpt   |       | -PLT          ",
 		"dθ    |       | *TD           ", # inversion
 		"ʃənt  |       | -RBT          ",
 		"ɫəti  |       | -LT           ",
