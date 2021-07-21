@@ -506,6 +506,7 @@ append_(steno_rules_by_spell, "fully    ".strip(), StenoRuleSuffix(Stroke("TPHRE
 append_(steno_rules_by_spell, "some     ".strip(), StenoRuleSuffix(Stroke("SO*PL   ".strip()), False))
 append_(steno_rules_by_spell, "some     ".strip(), StenoRuleSuffix(Stroke("SO*EPL  ".strip()), False))
 append_(steno_rules_by_spell, "man      ".strip(), StenoRuleSuffix(Stroke("PHA*PB  ".strip()), False))
+append_(steno_rules_by_spell, "mann     ".strip(), StenoRuleSuffix(Stroke("PHA*PB  ".strip()), False))
 append_(steno_rules_by_spell, "ary      ".strip(), StenoRuleSuffix(Stroke("REU     ".strip()), False))
 append_(steno_rules_by_spell, "ory      ".strip(), StenoRuleSuffix(Stroke("REU     ".strip()), False))
 append_(steno_rules_by_spell, "ury      ".strip(), StenoRuleSuffix(Stroke("REU     ".strip()), False))
