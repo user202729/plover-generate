@@ -74,7 +74,7 @@ parser.add_argument("--word-filter",
 		)
 parser.add_argument("-g", "--generate", action="store_true",
 		help=f"Preset for generating a dictionary. "
-		f"Equivalent to appending '{generate_equivalent}' to the command-line."
+		f"Equivalent to prepending '{generate_equivalent}' to the command-line."
 		)
 parser.add_argument("--debug-print-parsed", action="store_true",
 		help="Print parsed arguments.")
@@ -87,7 +87,7 @@ except NameError:
 	args=parser.parse_args()
 
 if args.generate:
-	args=parser.parse_args(sys.argv[1:]+generate_equivalent.split())
+	args=parser.parse_args(generate_equivalent.split()+sys.argv[1:])
 
 args.input=args.input or default_input_files
 
