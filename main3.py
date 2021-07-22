@@ -324,7 +324,7 @@ except KeyboardInterrupt:
 print("Writing to output file...")
 out_dump=open(args.output, "w", buffering=1)
 try:
-	if out_dump and args.last_entry:
+	if args.last_entry:
 		print("{", file=out_dump)
 
 	for outline, words in generated.items():
@@ -340,6 +340,6 @@ try:
 				",", file=out_dump)
 
 finally:
-	if out_dump and args.last_entry:
+	if args.last_entry:
 		print(args.last_entry+"\n}", file=out_dump)
 	print(f"Done. (total time = {time()-start_time:.3f} seconds)")
