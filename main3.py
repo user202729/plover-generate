@@ -76,6 +76,8 @@ parser.add_argument("-g", "--generate", action="store_true",
 		help=f"Preset for generating a dictionary. "
 		f"Equivalent to appending '{generate_equivalent}' to the command-line."
 		)
+parser.add_argument("--debug-print-parsed", action="store_true",
+		help="Print parsed arguments.")
 
 
 try:
@@ -88,6 +90,11 @@ if args.generate:
 	args=parser.parse_args(sys.argv[1:]+generate_equivalent.split())
 
 args.input=args.input or default_input_files
+
+if args.debug_print_parsed:
+	for key, value in vars(args).items():
+		print(key, "=", repr(value))
+	sys.exit()
 
 items=[x for p in args.input for x in matched_pronunciation_dictionary_(p)]  # spelling are in lowercase
 if args.item_limit>=0:
