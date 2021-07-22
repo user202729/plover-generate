@@ -33,7 +33,7 @@ from plover_ignore import *
 # parse args
 
 default_input_files=[tempdir/"out"]
-generate_equivalent="--raw-steno --include-briefs --no-output-errors --disambiguation-stroke=R-RPB"
+generate_equivalent="--raw-steno --brief-dictionary=briefs.json --no-output-errors --disambiguation-stroke=R-RPB"
 
 import argparse
 parser=argparse.ArgumentParser(
@@ -59,8 +59,9 @@ parser.add_argument("--no-output-errors", action="store_true",
 		help="Do not print errors. See also --output-errors")
 parser.add_argument("--raw-steno", action="store_true",
 		help="Print raw steno instead of pseudosteno")
-parser.add_argument("--include-briefs", action="store_true",
-		help="Include briefs in the output file")
+parser.add_argument("-b", "--brief-dictionary", type=str, default="",
+		help="Path to the dictionary of brief entries. If empty, no brief is included."
+		)
 parser.add_argument("--disambiguation-stroke", type=Stroke, default=Stroke(),
 		help=f"Stroke to disambiguate conflicts")
 parser.add_argument("--last-entry", default='"WUZ/WUZ": ""',
@@ -131,14 +132,6 @@ def outline_to_str(outline: Strokes, raw_steno: bool=args.raw_steno)->str:
 			x.raw_str() if raw_steno else str(x)
 			for x in outline)
 
-def have_ignore_part(outline: str)->bool:
-	parts: List[str]=outline.split("/")
-	return any(
-			"/".join(parts[l:r]) in plover_ignore
-			for r in range(len(parts)+1)
-			for l in range(r)
-			)
-
 ##
 
 errors: Set[Tuple[str, str]]=set()
@@ -172,9 +165,10 @@ try:
 	briefed_words_lower: Set[str]=set()
 	for x in pushed_strokes:
 		generated[x].append(None)
-	if args.include_briefs:
-		for x in plover_briefs|plover_brief_solitude:
-			word=plover_dict[x]
+	briefs: Dict[str, str]={}
+	if args.brief_dictionary:
+		briefs=json.loads(Path(args.brief_dictionary).read_text())
+		for x, word in briefs.items():
 			briefed_words_lower.add(word.lower())
 			outline=to_strokes(x)
 			outlines_for[word].append(Outline_(outline, frozen=True))
@@ -189,8 +183,7 @@ try:
 				-frequency_lowercase.get(base_form_lower.get(s, ""), 0),
 				s)
 
-	plover_solitude_words: Set[str]={plover_dict.get(x, "") for x in plover_brief_solitude}
-	plover_briefed_words: Set[str]={plover_dict.get(x, "") for x in plover_briefs}|plover_solitude_words
+	plover_briefed_words: Set[str]=set(briefs.values())
 	for (frequency__, frequency_base_, word_lower), x in group_sort(items, key=key_):
 		if not word_filter(word_lower): continue
 		outlines: Set[Strokes]=set()  # set of outlines generated for this word
@@ -227,14 +220,11 @@ try:
 		if word_lower in briefed_words_lower:
 			for outline in [*outlines]:
 				outline_=outline_to_str(outline, raw_steno=True)
-				if outline_ in plover_ignore and plover_dict[outline_].lower()==word_lower:
+				if outline_ in briefs and briefs[outline_].lower()==word_lower:
 					print_error(f"Redundant brief {outline} for {word_lower}")
 					outlines.remove(outline)
 
 		for word in casereverse.get(word_lower, [word_lower]):
-			if word in plover_solitude_words:
-				continue
-
 			for outline in outlines:
 				assert all(x.outline!=outline for x in outlines_for[word]), (word, outline, outlines_for[word])
 				outlines_for[word].append(Outline_(outline, frozen=False))
@@ -287,8 +277,7 @@ try:
 		failed_strokes: List[Strokes]=[ # Plover outlines that is not ignored and cannot be guessed by the program
 				plover_outline
 				for plover_outline_ in plover_entries
-				#if plover_outline_ not in plover_ignore
-				if not have_ignore_part(plover_outline_)
+				if plover_outline_ not in plover_misstrokes
 				for plover_outline in [to_strokes(plover_outline_)]
 				if not plover_entry_matches_generated_1(plover_outline, outlines)
 				]
