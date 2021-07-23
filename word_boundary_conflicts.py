@@ -7,7 +7,11 @@ from pathlib import Path
 from lib import *
 import json
 import argparse
-parser=argparse.ArgumentParser(usage="Determine word boundary conflicts")
+parser=argparse.ArgumentParser(usage="""\
+Determine word boundary conflicts.
+
+It's usually not necessary to use this script for generated dictionaries.
+""")
 parser.add_argument("dictionary", type=Path, help="Path to JSON dictionary.")
 parser.add_argument("ngrams_file", type=Path, nargs="?", default=Path("bigram-frequency.json"),
 		help="Path to n-grams file. Must be a JSON file that contains an iterable")
