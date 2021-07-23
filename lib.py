@@ -13,7 +13,6 @@ import random
 import enum
 import tempfile
 
-from colorama import Fore  # type: ignore
 
 from contextlib import contextmanager
 @contextmanager
@@ -664,6 +663,7 @@ def get_result_matching(result: List[MatchResult], color: bool=True)->Tuple[str,
 		a=a.ljust(l)
 		b=b.ljust(l)
 		if color and not isinstance(r, Matched):
+			from colorama import Fore  # type: ignore
 			a=Fore.RED+a+Fore.RESET
 			b=Fore.RED+b+Fore.RESET
 		spell_+=a+"|"
