@@ -73,6 +73,8 @@ parser.add_argument("--raw-steno", action="store_true",
 parser.add_argument("-b", "--brief-dictionary", type=str, default="",
 		help="Path to the dictionary of brief entries. If empty, no brief is included."
 		)
+parser.add_argument("--exclude-briefs", action="store_true",
+		help="Do not include the brief entries in the dictionary.")
 parser.add_argument("--disambiguation-stroke", type=Stroke, default=Stroke(),
 		help=f"Stroke to disambiguate conflicts")
 parser.add_argument("--last-entry", default='"WUZ/WUZ": ""',
@@ -366,6 +368,9 @@ try:
 	for outline, words in generated.items():
 		for i, word_ in enumerate(words):
 			if word_ is None: continue
+			if args.exclude_briefs:
+				[x]=[x for x in outlines_for[word_] if x.outline==outline]
+				if x.frozen: continue
 			print(
 				json.dumps(outline_to_str(
 					outline +
