@@ -17,6 +17,7 @@ parser.add_argument("--print-double-check-error", action="store_true")
 parser.add_argument("--disallowed-tsdz-shapes", default="-TZ,-SD,-TDZ,-TSD,-SDZ,-TSZ")
 args=parser.parse_args()
 
+warn_if_not_optimization()
 
 from plover.registry import registry       # type: ignore
 from plover import system                  # type: ignore
