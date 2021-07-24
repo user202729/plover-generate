@@ -2,7 +2,6 @@
 
 import typing
 import re
-import local_lib
 from lib import*
 from lib_steno import*
 import itertools

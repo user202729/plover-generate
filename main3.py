@@ -7,8 +7,6 @@ start_time=time()
 
 import sys
 
-import local_lib
-
 from pathlib import Path
 from dataclasses import dataclass
 from typing import List, Tuple, Optional, Iterator, Sequence

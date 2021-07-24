@@ -3,8 +3,6 @@
 
 import sys
 
-import local_lib
-
 try:
 	del sys.modules["lib"]
 except KeyError:
