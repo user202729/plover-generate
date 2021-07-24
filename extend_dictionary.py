@@ -14,7 +14,8 @@ parser.add_argument("-o", "--output", type=Path, default=None,
 parser.add_argument("--exclude-existing", action="store_true")
 parser.add_argument("--double-check", action="store_true")
 parser.add_argument("--print-double-check-error", action="store_true")
-parser.add_argument("--disallowed-tsdz-shapes", default="-TZ,-SD,-TDZ,-TSD,-SDZ,-TSZ")
+parser.add_argument("--disallowed-tsdz-shapes", default="-TZ,-SD,-TDZ,-TSD,-SDZ,-TSZ",
+		help="Comma-separated list of strokes that must not be in a stroke.")
 args=parser.parse_args()
 
 warn_if_not_optimization()
@@ -49,6 +50,8 @@ for suffix_stroke in suffixes: assert len(suffix_stroke)==1
 
 tsdz_stroke=Stroke("-TSDZ")
 disallowed_tsdz_shapes: Set[Stroke]={Stroke(x) for x in args.disallowed_tsdz_shapes.split(",")}
+for x in disallowed_tsdz_shapes:
+	assert x in tsdz_stroke, x
 
 for outline_str, word in source.items():
 	if word not in frequency: continue
