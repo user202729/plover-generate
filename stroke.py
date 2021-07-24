@@ -22,7 +22,7 @@ def short_replacement_():
 ("T",	"T-"),
 ("KWR",	"Y-"),
 ("KP",	"X-", "TWH"),
-("KH",	"Ch-"),
+("KH",	"Ch-", "R"),  # prefer KL to ChR
 ("K",	"K-"),
 ("PH",	"M-",	"WR"),  # MR- is possible (marine) but is less common than PL-
 # yes, pseudo steno -> steno conversion is lossy.
