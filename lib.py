@@ -523,8 +523,15 @@ Matched("'re", "ɹ", condition=trailing),
 Matched("ei", "ɪ", score=0.1),
 ]  # (are the conditions really necessary?...)
 
-index,=[i for i, x in enumerate(rules) if x==Matched("ei", "ɪ")]
-del rules[index]
+for to_delete in [
+	Matched("ei", "ɪ"),
+	Matched("ie", "jə"),
+	Matched("i", "jə"),
+	Matched("y", "jə"),
+	Matched("e", "jə"),
+]:
+	index,=[i for i, x in enumerate(rules) if x==to_delete]
+	del rules[index]
 
 special_cases: Set[Tuple[str, str]]={
 ("of", "əv"),
