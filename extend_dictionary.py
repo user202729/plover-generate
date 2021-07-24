@@ -30,7 +30,10 @@ from plover.orthography import add_suffix  # type: ignore
 registry.update()
 system.setup("English Stenotype")
 
-source: Dict[str, str]=json.loads(Path(args.dictionary).read_text())
+source: Dict[Strokes, str]={
+		to_strokes(outline): translation
+		for outline, translation in
+		json.loads(Path(args.dictionary).read_text()).items()}
 generated=dict(source)
 frequency=frequency_()
 base_form_lower: Dict[str, str]={
@@ -40,10 +43,11 @@ base_form_lower: Dict[str, str]={
 
 import re
 suffix_extract_pattern=re.compile(r'{\^(\w+)}')
-suffixes: Dict[Stroke, str]={Stroke(suffix): match[1]
-		for suffix in system.SUFFIX_KEYS
-		if suffix in source
-		for match in [suffix_extract_pattern.fullmatch(source[suffix])]
+suffixes: Dict[Stroke, str]={suffix: match[1]
+		for suffix_str in typing.cast(Sequence[str], system.SUFFIX_KEYS)
+		for suffix in [Stroke(suffix_str)]
+		if (suffix,) in source
+		for match in [suffix_extract_pattern.fullmatch(source[suffix,])]
 		if match is not None
 		}
 for suffix_stroke in suffixes: assert len(suffix_stroke)==1
@@ -53,9 +57,8 @@ disallowed_tsdz_shapes: Set[Stroke]={Stroke(x) for x in args.disallowed_tsdz_sha
 for x in disallowed_tsdz_shapes:
 	assert x in tsdz_stroke, x
 
-for outline_str, word in source.items():
+for outline, word in source.items():
 	if word not in frequency: continue
-	outline: Strokes=to_strokes(outline_str)
 	assert outline
 	for suffix_stroke, suffix in suffixes.items():
 		if suffix_stroke in outline[-1]: continue
@@ -66,14 +69,12 @@ for outline_str, word in source.items():
 		if (new_last_outline&tsdz_stroke) in disallowed_tsdz_shapes: continue
 		outline_=outline[:-1]+(new_last_outline,)
 
-		outline__parts=[x.raw_str() for x in outline_]
-		outline__str="/".join(outline__parts)
-		if outline__str in generated: continue
+		if outline_ in generated: continue
 
 		if args.double_check:
 			def fail()->bool:
-				for i in range(1, len(outline__parts)):
-					outline__part="/".join(outline__parts[i:])
+				for i in range(1, len(outline_)):
+					outline__part=outline_[i:]
 					if outline__part not in source: continue
 					if args.print_double_check_error:
 						print(f"{outline}+{suffix_stroke} != {word!r}+{suffix} "
@@ -83,11 +84,15 @@ for outline_str, word in source.items():
 				return False
 			if fail(): continue
 
-		generated[outline__str]=word_
+		generated[outline_]=word_
 
 if args.exclude_existing:
-	generated={outline_str: word for outline_str, word in generated.items() if outline_str not in source}
+	generated={outline: word for outline, word in generated.items() if outline not in source}
 
-json.dump(generated,
+json.dump(
+		{
+			"/".join(x.raw_str() for x in outline): translation
+			for outline, translation in generated.items()
+			},
 		sys.stdout if args.output is None else args.output.open("w"),
 		indent=0, ensure_ascii=False)
