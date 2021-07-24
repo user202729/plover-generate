@@ -17,6 +17,8 @@ Generate a dictionary from a list of rules. Tailored for Plover theory.
 
    It's possible to use an empty file, however uncommon words may take the outline instead of more common words.
 
+* `local_lib.py`: might contain anything. Can be an empty Python file.
+
 ### To generate a dictionary
 
 Usually you would only need to run
