@@ -81,6 +81,17 @@ for outline, word in source.items():
 								f"because {outline_[i:]} = {source[outline__part]!r}",
 								file=sys.stderr)
 					return True
+				for suffix_stroke1, suffix1 in suffixes.items():
+					if suffix_stroke1==suffix_stroke: break
+					if suffix_stroke1 not in outline_[-1]: continue
+					outline1=outline_[:-1]+(outline_[-1]-suffix_stroke1,)
+					if outline1 not in source: continue
+					if args.print_double_check_error:
+						print(f"{outline}+{suffix_stroke} !== {word!r}+{suffix} "
+								f"because {outline1} = {source[outline1]!r}",
+								file=sys.stderr)
+					return True
+
 				return False
 			if fail(): continue
 
